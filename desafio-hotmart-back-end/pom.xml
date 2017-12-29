@@ -79,6 +79,12 @@
 			<artifactId>HikariCP</artifactId>
 			<scope>compile</scope>
 		</dependency>
+		<!-- Conecctor MySql -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
+		</dependency>
 	</dependencies>
 
 	<!-- Configurações gerais de build -->
