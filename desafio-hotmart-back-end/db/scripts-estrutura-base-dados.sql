@@ -1,0 +1,1 @@
+CREATE SCHEMA `desafio-hotmart` DEFAULT CHARACTER SET utf8mb4 ;
