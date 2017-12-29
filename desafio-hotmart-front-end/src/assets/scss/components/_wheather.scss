@@ -1,0 +1,134 @@
+.wheather-widget {
+    background: url(../img/wheather.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    .weather-params {
+        list-style: outside none none;
+        padding: 0;
+        li {
+            i,
+            span {
+                display: inline-block;
+            }
+        }
+        >li .climacon {
+            font-size: 50px;
+            height: 37px;
+            line-height: 30px;
+            margin-right: 10px;
+            text-align: center;
+            vertical-align: -moz-middle-with-baseline;
+            width: 37px;
+        }
+    }
+}
+
+.weather-block-info,
+.today,
+.week-forecast {
+    color: #fff;
+}
+
+.main-icon {
+    max-width: 220px;
+}
+
+.weather-block-info {
+    >div {
+        width: 33%;
+        text-align: center;
+    }
+}
+
+.temp-today {
+    display: block;
+    font-size: 90px;
+    position: relative;
+    &:before {}
+    &:after {
+        border: 2px solid #fff;
+        border-radius: 50%;
+        content: "";
+        height: 10px;
+        line-height: 1;
+        opacity: 0.85;
+        position: absolute;
+        top: 15%;
+        width: 10px;
+    }
+}
+
+.week-day {
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.week-forecast {
+    padding: 0;
+    margin: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    >li {
+        display: inline-block;
+        width: 23.7%;
+        text-align: center;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        .inner {
+            padding: 1rem;
+        }
+        i {
+            font-size: 40px;
+            background: rgba(0, 0, 0, 0.1);
+            height: 50px;
+            width: 50px;
+            border-radius: 5px;
+            line-height: 50px;
+        }
+        .week-day-temperature {
+            margin: 0;
+        }
+    }
+}
+
+@media(max-width:1199px) {
+    .wheather-widget .weather-params {
+        display: none;
+    }
+    .weather-block-info.d-flex {
+        display: block !important;
+        >div {
+            text-align: center;
+            width: 50%;
+            float: left;
+        }
+    }
+}
+
+@media(max-width:650px) {
+    .weather-block-info.d-flex {
+        display: block !important;
+        text-align: center;
+        .align-self-center {
+            display: block !important;
+            display: block;
+            margin: 0 auto;
+            overflow: hidden;
+            text-align: center;
+            width: 100%;
+        }
+        >div{
+            float: none;
+        }
+    }
+    .week-forecast>li {
+        width: 24%;
+    }
+    .latest-post img {
+        width: 90px !important;
+    }
+}
+
+@media(max-width:420px) {
+    .week-forecast>li {
+        width: 32%;
+    }
+}

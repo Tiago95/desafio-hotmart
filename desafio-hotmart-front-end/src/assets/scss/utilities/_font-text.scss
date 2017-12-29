@@ -1,0 +1,24 @@
+
+
+body{
+    
+
+ .mat-card, button, input, optgroup, p, select, textarea,.mat-list .mat-list-item .mat-list-item-content, .mat-nav-list .mat-list-item .mat-list-item-content {
+  font-family: $font-family-sans-serif;
+}
+}
+.mat-white {
+    background: #fff;
+}
+.text-white{
+	color:#fff;
+}
+@include text-emphasis-variant('.mat-text-muted', mat-color($foreground, secondary-text));
+@include text-emphasis-variant('.mat-text-default', mat-color($foreground, base));
+@include text-emphasis-variant('.mat-text-primary', mat-color($primary));
+@include text-emphasis-variant('.mat-text-warn', mat-color($warn));
+@include text-emphasis-variant('.mat-text-accent', mat-color($accent));
+.app-dark {
+    @include text-emphasis-variant('.mat-text-muted', mat-color($dark-foreground, secondary-text));
+    @include text-emphasis-variant('.mat-text-default', mat-color($dark-foreground, base));
+}

@@ -1,0 +1,43 @@
+.popover-header {
+    padding-top: 0.5rem;
+    padding-bottom: 0.3rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    background: $brand-danger;
+    font-size: 1.2rem;
+    color: #fff;
+    position: relative;
+    &:after,
+    &:before {
+        bottom: 100%;
+        left: 50%;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+    }
+    &:after {
+        border-color: rgba(255, 255, 255, 0);
+        border-bottom-color: #fff;
+        border-width: 10px;
+        margin-left: -10px;
+    }
+    &:before {
+        border-color: rgba(255, 255, 255, 0);
+        border-bottom-color: #fff;
+        border-width: 11px;
+        margin-left: -11px;
+    }
+}
+
+.popover-body {
+    padding: 0.4rem 1rem 1rem;
+}
+
+.tour-step-navigation {
+    .btn.btn-sm {
+        @extend .btn-primary;
+    }
+}

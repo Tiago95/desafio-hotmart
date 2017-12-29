@@ -1,0 +1,87 @@
+
+//Preloader
+
+$preloader-bg-color:$brand-primary;
+
+//Sidebar
+
+$sidebar-icons:1.2rem;
+$user-name-font-size:1rem;
+$sidebar-width: 15rem !default;
+$sidebar-text-color: #fff;
+$sidebar-bg-color: #222d33;
+$sidebar-logo-bg:#7860aa;
+$compact-sidebar-width: 70px !default;
+$sidebar-width-mobile: 18rem !default;
+$sidebar-font-size:0.9rem;
+//Header 
+$header-bg-color:$brand-primary;
+
+$header-menu-font-size:1rem;
+$header-menu-text-color:#fff;
+$header-menu-line-height:2.1rem;
+//dropdown
+$dropdown-menu-font-color:$gray-dark;
+$dropdown-menu-header-color:#fff;
+
+$ham-font-size:1.3rem;
+$ham-text-color:#fff;
+
+//Container Padding
+$container-padding:1.5rem;
+$container-bg:#e5e5e5;
+
+//Silk Main Block
+
+$silk-card-pad:1rem;
+$silk-card-bg:#ffffff;
+$box-shadow:0 0 3px rgba(0, 0, 0, 0.1);
+$silk-card-border:1px solid rgba(0, 0, 0, 0.1);
+$silk-card-title-font-size:1.1rem;
+$silk-card-title-weight:600;
+
+//Md card
+
+$md-card-padding-top-bottom :1rem;
+$md-card-padding-left-right : 1rem;
+
+// Typography
+//
+
+$font-color: #3A405B;
+//Meta post
+
+$meta-post-color:#9c9fad;
+$meta-post-font-weight:bold;
+
+//Breadcrumb
+$breadcrumb-font-size:0.875rem;
+$breadcrumb-font-color:#ffffff;
+
+//Mat list hover bg
+$mat-list-hover-bg-color:rgba(0, 0, 0, 0.04);
+$html-font-size: 16px;
+$mat-font-family: Roboto,Helvetica Neue,sans-serif;
+
+// Radius
+
+$border-radius-base:8px;
+
+.bg-primary{
+	color:#fff !important;
+}
+.bg-success{
+	color:#fff !important;
+}
+.bg-info{
+	color:#fff !important;
+}
+.bg-warning{
+	color:#fff !important;
+}
+.bg-danger{
+	color:#fff !important;
+}
+.bg-inverse{
+	color:#fff !important;
+}

@@ -1,0 +1,241 @@
+        //customizer
+        .silk-customizer {
+            right: 0;
+            width: 300px;
+            backface-visibility: hidden;
+            background: #e5e5e5 none repeat scroll 0 0;
+            bottom: 0;
+            height: 100vh;
+            position: fixed;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+            right: -300px;
+            top: 10%;
+            transition: right 0.4s cubic-bezier(0.05, 0.74, 0.2, 0.99) 0s;
+            width: 300px;
+            z-index: 99;
+            md-card-content {
+                padding: 2rem 0;
+                .mat-checkbox-layout {
+                    display: block;
+                    width: 100%;
+                }
+                .mat-checkbox-label-before .mat-checkbox-inner-container {
+                    float: right;
+                    margin-left: 8px;
+                    margin-right: auto;
+                    order: 0;
+                }
+            }
+            .customizer-toggle {
+                background: #1565c0 none repeat scroll 0 0;
+                border: medium none;
+                color: #fff;
+                cursor: pointer;
+                height: 45px;
+                left: -45px;
+                line-height: 45px;
+                position: absolute;
+                text-align: center;
+                top: 25%;
+                width: 45px;
+                .fa-sliders {
+                    vertical-align: sub;
+                }
+            }
+            .theme-options {
+                >div {
+                    padding-left: 1rem;
+                    padding-right: 1rem;
+                    padding-top: 0.1rem;
+                    padding-bottom: 0.1rem;
+                }
+            }
+        }
+        
+        .settings-panel {
+            padding: 1rem;
+        }
+        
+        .customizer-in .silk-customizer {
+            right: 0;
+        }
+        
+        .boxed {
+            box-shadow: 0 0 9px rgba(0, 0, 0, 0.4);
+            margin: 0 auto;
+            width: 1170px;
+        }
+        
+        .app-dark {
+            .silk-customizer .customizer-toggle {
+                background: #ffe082;
+                color: #000;
+            }
+        }
+        
+        .collapsed-sidebar md-sidenav .sidebar-panel:not(:hover) .mat-list-item>.mat-list-item-content>a>.menu-caret,
+        .collapsed-sidebar md-sidenav .sidebar-panel:not(:hover) .mat-list-item>.mat-list-item-content>a>span:not(.menu-badge) {
+            display: none;
+        }
+        
+        .collapsed-sidebar md-sidenav.mat-sidenav-opened~.mat-sidenav-content {
+            margin-left: 4rem !important;
+        }
+        
+        .collapsed-sidebar md-sidenav .sidebar-panel:not(:hover) {
+            width: 4rem;
+            min-width: 4rem;
+        }
+        
+        .collapsed-sidebar md-sidenav .sidebar-panel {
+            transition: all 0.3s ease-in-out 0s;
+        }
+        
+        .theme-color>div {
+            display: inline-block;
+            margin: 0.1rem;
+        }
+        
+        .settings-panel {
+            height: 100%;
+            overflow-x: hidden;
+            overflow-y: scroll;
+        }
+        
+        .color-header {
+            .def {
+                color: $brand-primary !important;
+            }
+        }
+        
+        .color-side {
+            .def {
+                color: $sidebar-bg-color !important;
+            }
+        }
+        
+        .collapsed-sidebar {
+            .logo-sign i {
+                margin: 0 0.6rem!important;
+            }
+            .sidebar-search input[type="text"] {
+                padding: 3px;
+            }
+            .silk-user-thumb,
+            .silk-user-i,
+            .logo-img {
+                display: none;
+            }
+            .logo-text {
+                display: none;
+            }
+        }
+        
+        .collapsed-sidebar {
+            .silk-user-name {
+                display: none;
+            }
+        }
+        
+        .collapsed-sidebar md-sidenav .sidebar-panel:not(:hover) .sub-menu {
+            display: none;
+            visibility: hidden;
+        }
+        
+        .collapsed-sidebar[dir="rtl"] md-sidenav.mat-sidenav-opened~.mat-sidenav-content,
+        [dir="rtl"] .collapsed-sidebar md-sidenav.mat-sidenav-opened~.mat-sidenav-content {
+            margin-left: 0 !important;
+            margin-right: 4rem !important;
+        }
+        
+        //Theme color
+        .header-green .silk-header-toolbar {
+            background: $brand-success;
+        }
+        
+        .header-green .logo-container {
+            background: $brand-success;
+        }
+        
+        .header-yellow .silk-header-toolbar {
+            background: $brand-warning;
+        }
+        
+        .header-yellow .logo-container {
+            background: $brand-warning;
+        }
+        
+        .header-red .silk-header-toolbar {
+            background: $brand-danger;
+        }
+        
+        .header-red .logo-container {
+            background: $brand-danger;
+        }
+        
+        .sidebar-yellow {
+            .sidebar-area.mat-sidenav,
+            .user-info-w {
+                background-color: $brand-warning;
+            }
+            .sidebar-search .btn,
+            .sidebar-search input[type="text"] {
+                background: #fff;
+            }
+        }
+        
+        .sidebar-red {
+            .sidebar-area.mat-sidenav,
+            .user-info-w {
+                background-color: $brand-danger;
+            }
+            .sidebar-search .btn,
+            .sidebar-search input[type="text"] {
+                background: #fff;
+            }
+        }
+        
+        .sidebar-green {
+            .sidebar-area.mat-sidenav,
+            .user-info-w {
+                background-color: $brand-success;
+            }
+            .sidebar-search .btn,
+            .sidebar-search input[type="text"] {
+                background: #fff;
+            }
+        }
+        
+        .sidebar-blue {
+            .sidebar-area.mat-sidenav,
+            .user-info-w {
+                background-color: $brand-primary;
+            }
+            .sidebar-search .btn,
+            .sidebar-search input[type="text"] {
+                background: #fff;
+            }
+        }
+        
+        [dir="rtl"] {
+            .theme-options {
+                .form-check-input {
+                    margin-left: 0.75rem;
+                }
+            }
+            .box-sm .icon {
+                right: inherit;
+                left: 10px;
+            }
+            .slider {
+                .carousel-caption {
+                    text-align: right;
+                }
+            }
+        }
+        
+        @media(max-width:991px) {
+            .popover {
+                display: none !important;
+            }
+        }

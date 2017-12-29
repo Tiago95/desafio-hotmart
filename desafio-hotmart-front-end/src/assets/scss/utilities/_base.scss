@@ -1,0 +1,338 @@
+// Basics tags 
+$basic-border:1px solid rgba(0, 0, 0, 0.1);
+code {
+    padding: 8px;
+    background: $container-bg;
+}
+.border-primary{
+    border-top:2px solid $brand-primary !important;
+}
+.border-success{
+    border-top:2px solid $brand-success !important;
+}
+.border-warning{
+    border-top:2px solid $brand-warning !important;
+}
+.border-danger{
+    border-top:2px solid $brand-danger !important;
+}
+.bg-white {
+    background: #fff none repeat scroll 0 0;
+}
+
+pre {
+    background-color: $container-bg;
+    padding: 15px;
+}
+
+img {
+    height: auto;
+    max-width: 100%;
+    vertical-align: middle;
+}
+
+.label {
+    color: #ffffff;
+    display: inline-block;
+    padding: 2px 14px;
+}
+
+.box-shadow-none {
+    box-shadow: none !important;
+}
+
+.lead {
+    font-size: 1.375rem;
+}
+
+.sq-50 {
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    border: 1px solid #fff;
+    border-radius: 100%;
+    font-size: 1.4rem;
+}
+
+// silk Mat Card style
+.silk-card-title {
+   // border-bottom: $basic-border;
+    .mat-icon-button {
+        height: 2.188rem;
+        line-height: 1.1;
+        width: 2.188rem;
+        margin: 0;
+        color: #868E96;
+        font-size: 0.875rem;
+    }
+    h4 {
+        margin-bottom: 0.8rem;
+        font-size: $silk-card-title-font-size;
+        font-weight: $silk-card-title-weight;
+    }
+    .silk-head,
+    .silk-flex {
+        align-items: center;
+        display: flex;
+        .silk-pre {
+            flex: 1 1 auto;
+        }
+    }
+}
+
+.silk-card {
+    background: $silk-card-bg;
+    border: $silk-card-border;
+    box-shadow: $box-shadow;
+    padding: $silk-card-pad;
+    border-radius: 5px;
+}
+.card-controls a {
+  color: gray;
+  margin: 0 0.2rem;
+}
+.silk-card-content-sm {
+    padding: 0.5rem 0 0;
+}
+
+.silk-card-content {
+    padding: 1.3rem 0 1rem 0;
+}
+
+.silk-card-footer {
+    .mat-divider {
+        padding: 0.3em
+    }
+}
+
+.no-gutter {
+    margin-left: -$md-card-padding-left-right;
+    margin-right: -$md-card-padding-left-right;
+}
+
+//Radius classes
+.radius-none {
+    border-radius: 0;
+}
+
+.radius-circle {
+    border-radius: 50%;
+}
+
+.border-none {
+    border: 0!important;
+}
+
+.border-rad-base {
+    border-radius: $border-radius-base;
+}
+
+//Overflow hidden
+.overflow-visible {
+    overflow: visible;
+}
+
+.overflow-hidden {
+    overflow: hidden;
+}
+
+.overflow-auto {
+    overflow: auto;
+}
+
+// Position
+.silk-relative {
+    position: relative;
+}
+
+.silk-fixed {
+    position: fixed;
+}
+
+.silk-absolute {
+    position: absolute;
+}
+
+// List 
+.list-inline {
+    li {
+        display: inline-block;
+    }
+}
+
+.list-style-none {
+    list-style: none;
+}
+
+.silk-list {
+    list-style: none;
+    padding-left: 0;
+    padding-right: 0;
+    margin: 0;
+    >li {
+        margin-bottom: 1rem;
+    }
+}
+
+.list-style-none {
+    list-style: none;
+    padding-left: 0;
+}
+
+// Helper classes
+.box-inset {
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.3) inset;
+}
+
+.full-wid {
+    width: 100%;
+}
+
+.silk-span {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.silk-block {
+    display: block;
+}
+
+.button-block {
+    display: block;
+    width: 100%;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.img-circle {
+    border-radius: 50%;
+}
+
+.shadow-none {
+    box-shadow: none!important;
+}
+
+.background-none {
+    background-color: transparent!important;
+}
+
+.stats-link {
+    a {
+        color: #fff;
+    }
+}
+
+//Forms
+.send-text {
+    width: 80%;
+    float: left;
+}
+
+.send-btn {
+    width: 20%;
+    float: left;
+}
+
+.registered-users-list>li {
+    float: left;
+    padding: 7.5px;
+    width: 25%;
+    p {
+        margin: 0;
+    }
+}
+
+.text-ellipsis {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.latest-post img {
+    width: 250px;
+}
+
+.cursor:hover {
+    pointer: cursor;
+}
+
+.form-bg {
+    background: url(../img/hotmart_bg.jpg);
+    background-size: cover;
+}
+
+.error-bg {
+    background: url(../img/7.jpg);
+    background-size: cover;
+    height: 100vh;
+}
+
+.tab-content {
+    padding: 1rem 0;
+}
+
+.message .media {
+    margin-bottom: 1rem;
+    img {
+        width: 80px;
+    }
+}
+
+.silk-mail-wrapper {
+    .mail-nav-list {
+        li.active {
+            background: $brand-danger;
+            color: #fff;
+        }
+    }
+}
+
+//
+.ngx-charts-outer {
+    @include clearfix;
+}
+
+.h-300px {
+    height: 300px;
+}
+
+.font-sm {
+    font-size: 1rem !important;
+}
+
+//custom cols
+@media(max-width:1800px) and (min-width:769px) {
+    .col-full {
+        -moz-box-flex: 0 !important;
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+    }
+     .col-half {
+        -moz-box-flex: 0 !important;
+        flex: 0 0 50% !important;
+        max-width: 50% !important;
+    }
+    .hide-down{
+        display: none;
+    }
+}
+@media(max-width:1199px){
+   .slider .carousel-caption{
+        left:4%;
+       right: 4%;
+    }
+}
+@media(max-width:1199px) and (min-width:992px) {
+    .res-md-6 {
+        -moz-box-flex: 0 !important;
+        flex: 0 0 50% !important;
+        max-width: 50% !important;
+    }
+       .res-md-12 {
+        -moz-box-flex: 0 !important;
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+    }
+}

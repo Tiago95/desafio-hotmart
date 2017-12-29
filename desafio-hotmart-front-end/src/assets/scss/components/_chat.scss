@@ -1,0 +1,100 @@
+//Chat page
+$chat-area-bg: #fff;
+$chat-sidebar-bg: #fff;
+body .silk-chat-page .mat-sidenav-content {
+    padding: 0;
+}
+.silk-chat-page {
+    img {
+        width: 50px;
+    }
+    .chat-toolbar,
+    .chat-toolbar-side {
+        padding: 0.3rem 1rem;
+    }
+    .silk-chat-area {
+        padding: 2rem;
+        height: 100%;
+    }
+    .silk-chat-msg {
+        border-radius: $border-radius-base;
+        padding: 0.4375rem 1.25rem;
+    }
+    .silk-chat-user {
+        padding: 1rem 1rem 1rem 0;
+    }
+    .silk-chat-thumb,
+    .silk-user-info {
+        display: inline-block;
+        vertical-align: top;
+    }
+    .silk-chat-user {
+        .mat-list-item-content {
+            margin-bottom: 1rem;
+        }
+        p {
+            margin: 0;
+        }
+    }
+    .chat-toolbar-side {
+        .mat-icon-button {
+            margin: 0;
+        }
+    }
+    .silk-chat-form {
+        border-top: 1px solid rgba(0, 0, 0, 0.12);
+        margin-top: 2rem;
+        padding: 1.5rem 0rem;
+    }
+    .mat-sidenav.mat-sidenav-side {
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    }
+    .silk-send-btn {
+        margin-left: 3rem;
+    }
+    .chat-toolbar {
+        .mat-icon-button {
+            margin: 0;
+        }
+    }
+    .ps-container .ps-content {
+        height: 500px;
+    }
+}
+.silk-send-text {
+    float: left;
+    width: calc(100% - 7rem);
+    margin-top: 1.2rem;
+}
+.chat-content-area .mat-sidenav-content {
+    background-color: $chat-area-bg;
+    height: auto;
+}
+.chat-content-area {
+    .cdk-focus-trap-content {
+        background-color: $chat-sidebar-bg;
+    }
+}
+.app-dark {
+    .chat-content-area .mat-sidenav-content {
+        background: mat-color($dark-background, card);
+        height: auto;
+    }
+    .chat-content-area {
+        .cdk-focus-trap-content {
+            background: mat-color($dark-background, card);
+        }
+    }
+}
+@media(max-width:1300px) {
+    .silk-chat-page .silk-send-btn {
+        margin-left: 2rem;
+    }
+}
+@media(max-width:580px) {
+    .silk-chat-page {
+        .silk-chat-sidebar {
+            width: 80%;
+        }
+    }
+}

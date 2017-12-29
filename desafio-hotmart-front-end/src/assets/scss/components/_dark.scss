@@ -1,0 +1,125 @@
+.mails-container {
+    background: white;
+}
+
+.content-container {
+    .search {
+        background: white;
+    }
+}
+
+.app-dark {
+    .time-desc{
+        background: transparent;
+    }
+    .mails-container {
+        background: mat-color($dark-background, card);
+        .mails .mail {
+            color: #fff !important;
+            &:hover {
+                color: #000 !important;
+            }
+        }
+    }
+    .chat-w {
+        color: #000;
+    }
+    .content-container {
+        .search {
+            background: mat-color($dark-background, card);
+        }
+    }
+    .cal-month-view .cal-cell-row:hover {
+        background-color: mat-color($dark-background, card);
+    }
+    .cal-month-view .cal-cell-row .cal-cell:hover,
+    .cal-month-view .cal-cell.cal-has-events.cal-open {
+        background: mat-color($dark-background, card);
+    }
+    code {
+        background: mat-color($dark-background, card);
+    }
+    .ngx-datatable.material .datatable-header .datatable-row-right,
+    .ngx-datatable.material .datatable-body .datatable-row-right,
+    .ngx-datatable.material .datatable-header .datatable-row-left,
+    .ngx-datatable.material .datatable-body .datatable-row-left {
+        background-color: mat-color($dark-background, card);
+    }
+    .mat-white {
+        background: transparent;
+    }
+    .navigation {
+        background: #424242 !important;
+    }
+    .well {
+        background: #424242 none repeat scroll 0 0;
+    }
+    .card.card-block {
+        background: #424242 none repeat scroll 0 0;
+        color: #fff;
+    }
+    .card {
+        background: #424242 none repeat scroll 0 0;
+    }
+    .card-footer,
+    .card-header {
+        background: #424242 none repeat scroll 0 0;
+        color: #fff;
+    }
+    .list-group-item {
+        background: #424242 none repeat scroll 0 0;
+    }
+    .flag {
+        background: transparent;
+    }
+}
+
+body .app-dark .silk-icon-display md-icon {
+    color: mat-color($dark-foreground, base);
+}
+
+//rtl
+[dir="rtl"] {
+    .silk-mail-wrapper {
+        .mail-lebel-area .fa-circle {
+            right: inherit !important;
+            left: 0;
+        }
+        .mail-tabs-base {
+            ul {
+                li {
+                    margin-left: 2rem;
+                    margin-right: 0;
+                }
+            }
+        }
+        .mail-detail {
+            .mail-header {
+                .avatar {
+                    margin-left: 20px;
+                    margin-right: 0 !important;
+                }
+            }
+        }
+        .respond {
+            .avatar {
+                margin-left: 28px;
+            }
+        }
+        .mails {
+            .td-actions,
+            .td-content {
+                float: right !important;
+            }
+            .content-wrapper,
+            .end-wrapper {
+                float: right !important;
+            }
+            .td-content {
+                .start-wrapper {
+                    float: right !important;
+                }
+            }
+        }
+    }
+}
