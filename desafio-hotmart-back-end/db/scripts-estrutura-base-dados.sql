@@ -2,7 +2,7 @@ CREATE SCHEMA `desafio-hotmart` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_un
 USE `desafio-hotmart`;
 
 CREATE TABLE `usuario` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `login` varchar(150) NOT NULL,
   `senha` varchar(255) NOT NULL,
   `nick_name` varchar(50) NOT NULL,
