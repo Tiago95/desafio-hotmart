@@ -1,3 +1,4 @@
+import { Usuario } from './../models/usuario';
 import { EstruturaJson } from 'app/models/estrutura-json';
 import { HttpControl } from './../models/http-control';
 import { DesafioHotmartAppComponent } from './../app.component';
@@ -6,7 +7,6 @@ import { Injectable } from "@angular/core";
 import 'rxjs/add/operator/map';
 
 import { Credentials } from './../models/credentials';
-import { Usuario } from 'app/models/usuario';
 import { HttpService } from './http-service';
 
 @Injectable()
@@ -14,41 +14,36 @@ export class AuthenticationService{
 
     constructor(private httpService: HttpService){}
 
-    public login(credentials: Credentials): Promise<EstruturaJson> {       
+    public login(credentials: Credentials): Promise<EstruturaJson> {
+        
+        return new Promise<EstruturaJson>((resolve, reject) => {
 
-        return this.httpService.realizarRequisicaoHttp(new HttpControl(DesafioHotmartAppComponent.API_URL + "/auth/login", RequestMethod.Get, null, this.createHeaders(credentials)));
+            this.httpService.realizarRequisicaoHttp(new HttpControl(DesafioHotmartAppComponent.API_URL + "/auth/user", RequestMethod.Get, null, this.createHeaders(credentials)))
+            .then(response => {
+                
+                if(response){
+
+                    let usuario = response.voReturn as Usuario;
+                    
+                    if (usuario) {
+                        
+                        localStorage.setItem('currentUser', JSON.stringify(usuario));
+        
+                    }
+        
+                }
+
+                resolve(response);
+
+            });
+       
+        });         
 
     }
 
     public register(usuario: Usuario): Promise<EstruturaJson>{
 
         return this.httpService.realizarRequisicaoHttp(new HttpControl(DesafioHotmartAppComponent.API_URL + "/auth/register", RequestMethod.Post, usuario));
-
-    }
-
-    private createMapRequestLogin(response: Response): void {
-
-        if(response){
-
-            let user = response.json().principal;
-            
-            if (user) {
-                
-                localStorage.setItem('currentUser', JSON.stringify(user));
-
-            }
-
-        }
-        
-    }
-
-    private createRequestOption(credentials: Credentials): RequestOptions{
-        
-        let options = new RequestOptions();
-              
-        options.headers = this.createHeaders(credentials);
-
-        return options;
 
     }
 

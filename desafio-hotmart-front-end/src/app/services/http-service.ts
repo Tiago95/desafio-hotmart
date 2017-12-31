@@ -39,8 +39,8 @@ export class HttpService {
        
             this.httpService.request(DesafioHotmartAppComponent.API_URL + httpControl.url, httpControl.toRequestOptions())
             .toPromise()
-            .then(response => resolve(response.json() as EstruturaJson), error => resolve(HttpUtils.getDefaultEstruturaJsonErro()))
-            .catch(error => resolve(HttpUtils.getDefaultEstruturaJsonErro()));
+            .then(response => resolve(response.json() as EstruturaJson), error => {console.log(error); resolve(HttpUtils.getDefaultEstruturaJsonErro());})
+            .catch(error => {console.log(error); resolve(HttpUtils.getDefaultEstruturaJsonErro());});
        
         });     
       

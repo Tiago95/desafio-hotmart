@@ -5,6 +5,7 @@ import java.security.Principal;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.hotmart.desafiohotmart.builder.MessageBuilder;
+import br.com.hotmart.desafiohotmart.entity.Usuario;
+import br.com.hotmart.desafiohotmart.enumerations.ReturnTypeEnum;
 import br.com.hotmart.desafiohotmart.exception.ServiceException;
 import br.com.hotmart.desafiohotmart.service.UsuarioService;
 import br.com.hotmart.desafiohotmart.vo.ResponseVO;
@@ -39,9 +42,16 @@ public class AuthController {
    * @return
    */
   @GetMapping("/user")
-  public Principal user(Principal user) {
+  public ResponseVO<UsuarioVO> user(Principal user) {  
 	  
-    return user;
+	  if(user != null && user instanceof UsernamePasswordAuthenticationToken
+				&& ((UsernamePasswordAuthenticationToken) user).getPrincipal() instanceof Usuario){
+			
+		  return new ResponseVO<UsuarioVO>(ReturnTypeEnum.SUCESSO, ((Usuario)((UsernamePasswordAuthenticationToken) user).getPrincipal()).toUsuarioVO()); 
+			
+	  }
+	  
+	  return new ResponseVO<UsuarioVO>(ReturnTypeEnum.SUCESSO, new UsuarioVO());
     
   }
   

@@ -20,36 +20,31 @@ export class LoginComponent {
 
   private errorMessage: string;
 
-  private fieldsInfoVO: Map<string, FieldInfoVO>;
-
-  private messagesInfoVO: Array<MessageInfoVO>;
-
-  constructor(private router: Router, private authService: AuthenticationService) { 
+  public constructor(private router: Router, private authService: AuthenticationService) { 
 
     this.credentials = new Credentials();
     
   }
 
-  login(){
+  public login(){
 
-    this.authService.login(this.credentials).then(this.callbackSucessLogin, err => {this.errorMessage="Usuário ou senha incorreta";});
+    this.authService.login(this.credentials).then(estruturaJson => {
 
-  }
+      if(estruturaJson){
 
-  private callbackSucessLogin(estruturaJson: EstruturaJson): void{
+        if(TipoRetornoEnum.ERRO === estruturaJson.returnType){
 
-    if(estruturaJson){
-
-      if(TipoRetornoEnum.SUCESSO === estruturaJson.returnType){
-
-        this.router.navigate(['/chat']);
+          this.errorMessage = "Usuário ou senha incorreta";        
+    
+        }else{
+  
+          this.router.navigate(['/chat']);
+  
+        }     
   
       }
 
-      this.fieldsInfoVO = HttpUtils.getMapFieldInfosVOByEstruturaJson(estruturaJson);
-      this.messagesInfoVO = estruturaJson.messagesInfo;
-
-    }
+    });
 
   }
 	
