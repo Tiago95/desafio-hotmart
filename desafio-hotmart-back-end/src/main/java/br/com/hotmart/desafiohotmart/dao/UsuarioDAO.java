@@ -22,4 +22,20 @@ public interface UsuarioDAO extends PagingAndSortingRepository<Usuario, Long> {
 	 * @return
 	 */
 	Usuario findByLogin(String login);
+
+	/**
+	 * Responsável por obter a quantidade de nick name.
+	 * 
+	 * @param nickName
+	 * @return
+	 */
+	Long countByNickName(String nickName);
+
+	/**
+	 * Responsável por obter a quantidade de e-mail.
+	 * 
+	 * @param login
+	 * @return
+	 */
+	Long countByLogin(String login);
 }

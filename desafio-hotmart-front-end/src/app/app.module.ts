@@ -18,6 +18,8 @@ import 'hammerjs';
 import { DesafioHotmartAppComponent} from './app.component';
 import { AppRoutes} from "./app-routing.module";
 import { AuthLayoutComponent } from './auth/auth-layout.component';
+import { AuthenticationService } from 'app/services/authentication.service';
+import { HttpService } from 'app/services/http-service';
 
 
 
@@ -52,7 +54,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 		AuthLayoutComponent
 	],
 	bootstrap: [DesafioHotmartAppComponent],
-	providers:[
+	providers:[AuthenticationService, HttpService,
       {
          provide: PERFECT_SCROLLBAR_CONFIG,
          useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG

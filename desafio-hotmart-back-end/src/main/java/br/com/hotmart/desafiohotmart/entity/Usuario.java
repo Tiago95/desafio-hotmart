@@ -8,11 +8,15 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import br.com.hotmart.desafiohotmart.enumerations.StatusUsuarioEnum;
+import br.com.hotmart.desafiohotmart.vo.UsuarioVO;
 
 /**
  * 
@@ -30,18 +34,43 @@ public class Usuario extends BaseEntity implements UserDetails {
 	 */
 	private static final long serialVersionUID = 2252840882729290922L;
 	
+	@NotBlank
+	@Size(max = 100)
+	@Column(name = "nome", nullable = false, unique = true, length = 100)
+	private String nome;
+	
+	@NotBlank
+	@Size(max = 150)
 	@Column(name = "login", nullable = false, unique = true, length = 150)
 	private String login;
 	
+	@NotBlank
 	@Column(name = "senha", nullable = false, unique = false, length = 255)
 	private String senha;
 	
+	@NotBlank
+	@Size(max = 50)
 	@Column(name = "nick_name", nullable = false, unique = true, length = 50)
 	private String nickName;
 	
+	@NotNull
 	@Column(name = "status", nullable = false, unique = false, columnDefinition = "tinyint")
 	@Enumerated(value = EnumType.ORDINAL)
 	private StatusUsuarioEnum statusUsuario;	
+	
+	/**
+	 * @return the nome
+	 */
+	public String getNome() {
+		return nome;
+	}
+
+	/**
+	 * @param nome the nome to set
+	 */
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
 	/**
 	 * @return the login
@@ -146,6 +175,23 @@ public class Usuario extends BaseEntity implements UserDetails {
 		
 		return !StatusUsuarioEnum.INATIVO.equals(getStatusUsuario());
 		
+	}
+
+	/**
+	 * Responsável por retornar um UsuarioVO
+	 * 
+	 * @return
+	 */
+	public UsuarioVO toUsuarioVO() {
+
+		UsuarioVO usuarioVO = new UsuarioVO();
+		
+		usuarioVO.setEmail(this.getLogin());
+		usuarioVO.setNick(this.getNickName());
+		usuarioVO.setNome(this.getNome());
+		usuarioVO.setSenha(this.getSenha());
+		
+		return usuarioVO;
 	}
 
 }

@@ -1,0 +1,51 @@
+<div class="clearfix d-flex silk-registration-form form-bg justify-content-center height-full">
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 align-self-center">
+        <div class="register-account">
+            <div>
+                <div class="title-register login-logo text-center pb-3 pt-3">
+                    <h2 class="">Cadastro de usuário</h2>
+                </div>
+            </div>
+            <div class="pl-3 pt-3 pb-3 pr-3">
+                <form role="form" name="form-register" (ngSubmit)="f.form.valid && register()" #f="ngForm" novalidate>
+                    <div class="alert alert-danger" role="alert" *ngIf="existeErroFormulario">Existem erros no formulário</div>
+                    <div class="form-group row" [ngClass]="{ 'has-error': f.submitted && !nome.valid }">
+                        <label for="example-text-input" class="col-2 col-form-label">Nome</label>
+                        <div class="col-10">
+                            <input class="form-control" type="text" [(ngModel)]="usuario.nome" name="nome" id="nome" #nome="ngModel" required [maxLength]="100">
+                            <div *ngIf="f.submitted && !nome.valid" class="help-block">O nome é obrigatório</div>
+                            <div *ngIf="f.submitted && fieldsInfoVO.get('nome') && fieldsInfoVO.get('nome').returnType === 'ERRO'" class="help-block">{{fieldsInfoVO.get('nome').message}}</div>
+                        </div>
+                    </div>
+                    <div class="form-group row" [ngClass]="{ 'has-error': f.submitted && !nickName.valid }">
+                            <label for="example-text-input" class="col-2 col-form-label">Nick Name</label>
+                            <div class="col-10">
+                                <input class="form-control" type="text" [(ngModel)]="usuario.nick" name="nickName" id="nickName" #nickName="ngModel" required [maxLength]="50">
+                                <div *ngIf="f.submitted && !nickName.valid" class="help-block">O nick name é obrigatório</div>
+                                <div *ngIf="f.submitted && fieldsInfoVO.get('nick') && fieldsInfoVO.get('nick').returnType === 'ERRO'" class="help-block">{{fieldsInfoVO.get('nick').message}}</div>
+                            </div>
+                        </div>
+                    <div class="form-group row" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
+                        <label for="example-email-input" class="col-2 col-form-label">Email</label>
+                        <div class="col-10">
+                            <input class="form-control" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" [(ngModel)]="usuario.email" name="email" id="email" #email="ngModel" required [maxLength]="150">
+                            <div *ngIf="f.submitted && !email.valid" class="help-block">Email Inválido</div>
+                            <div *ngIf="f.submitted && fieldsInfoVO.get('email') && fieldsInfoVO.get('email').returnType === 'ERRO'" class="help-block">{{fieldsInfoVO.get('email').message}}</div>
+                        </div>
+                    </div>
+                    <div class="form-group row" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+                        <label for="example-password-input" class="col-2 col-form-label">Password</label>
+                        <div class="col-10">
+                            <input class="form-control" type="password" [(ngModel)]="usuario.senha" name="password" id="password" #password="ngModel" required [maxLength]="20">
+                            <div *ngIf="f.submitted && !password.valid" class="help-block">A senha é obrigatória</div>
+                            <div *ngIf="f.submitted && fieldsInfoVO.get('senha') && fieldsInfoVO.get('email').returnType === 'ERRO'" class="help-block">{{fieldsInfoVO.get('senha').message}}</div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Cadastrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

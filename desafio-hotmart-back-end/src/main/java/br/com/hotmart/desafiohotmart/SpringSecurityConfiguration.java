@@ -8,13 +8,15 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-import br.com.hotmart.desafiohotmart.auth.AjaxAuthenticationFailureHandler;
-import br.com.hotmart.desafiohotmart.auth.AjaxAuthenticationSuccessHandler;
 import br.com.hotmart.desafiohotmart.service.UsuarioService;
 
 @Configuration
@@ -23,12 +25,6 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter{
 	
 	@Autowired
 	private UsuarioService usuarioService;
-	
-	@Autowired
-    private AjaxAuthenticationSuccessHandler ajaxAuthenticationSuccessHandler;
-
-	@Autowired
-    private AjaxAuthenticationFailureHandler ajaxAuthenticationFailureHandler;
 	
 	/**
 	 * Método principal de configuração
@@ -40,19 +36,17 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
-		http.authorizeRequests()
-		.antMatchers("/login.html").permitAll().and()
-		.formLogin()
-		.loginPage("/login.html")
-		.loginProcessingUrl("/login")
-		.usernameParameter("username")
-        .passwordParameter("password")
-        .successHandler(ajaxAuthenticationSuccessHandler)
-        .failureHandler(ajaxAuthenticationFailureHandler).and()
+		http.cors().and().authorizeRequests()
+		//.antMatchers("/auth/login", "/**/auth/register").permitAll()
+		.anyRequest().permitAll()
+		.and()
 		.logout()
+		.logoutRequestMatcher(new AntPathRequestMatcher("/logout", "POST"))
 		.deleteCookies("JSESSIONID")
-		.invalidateHttpSession(true).and().csrf()
-		.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
+		.invalidateHttpSession(true).and()
+		.httpBasic().and()
+		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED).and().csrf()
+		.disable();
 		
 	}
 	
@@ -100,5 +94,21 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter{
 		authenticationProvider.setHideUserNotFoundExceptions(false);
 		
 		return authenticationProvider;
+	}
+	
+	/**
+	 * Configuração do CORS para aceitar requisições de localhost nas portas
+	 * 4200 e 4201.
+	 * 
+	 * @return
+	 */
+	@Bean
+	public WebMvcConfigurer corsConfigurer() {
+	    return new WebMvcConfigurerAdapter() {
+	        @Override
+	        public void addCorsMappings(CorsRegistry registry) {
+	            registry.addMapping("/**").allowedOrigins("http://localhost:4200", "http://localhost:4201", "*");	          
+	        }
+	    };
 	}
 }

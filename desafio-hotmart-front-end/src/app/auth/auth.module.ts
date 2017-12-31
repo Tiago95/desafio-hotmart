@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { MdIconModule} from '@angular/material';
 
 import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from 'app/auth/register/register.component';
 import { AuthRoutes } from './auth.routing';
 
 
@@ -18,6 +19,7 @@ import { AuthRoutes } from './auth.routing';
   ],
   declarations: [ 
     LoginComponent,
+    RegisterComponent
   ]
 })
 

@@ -8,16 +8,19 @@
                     </div>
                 </div>
                 <div class="pl-3 pt-3 pb-3 pr-3">
-                    <p class="text-center"><strong>Utilize os dados recebidos por e-mail</strong></p>
-                    <form>
+                    <p class="text-center"><strong>Login</strong></p>
+                    <form role="form" name="form-signin" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
+                        <div class="alert alert-danger" role="alert" *ngIf="errorMessage">{{errorMessage}}</div>
                         <fieldset>
-                            <div class="form-group">
-                                <label for="usuarioTextInput">Usuário</label>
-                                <input type="text" id="usuarioTextInput" class="form-control" placeholder="Usuário">
+                            <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+                                <label for="usuarioTextInput">Usuário (email)</label>
+                                <input type="text" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" id="username" class="form-control" placeholder="Usuário" [(ngModel)]="credentials.username" name="username" required #username="ngModel" />
+                                <div *ngIf="f.submitted && !username.valid" class="help-block">Email inválido</div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
                                 <label for="senhaTextInput">Senha</label>
-                                <input type="password" id="senhaTextInput" class="form-control" placeholder="Senha">
+                                <input type="password" id="password" class="form-control" placeholder="Senha" [(ngModel)]="credentials.password" name="password" #password="ngModel" required />
+                                <div *ngIf="f.submitted && !password.valid" class="help-block">A senha é obrigatória</div>
                             </div>
                             <button type="submit" class="btn btn-primary">Entrar</button>
                         </fieldset>

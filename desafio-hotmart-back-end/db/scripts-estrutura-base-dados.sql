@@ -3,6 +3,7 @@ USE `desafio-hotmart`;
 
 CREATE TABLE `usuario` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `nome` varchar(100) NOT NULL,
   `login` varchar(150) NOT NULL,
   `senha` varchar(255) NOT NULL,
   `nick_name` varchar(50) NOT NULL,

@@ -8,6 +8,9 @@ import {MdDialog, MdDialogConfig, MdDialogRef, MdSnackBar} from '@angular/materi
     encapsulation: ViewEncapsulation.None
 })
 export class DesafioHotmartAppComponent {
+
+   static API_URL="http://localhost:8080";
+
    constructor(translate: TranslateService) {
        translate.addLangs(['en', 'fr']);
        translate.setDefaultLang('en');
