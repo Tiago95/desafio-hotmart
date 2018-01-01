@@ -1,4 +1,4 @@
-package br.com.hotmart.desafiohotmart;
+package br.com.hotmart.desafiohotmart.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -38,7 +38,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter{
 		
 		http.cors().and().authorizeRequests()
 		.antMatchers("/auth/user", "/auth/register").permitAll()
-		.anyRequest().fullyAuthenticated()
+		.anyRequest().authenticated()
 		.and()
 		.logout()
 		.logoutRequestMatcher(new AntPathRequestMatcher("/logout", "POST"))

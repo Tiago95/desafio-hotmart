@@ -26,7 +26,7 @@ import br.com.hotmart.desafiohotmart.vo.UsuarioVO;
  *
  */
 @Entity
-@Table(name = "Usuario")
+@Table(name = "usuario")
 public class Usuario extends BaseEntity implements UserDetails {
 	
 	/**
@@ -56,7 +56,11 @@ public class Usuario extends BaseEntity implements UserDetails {
 	@NotNull
 	@Column(name = "status", nullable = false, unique = false, columnDefinition = "tinyint")
 	@Enumerated(value = EnumType.ORDINAL)
-	private StatusUsuarioEnum statusUsuario;	
+	private StatusUsuarioEnum statusUsuario;
+	
+	@NotNull
+	@Column(name = "conectado", nullable = false, unique = false)
+	private boolean conectado;
 	
 	/**
 	 * @return the nome
@@ -128,6 +132,20 @@ public class Usuario extends BaseEntity implements UserDetails {
 		this.statusUsuario = statusUsuario;
 	}
 
+	/**
+	 * @return the conectado
+	 */
+	public boolean isConectado() {
+		return conectado;
+	}
+
+	/**
+	 * @param conectado the conectado to set
+	 */
+	public void setConectado(boolean conectado) {
+		this.conectado = conectado;
+	}
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		
@@ -186,10 +204,12 @@ public class Usuario extends BaseEntity implements UserDetails {
 
 		UsuarioVO usuarioVO = new UsuarioVO();
 		
+		usuarioVO.setId(this.getId());
 		usuarioVO.setEmail(this.getLogin());
 		usuarioVO.setNick(this.getNickName());
 		usuarioVO.setNome(this.getNome());
 		usuarioVO.setSenha(this.getSenha());
+		usuarioVO.setConectado(this.isConectado());
 		
 		return usuarioVO;
 	}

@@ -21,6 +21,7 @@ import { AuthLayoutComponent } from './auth/auth-layout.component';
 import { AuthenticationService } from 'app/services/authentication.service';
 import { HttpService } from 'app/services/http-service';
 import { UrlPermission } from 'app/urlPermission/url.permission';
+import { ChatService } from 'app/services/chat.service';
 
 
 
@@ -55,7 +56,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 		AuthLayoutComponent
 	],
 	bootstrap: [DesafioHotmartAppComponent],
-	providers:[AuthenticationService, HttpService, UrlPermission,
+	providers:[AuthenticationService, HttpService, UrlPermission, ChatService,
       {
          provide: PERFECT_SCROLLBAR_CONFIG,
          useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG

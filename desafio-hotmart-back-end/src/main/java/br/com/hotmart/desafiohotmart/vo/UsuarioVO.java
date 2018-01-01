@@ -19,6 +19,8 @@ public class UsuarioVO implements BaseVO, BaseResponseVO {
 	 */
 	private static final long serialVersionUID = -3722017452589728946L;
 
+	private Long id;
+	
 	@NotBlank
 	@Size(max = 100)
 	private String nome;
@@ -34,6 +36,22 @@ public class UsuarioVO implements BaseVO, BaseResponseVO {
 	@NotBlank
 	@Size(max = 20)
 	private String senha;
+	
+	private boolean conectado;
+
+	/**
+	 * @return the id
+	 */
+	public Long getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	/**
 	 * @return the nome
@@ -92,6 +110,20 @@ public class UsuarioVO implements BaseVO, BaseResponseVO {
 	}
 	
 	/**
+	 * @return the conectado
+	 */
+	public boolean isConectado() {
+		return conectado;
+	}
+
+	/**
+	 * @param conectado the conectado to set
+	 */
+	public void setConectado(boolean conectado) {
+		this.conectado = conectado;
+	}
+
+	/**
 	 * Responsável por retornar uma entidade de usuário.
 	 * 
 	 * @return
@@ -100,10 +132,12 @@ public class UsuarioVO implements BaseVO, BaseResponseVO {
 		
 		Usuario usuario = new Usuario();
 		  
+		usuario.setId(this.getId());
 	    usuario.setLogin(this.getEmail());
 	    usuario.setNickName(this.getNick());
 	    usuario.setSenha(this.getSenha());
 	    usuario.setNome(this.getNome());
+	    usuario.setConectado(this.isConectado());
 	    
 	    return usuario;
 		

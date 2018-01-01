@@ -1,3 +1,4 @@
+import { ChatService } from 'app/services/chat.service';
 import { HttpUtils } from 'app/utils/http-utils';
 import { MessageInfoVO } from 'app/models/message-info-vo';
 import { FieldInfoVO } from './../../models/field-info-vo';
@@ -20,7 +21,8 @@ export class LoginComponent {
 
   private errorMessage: string;
 
-  public constructor(private router: Router, private authService: AuthenticationService) { 
+  public constructor(private router: Router, private authService: AuthenticationService,
+                     private chatService: ChatService) { 
 
     this.credentials = new Credentials();
     
@@ -38,6 +40,7 @@ export class LoginComponent {
     
         }else{
   
+          this.chatService.connect(this.credentials.username, this.credentials.password);
           this.router.navigate(['/chat']);
   
         }     

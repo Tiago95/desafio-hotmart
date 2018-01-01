@@ -1,4 +1,4 @@
-package br.com.hotmart.desafiohotmart;
+package br.com.hotmart.desafiohotmart.config;
 
 import javax.sql.DataSource;
 

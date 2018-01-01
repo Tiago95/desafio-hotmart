@@ -1,5 +1,7 @@
 package br.com.hotmart.desafiohotmart.service;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -97,6 +99,7 @@ public class UsuarioService extends BaseServiceAbstract<Usuario, Long> implement
 				
 				usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
 				usuario.setStatusUsuario(StatusUsuarioEnum.ATIVO);
+				usuario.setConectado(true);
 				
 				return usuarioDAO.save(usuario);
 				
@@ -109,6 +112,19 @@ public class UsuarioService extends BaseServiceAbstract<Usuario, Long> implement
 		}
 		
 		throw new ServiceException(USUARIO_NAO_PODE_SER_NULO);
+		
+	}
+	
+	/**
+	 * Responsável por atualizar o status de conectado do usuário.
+	 * 
+	 * @param idUsuario
+	 * @param conectado
+	 */
+	@Transactional
+	public void updateUserConnected(Long idUsuario, boolean conectado) {
+		
+		usuarioDAO.updateUserConnected(idUsuario, conectado);
 		
 	}
 
@@ -164,6 +180,6 @@ public class UsuarioService extends BaseServiceAbstract<Usuario, Long> implement
 			
 		}
 		
-	}
+	}	
 	
 }

@@ -1,6 +1,11 @@
 package br.com.hotmart.desafiohotmart.dao;
 
+import javax.transaction.Transactional;
+
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.query.Param;
 
 import br.com.hotmart.desafiohotmart.entity.Usuario;
 
@@ -38,4 +43,15 @@ public interface UsuarioDAO extends PagingAndSortingRepository<Usuario, Long> {
 	 * @return
 	 */
 	Long countByLogin(String login);
+
+	/**
+	 * Responsável por atualizar o status de conectado do usuário.
+	 * 
+	 * @param idUsuario
+	 * @param conectado
+	 */
+	@Transactional
+	@Modifying
+	@Query("UPDATE Usuario u SET conectado = :conectado WHERE u.id = :idUsuario")
+	void updateUserConnected(@Param("idUsuario") Long idUsuario, @Param("conectado") boolean conectado);
 }
