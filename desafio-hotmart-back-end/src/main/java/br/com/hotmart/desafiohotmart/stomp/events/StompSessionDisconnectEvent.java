@@ -8,10 +8,10 @@ import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 
+import br.com.hotmart.desafiohotmart.entity.Usuario;
 import br.com.hotmart.desafiohotmart.service.UsuarioService;
 import br.com.hotmart.desafiohotmart.utils.SecurityUtils;
 import br.com.hotmart.desafiohotmart.utils.WebSocketUtils;
-import br.com.hotmart.desafiohotmart.vo.UsuarioVO;
 
 @Component
 public class StompSessionDisconnectEvent implements ApplicationListener<SessionDisconnectEvent> {
@@ -28,11 +28,11 @@ public class StompSessionDisconnectEvent implements ApplicationListener<SessionD
 
 		try {
 
-			UsuarioVO usuarioVO = SecurityUtils.getUsuarioVOByUserPrincipal(shaccessor.getUser());
+			Usuario usuario = SecurityUtils.getUsuarioByUserPrincipal(shaccessor.getUser());
 
-			WebSocketUtils.connect(shaccessor.getSessionId(), usuarioVO);
+			WebSocketUtils.connect(shaccessor.getSessionId(), usuario);
 			
-			usuarioService.updateUserConnected(usuarioVO.getId(), false);
+			usuarioService.updateUserConnected(usuario.getId(), false);
 			
 		} catch (Exception e) {
 			

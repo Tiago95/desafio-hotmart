@@ -4,7 +4,7 @@ import java.security.Principal;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import br.com.hotmart.desafiohotmart.vo.UsuarioVO;
+import br.com.hotmart.desafiohotmart.entity.Usuario;
 
 /**
  * Classe utilitária responsável por conter métodos utilitário para web socket
@@ -14,7 +14,7 @@ import br.com.hotmart.desafiohotmart.vo.UsuarioVO;
  */
 public class WebSocketUtils {
 	
-	private static final Map<String, UsuarioVO> sessionMap = new ConcurrentHashMap<>();
+	private static final Map<String, Usuario> sessionMap = new ConcurrentHashMap<>();
 	
 	/**
 	 * Construtor privado para a classe utilitária.
@@ -28,11 +28,11 @@ public class WebSocketUtils {
 	 * Responsável por registrar uma nova conexão.
 	 * 
 	 * @param sessionId
-	 * @param usuarioVO
+	 * @param 
 	 */
-	public static void connect(String sessionId, UsuarioVO usuarioVO) {
+	public static void connect(String sessionId, Usuario usuario) {
 
-		sessionMap.put(sessionId, usuarioVO);
+		sessionMap.put(sessionId, usuario);
 		
 	}
 	
@@ -44,7 +44,7 @@ public class WebSocketUtils {
 	 */
 	public static void connect(String sessionId, Principal principal) {
 
-		connect(sessionId, SecurityUtils.getUsuarioVOByUserPrincipal(principal));
+		connect(sessionId, SecurityUtils.getUsuarioByUserPrincipal(principal));
 		
 	}
 	
@@ -65,7 +65,7 @@ public class WebSocketUtils {
 	 * @param sessionId
 	 * @return
 	 */
-	public static UsuarioVO getUsuarioVOBySessionId(String sessionId){
+	public static Usuario getUsuarioVOBySessionId(String sessionId){
 		
 		if(sessionMap.containsKey(sessionId)){
 			

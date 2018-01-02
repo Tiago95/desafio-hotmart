@@ -15,23 +15,23 @@ export class ChatService {
 
 	public connect(login: string, password: string){
 
-		let connect = localStorage.getItem('connect');
-
-		if(!connect || connect.toString() !== "true"){
-
 			let ws = new SockJS(CHAT_URL);
 			this.stompClient = Stomp.over(ws);
 			let that = this;
-			this.stompClient.connect(login,	password, function(frame) {
-				that.stompClient.subscribe("/chatHotmart", (message) => {
-					if(message.body) {					  
-					  console.log(message.body);
-					}
-				  });				
-				localStorage.setItem('connect', 'true');
+			this.stompClient.connect({login: login, password: btoa(password)}, function(frame) {
+				that.stompClient.subscribe("/user/chatHotmart", (message) => {
+						if(message.body) {					  
+							console.log(message.body);
+						}
+					});
+					
 			});
 
-		}
+	}
+
+	public sendMsg(message: string, idUsuarioDestino: number){
+
+		this.stompClient.send("/app/chat" , {}, JSON.stringify({message: message, idUsuarioDestino: idUsuarioDestino}));
 
 	}
 

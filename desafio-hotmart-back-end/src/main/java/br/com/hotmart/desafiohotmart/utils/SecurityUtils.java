@@ -25,7 +25,7 @@ public class SecurityUtils {
 	}
 	
 	/**
-	 * Responsável por retornar um usuário vo de acordo com um usuário logado (Principal)
+	 * Responsável por retornar um usuário vo de acordo com um usuário (Principal)
 	 * 
 	 * @param userPrincipal
 	 * @return
@@ -36,6 +36,25 @@ public class SecurityUtils {
 				&& ((UsernamePasswordAuthenticationToken) userPrincipal).getPrincipal() instanceof Usuario){
 			
 		  return ((Usuario)((UsernamePasswordAuthenticationToken) userPrincipal).getPrincipal()).toUsuarioVO(); 
+			
+		}
+		
+		return null;
+		
+	}
+	
+	/**
+	 * Responsável por retornar um usuário de acordo com um usuário (Principal)
+	 * 
+	 * @param userPrincipal
+	 * @return
+	 */
+	public static Usuario getUsuarioByUserPrincipal(Principal userPrincipal){
+		
+		if(userPrincipal != null && userPrincipal instanceof UsernamePasswordAuthenticationToken
+				&& ((UsernamePasswordAuthenticationToken) userPrincipal).getPrincipal() instanceof Usuario){
+			
+		  return ((Usuario)((UsernamePasswordAuthenticationToken) userPrincipal).getPrincipal()); 
 			
 		}
 		

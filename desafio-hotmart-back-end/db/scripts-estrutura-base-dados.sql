@@ -16,7 +16,7 @@ CREATE TABLE `usuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
 CREATE TABLE `desafio-hotmart`.`chat_message` (
-  `id` BIGINT(20) UNSIGNED NOT NULL,
+  `id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `usuario_origem_id` BIGINT(20) UNSIGNED NOT NULL,
   `usuario_destino_id` BIGINT(20) UNSIGNED NOT NULL,
   `message` VARCHAR(255) CHARACTER SET 'utf8mb4' NOT NULL,

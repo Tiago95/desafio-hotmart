@@ -8,10 +8,10 @@ import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.messaging.SessionConnectEvent;
 
+import br.com.hotmart.desafiohotmart.entity.Usuario;
 import br.com.hotmart.desafiohotmart.service.UsuarioService;
 import br.com.hotmart.desafiohotmart.utils.SecurityUtils;
 import br.com.hotmart.desafiohotmart.utils.WebSocketUtils;
-import br.com.hotmart.desafiohotmart.vo.UsuarioVO;
 
 /**
  * Classe responsável pelo evento de conexão
@@ -34,11 +34,11 @@ public class StompSessionConnectEvent implements ApplicationListener<SessionConn
 
 		try {
 			
-			UsuarioVO usuarioVO = SecurityUtils.getUsuarioVOByUserPrincipal(shaccessor.getUser());
+			Usuario usuario = SecurityUtils.getUsuarioByUserPrincipal(shaccessor.getUser());
 
-			WebSocketUtils.connect(shaccessor.getSessionId(), usuarioVO);
+			WebSocketUtils.connect(shaccessor.getSessionId(), usuario);
 			
-			usuarioService.updateUserConnected(usuarioVO.getId(), true);
+			usuarioService.updateUserConnected(usuario.getId(), true);
 			
 		} catch (Exception e) {
 			

@@ -2,6 +2,8 @@ package br.com.hotmart.desafiohotmart;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 
 /**
  * Classe principal do desafio hotmart, responsável por inicializar a aplicação
@@ -11,6 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  *
  */
 @SpringBootApplication
+@EntityScan(basePackageClasses = {DesafioHotmartApplication.class, Jsr310JpaConverters.class})
 public class DesafioHotmartApplication {
 
 	/**

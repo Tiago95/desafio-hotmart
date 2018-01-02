@@ -1,7 +1,7 @@
 package br.com.hotmart.desafiohotmart.entity;
 
 import java.util.Collection;
-import java.util.HashSet;
+import java.util.Collections;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -149,7 +149,7 @@ public class Usuario extends BaseEntity implements UserDetails {
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		
-		return new HashSet<>();
+		return Collections.singleton((GrantedAuthority) () -> "USER");
 		
 	}
 

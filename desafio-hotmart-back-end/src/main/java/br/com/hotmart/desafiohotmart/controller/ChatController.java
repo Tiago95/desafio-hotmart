@@ -1,20 +1,18 @@
 package br.com.hotmart.desafiohotmart.controller;
 
-import java.security.Principal;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
-import org.springframework.messaging.simp.annotation.SendToUser;
+import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.hotmart.desafiohotmart.entity.ChatMessage;
+import br.com.hotmart.desafiohotmart.entity.Usuario;
 import br.com.hotmart.desafiohotmart.service.ChatMessageService;
-import br.com.hotmart.desafiohotmart.utils.SecurityUtils;
+import br.com.hotmart.desafiohotmart.service.UsuarioService;
 import br.com.hotmart.desafiohotmart.utils.WebSocketUtils;
-import br.com.hotmart.desafiohotmart.vo.ChatMessageVO;
 import br.com.hotmart.desafiohotmart.vo.MessageVO;
 
 /**
@@ -29,6 +27,12 @@ public class ChatController {
 	@Autowired
 	private ChatMessageService chatMessageService;
 	
+	@Autowired
+	private UsuarioService usuarioService;
+	
+	@Autowired
+	private SimpMessageSendingOperations simpMessageSendingOperations;
+	
 	/**
 	 * Responsável por controlar o envio de mensagens trocadas entre os usuários.
 	 * 
@@ -38,16 +42,16 @@ public class ChatController {
 	 * @return
 	 */
 	@MessageMapping("/chat")
-	@SendToUser("/chatHotmart")
-	public ChatMessageVO sendMessage(@Payload MessageVO messageVO,
-			Message<?> message, Principal principal){
+	public void sendMessage(@Payload MessageVO messageVO, Message<?> message){
 		
-		ChatMessage chatMessage = new ChatMessage(WebSocketUtils.getUsuarioVOBySessionId(StompHeaderAccessor.wrap(message).getSessionId()).toUsuario(),
-				SecurityUtils.getUsuarioVOByUserPrincipal(principal).toUsuario(), messageVO.getMessage());
+		Usuario usuarioDestino = usuarioService.findById(messageVO.getIdUsuarioDestino());
+		
+		ChatMessage chatMessage = new ChatMessage(WebSocketUtils.getUsuarioVOBySessionId(StompHeaderAccessor.wrap(message).getSessionId()),
+				usuarioDestino, messageVO.getMessage());
 		
 		chatMessageService.save(chatMessage);
 		
-		return chatMessage.toChatMessageVO();
+		simpMessageSendingOperations.convertAndSendToUser(usuarioDestino.getUsername(), "/chatHotmart", chatMessage.toChatMessageVO());
 		
 	}
 
