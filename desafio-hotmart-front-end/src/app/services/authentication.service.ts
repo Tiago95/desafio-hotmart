@@ -8,6 +8,7 @@ import 'rxjs/add/operator/map';
 
 import { Credentials } from './../models/credentials';
 import { HttpService } from './http-service';
+import { TipoRetornoEnum } from 'app/enum/tipo-retorno-enum';
 
 @Injectable()
 export class AuthenticationService{
@@ -45,6 +46,23 @@ export class AuthenticationService{
 
         return this.httpService.realizarRequisicaoHttp(new HttpControl(DesafioHotmartAppComponent.API_URL + "/auth/register", RequestMethod.Post, usuario));
 
+    }
+
+    public logOut() {
+        
+        return new Promise<EstruturaJson>((resolve, reject) => {
+
+            this.httpService.realizarRequisicaoHttp(new HttpControl(DesafioHotmartAppComponent.API_URL + "/logout", RequestMethod.Post, {}))
+            .then((estruturaJson: EstruturaJson) => {
+
+                localStorage.removeItem('currentUser');
+                
+                resolve();
+                
+            });
+
+        });
+    
     }
 
     private createHeaders(credentials: Credentials): Headers{

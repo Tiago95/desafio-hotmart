@@ -1,3 +1,4 @@
+import { MainComponent } from './main/main.component';
 import { NgModule} from '@angular/core';
 import { BrowserModule} from '@angular/platform-browser';
 import { BrowserAnimationsModule} from "@angular/platform-browser/animations";
@@ -22,6 +23,8 @@ import { AuthenticationService } from 'app/services/authentication.service';
 import { HttpService } from 'app/services/http-service';
 import { UrlPermission } from 'app/urlPermission/url.permission';
 import { ChatService } from 'app/services/chat.service';
+import { MenuItems } from 'app/core/menu/menu-items/menu-items';
+import { PageTitleService } from 'app/core/page-title/page-title.service';
 
 
 
@@ -53,10 +56,11 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 	],
 	declarations: [
 		DesafioHotmartAppComponent,
-		AuthLayoutComponent
+		AuthLayoutComponent,
+		MainComponent
 	],
 	bootstrap: [DesafioHotmartAppComponent],
-	providers:[AuthenticationService, HttpService, UrlPermission, ChatService,
+	providers:[AuthenticationService, HttpService, UrlPermission, ChatService, MenuItems, PageTitleService,
       {
          provide: PERFECT_SCROLLBAR_CONFIG,
          useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG

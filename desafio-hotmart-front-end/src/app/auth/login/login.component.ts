@@ -41,7 +41,7 @@ export class LoginComponent {
         }else{
   
           this.chatService.connect(this.credentials.username, this.credentials.password);
-          this.router.navigate(['/chat']);
+          this.router.navigate(['/dashboard']);
   
         }     
   

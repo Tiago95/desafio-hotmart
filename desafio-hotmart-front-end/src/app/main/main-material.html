@@ -1,0 +1,156 @@
+<div class="app" #root="$implicit" dir="ltr" [ngClass]="[themeSidebarSkinColor, themeHeaderSkinColor]" [class.app-dark]="dark" [class.boxed]="boxed" [class.collapsed-sidebar]="collapseSidebar" [class.compact-sidebarr]="compactSidebar" [class.customizer-in]="customizerIn">
+<md-sidenav-container class="silk-container">
+   <md-sidenav #sidenav [mode]="sidenavMode" [opened]="sidenavOpen" class="sidebar-area">
+   <div class="sidebar-panel silk-sidenav">
+      <div class="sidebar-container">
+         <div class="logo-container ">
+            <div class="logo-w logo-i d-flex justify-content-between">
+               <div class="align-self-center">
+                  <div class="logo-sign inline-block d-flex"><img class="align-self-center logo-img" src="assets/img/logo_hotmart_transparent.png" width="30" height="30">
+                  <span>Desafio Hotmart</span>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="user-info-w">
+            <div class="silk-user-thumb d-flex">
+               <img class="img-responsive img-circle align-self-center" src="assets/img/user-default.png" width="107" height="107" alt="user list image">
+               <div class="align-self-center pr-3 pl-3 silk-user-i">
+                  <span class="silk-user-name"><strong>{{currentUser.nick}}</strong></span>
+                  <p class="mb-0"><small><i class="fa fa-circle text-success"></i> Online</small></p>
+               </div>
+            </div>
+         </div>
+         <div class="sidenav-scrollbar-container">
+               <md-nav-list menuToggleDirective class="navigation">
+                  <md-list-item menuToggleLink *ngFor="let menuitem of menuItems.getAll()">
+                     <a menuToggle class="silk-relative" md-ripple [routerLink]="['/', menuitem.state]" *ngIf="menuitem.type === 'link'">
+                     <md-icon>{{ menuitem.icon }}</md-icon>
+                     <span>{{ menuitem.name | translate }}</span>
+                     </a>
+                     <a menuToggle class="silk-relative" md-ripple href="javascript:;" *ngIf="menuitem.type === 'sub'">
+                        <md-icon>{{ menuitem.icon }}</md-icon>
+                        <span>{{ menuitem.name | translate }}</span>
+                        <i class="fa menu-caret fa-angle-left"></i>
+                     </a>
+                     <md-nav-list class="sub-menu" *ngIf="menuitem.type === 'sub'">
+                        <md-list-item *ngFor="let childitem of menuitem.children" routerLinkActive="open">
+                           <a [routerLink]="['/', menuitem.state, childitem.state ]" class="silk-relative" md-ripple>{{ childitem.name | translate }}</a>
+                        </md-list-item>
+                     </md-nav-list>
+                  </md-list-item>
+                  <md-divider></md-divider>
+               </md-nav-list>
+         </div>
+      </div>
+   </div>
+   </md-sidenav>
+   <div class="silk-base-container" #scrollContainer>
+      <div class="silk-header-toolbar">
+         <div class="d-flex justify-content-between">
+            <div class="header-left d-flex">
+               <div class="silk-ham-icon align-self-center">
+                  <a charset="cursor" (click)="sidenav.toggle()"><i class="fa fa-bars fa-lg" aria-hidden="true"></i>
+                  </a>
+               </div>
+               <div class="d-flex page-info-wrap justify-content-between">
+                  <a class="navbar-brand align-self-center" href="#">{{header}}</a>
+               </div>
+            </div>
+            <div class="silk-main-menu">
+               <ul class="main-nav">
+                  <li class="nav-item dropdown">
+                     <a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     <i class="fa fa-envelope-o"></i><span class="badge badge-success">4</span>
+                     </a>
+                     <div class="dropdown-menu dropdown-menu-md dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                        <div class="dropdown-head bg-success">
+                           <small class="dropdown-header"><strong>You have 2 new messages</strong></small>
+                        </div>
+                        <div class="dropdown-body">
+                           <a class="dropdown-item d-flex" href="javascript:void(0)">
+                              <div class="align-self-center">
+                                 <img src="assets/img/user-1.jpg" class="img-circle" width="40" height="40" alt="">
+                              </div>
+                              <div class="ml-2 mr-2"> <span class="align-self-center d-block">Your new theme is awesome! </span>
+                                 <small><i class="fa fa-clock-o"></i> 12 min ago</small>
+                              </div>
+                           </a>
+                           <a class="dropdown-item d-flex" href="javascript:void(0)">
+                              <div class="align-self-center">
+                                 <img src="assets/img/user-2.jpg" class="img-circle" width="40" height="40" alt="">
+                              </div>
+                              <div class="ml-2 mr-2"> <span class="align-self-center d-block">Thanks for your support. </span>
+                                 <small><i class="fa fa-clock-o"></i> 23 min ago</small>
+                              </div>
+                           </a>
+                           <a class="dropdown-item d-flex" href="javascript:void(0)">
+                              <div class="align-self-center">
+                                 <img src="assets/img/user-3.jpg" class="img-circle" width="40" height="40" alt="">
+                              </div>
+                              <div class="ml-2 mr-2"> <span class="align-self-center d-block">I need help in theme! </span>
+                                 <small><i class="fa fa-clock-o"></i> 27 min ago</small>
+                              </div>
+                           </a>
+                           <a class="dropdown-item d-flex" href="javascript:void(0)">
+                              <div class="align-self-center">
+                                 <img src="assets/img/user-4.jpg" class="img-circle" width="40" height="40" alt="">
+                              </div>
+                              <div class="ml-2 mr-2"> <span class="align-self-center d-block">Stunning design </span>
+                                 <small><i class="fa fa-clock-o"></i> 28 min ago</small>
+                              </div>
+                           </a>
+                           <a class="dropdown-item d-flex" href="javascript:void(0)">
+                              <div class="align-self-center">
+                                 <img src="assets/img/user-5.jpg" class="img-circle" width="40" height="40" alt="">
+                              </div>
+                              <div class="ml-2 mr-2"> <span class="align-self-center d-block">Good tempalte </span>
+                                 <small><i class="fa fa-clock-o"></i> 31 min ago</small>
+                              </div>
+                           </a>
+                        </div>
+                        <div class="dropdown-foot bg-success">
+                           <a href="javascript:void(0)"><small><strong>View all</strong></small></a>
+                        </div>
+                     </div>
+                  </li>
+                  <li class="nav-item">
+                     <a href="javascript:void(0)" class="nav-link" (click)="toggleFullscreen()">
+                     <i class="fa fa-arrows-alt" *ngIf="!isFullscreen"></i>
+                     <i class="fa fa-desktop" *ngIf="isFullscreen"></i>
+                     </a>
+                  </li>
+                  <li class="nav-item">
+                        <a href="javascript:void(0)" class="nav-link" (click)="logout()">
+                        <i class="fa fa-sign-out"></i></a>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </div>
+      <div class="inner-container">
+         <router-outlet (activate)="onActivate($event, scrollContainer)"></router-outlet>
+      </div>
+   </div>
+</md-sidenav-container>
+</div>
+<md-menu class="user-menu" x-position="before" y-position="below" #menu="mdMenu">
+   <button md-menu-item>
+      <md-icon>account_circle</md-icon>
+      <span>Profile</span>
+   </button>
+   <button md-menu-item>
+      <md-icon>settings</md-icon>
+      <span>Settings</span>
+   </button>
+   <button md-menu-item>
+      <md-icon>help</md-icon>
+      <span>Help</span>
+   </button>
+   <md-divider></md-divider>
+   <button [routerLink]="['/login']" md-menu-item>
+      <md-icon>exit_to_app</md-icon>
+      <span>Logout</span>
+   </button>
+</md-menu>
+
