@@ -12,7 +12,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -40,13 +39,16 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter{
 		.antMatchers("/auth/user", "/auth/register", "/chat/**").permitAll()
 		.anyRequest().authenticated()
 		.and()
-		.logout()
-		.logoutRequestMatcher(new AntPathRequestMatcher("/logout", "POST"))
-		.deleteCookies("JSESSIONID")
-		.invalidateHttpSession(true).and()
-		.httpBasic().and()
-		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED).and().csrf()
-		.disable();
+		.logout().permitAll()
+		.and()
+		.csrf().disable()
+		.httpBasic()
+		.and()
+		.logout().permitAll()
+		.and()
+		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+		.and()
+		.csrf().disable();
 		
 	}
 	
