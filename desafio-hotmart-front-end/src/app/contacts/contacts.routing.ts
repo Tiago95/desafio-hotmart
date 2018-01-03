@@ -3,9 +3,9 @@ import { Routes } from '@angular/router';
 import { ContactsComponent } from './contacts.component';
 
 export const ContactsRoutes: Routes = [{
-  path: '/dashboard/contacts',
+  path: '',
   children: [{
-    path: 'contacts',
+    path: '',
     component: ContactsComponent
   }]
 }];

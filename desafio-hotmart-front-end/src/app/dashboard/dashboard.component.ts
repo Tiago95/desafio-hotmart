@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import {fadeInAnimation} from "../core/route-animation/route.animation";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'ms-dashboard',
@@ -13,5 +14,13 @@ import {fadeInAnimation} from "../core/route-animation/route.animation";
 })
 export class DashboardComponent {
 
-  
+    public constructor(private router: Router){
+
+
+    }
+
+    public goToContacts(){
+        this.router.navigate(["/contacts"]);
+    }
+
 }
