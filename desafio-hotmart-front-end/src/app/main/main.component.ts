@@ -10,6 +10,7 @@ import {MediaChange, ObservableMedia} from "@angular/flex-layout";
 import { PerfectScrollbarConfigInterface,
 PerfectScrollbarComponent, PerfectScrollbarDirective } from 'ngx-perfect-scrollbar';
 import PerfectScrollbar from 'perfect-scrollbar';
+import { AppUtils } from 'app/utils/app-utils';
 const screenfull = require('screenfull');
 
 @Component({
@@ -23,9 +24,10 @@ export class MainComponent{
     private isFullscreen: boolean = false;    
     private sidenavOpen: boolean = true;
     private sidenavMode: string = 'side';
-    themeHeaderSkinColor: any = "header-default";
-    themeSidebarSkinColor: any = "sidebar-default";
+    private themeHeaderSkinColor: any = "header-default";
+    private themeSidebarSkinColor: any = "sidebar-default";
     private currentUser: Usuario;
+    private randomUserNumber: number = AppUtils.getRandomInt(1, 13);
     
     @ViewChild('sidenav') sidenav;
 	public constructor(private menuItems: MenuItems, private authService: AuthenticationService, private router: Router) {
