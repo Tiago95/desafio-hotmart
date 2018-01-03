@@ -46,7 +46,7 @@ public class ChatMessage extends BaseEntity{
 	private String message;
 	
 	@NotNull
-	@Column(name = "sendDate", nullable = true, unique = false, columnDefinition = "datetime")
+	@Column(name = "send_date", nullable = true, unique = false, columnDefinition = "datetime")
 	private LocalDateTime sendDate;
 	
 	@NotNull
