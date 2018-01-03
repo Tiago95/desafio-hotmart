@@ -6,7 +6,7 @@ import java.util.List;
 
 import br.com.hotmart.desafiohotmart.enumerations.ReturnTypeEnum;
 
-public class ResponseVO<T extends BaseResponseVO> implements BaseVO {
+public class ResponseVO<T> implements BaseVO {
 
 	/**
 	 * 

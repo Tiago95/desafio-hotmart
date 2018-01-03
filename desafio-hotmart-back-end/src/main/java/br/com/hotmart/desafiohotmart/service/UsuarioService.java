@@ -1,5 +1,7 @@
 package br.com.hotmart.desafiohotmart.service;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import br.com.hotmart.desafiohotmart.entity.Usuario;
 import br.com.hotmart.desafiohotmart.enumerations.StatusUsuarioEnum;
 import br.com.hotmart.desafiohotmart.exception.FieldServiceException;
 import br.com.hotmart.desafiohotmart.exception.ServiceException;
+import br.com.hotmart.desafiohotmart.vo.ContatosVO;
 
 /**
  * Serviço responsável por manipular
@@ -125,6 +128,30 @@ public class UsuarioService extends BaseServiceAbstract<Usuario, Long> implement
 	public void updateUserConnected(Long idUsuario, boolean conectado) {
 		
 		usuarioDAO.updateUserConnected(idUsuario, conectado);
+		
+	}
+	
+	/**
+	 * Responsável por retornar uma lista de contatos de acordo com um usuário.
+	 * 
+	 * @param usuario
+	 * @return
+	 */
+	public List<ContatosVO> getContatosVOByUsuario(Usuario usuario){
+		
+		return usuarioDAO.getContatosVOByUsuario(usuario);
+		
+	}
+	
+	/**
+	 * Responsável por retornar uma lista de contatos de acordo com um usuário.
+	 * 
+	 * @param idUsuario
+	 * @return
+	 */
+	public List<ContatosVO> getContatosVOByUsuario(Long idUsuario){
+		
+		return getContatosVOByUsuario(new Usuario(idUsuario));
 		
 	}
 

@@ -63,6 +63,26 @@ public class Usuario extends BaseEntity implements UserDetails {
 	private boolean conectado;
 	
 	/**
+	 * Construtor default.
+	 * 
+	 */
+	public Usuario() {
+		super();
+	}
+	
+	/**
+	 * Construtor que recebe um id.
+	 * 
+	 * @param id
+	 */
+	public Usuario(Long id){
+		
+		this();
+		
+		setId(id);		
+	}
+	
+	/**
 	 * @return the nome
 	 */
 	public String getNome() {

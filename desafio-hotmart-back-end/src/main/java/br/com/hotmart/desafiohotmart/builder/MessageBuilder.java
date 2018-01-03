@@ -10,7 +10,6 @@ import java.util.Set;
 import br.com.hotmart.desafiohotmart.enumerations.ReturnTypeEnum;
 import br.com.hotmart.desafiohotmart.exception.FieldServiceException;
 import br.com.hotmart.desafiohotmart.exception.ServiceException;
-import br.com.hotmart.desafiohotmart.vo.BaseResponseVO;
 import br.com.hotmart.desafiohotmart.vo.FieldInfoVO;
 import br.com.hotmart.desafiohotmart.vo.MessageInfoVO;
 import br.com.hotmart.desafiohotmart.vo.ResponseVO;
@@ -23,7 +22,7 @@ import br.com.hotmart.desafiohotmart.vo.ResponseVO;
  *
  * @param <E>
  */
-public class MessageBuilder<E extends BaseResponseVO> {
+public class MessageBuilder<E> {
 
 	private Map<String, FieldInfoVO> errosEncontrados = new HashMap<>();
 
@@ -235,8 +234,11 @@ public class MessageBuilder<E extends BaseResponseVO> {
 	/**
 	 * @param voReturn the voReturn to set
 	 */
-	public void setVoReturn(E voReturn) {
+	public MessageBuilder<E> setVoReturn(E voReturn) {
+		
 		this.voReturn = voReturn;
+		
+		return this;
 	}
 	
 }
