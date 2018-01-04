@@ -2,6 +2,7 @@
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 mb-4 col-half" widget="">
         <div class="silk-card border-success">
             <div class="silk-card-title d-flex justify-content-between">
+                <a routerLink="/dashboard"><button type="button" class="btn btn-primary">Voltar</button></a>
                 <h4 class="ng-tns-c6-19"><i class="fa fa-user-plus fa-lg mx-1"> </i>Contatos</h4>
             </div>
             <div class="widget-body">
@@ -16,7 +17,7 @@
                         <i class="fa fa-user-o cursorPointer" *ngIf="contato.statusSolicitacaoAmizade === 'NAO_SOLICITADO'" aria-hidden="true" (click)="solicitarAmizade(contato.id)"> Solicitar Amizade</i>
                         <i class="fa fa-user-o cursorPointer" *ngIf="contato.statusSolicitacaoAmizade === 'PENDENTE' && !contato.amizadeSolicitada" aria-hidden="true" (click)="aceitarAmizade(contato.id)"> Aceitar Pedido Amizade</i>
                         <i class="fa fa-user-o cursorPointer" *ngIf="contato.statusSolicitacaoAmizade === 'PENDENTE' && !contato.amizadeSolicitada" aria-hidden="true" (click)="recusarAmizade(contato.id)"> Recusar Pedido Amizade</i>
-                        <i class="fa fa-commenting cursorPointer" aria-hidden="true" (click)="chat(contato.id)"> Chat</i>
+                        <i class="fa fa-commenting cursorPointer" *ngIf="(contato.statusSolicitacaoAmizade === 'ACEITO' || contato.amizadeSolicitada) && !contato.bloqueado" aria-hidden="true" (click)="chat(contato.id)"> Chat</i>
                     </li>
                 </ul>
             </div>

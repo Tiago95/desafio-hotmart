@@ -50,23 +50,6 @@ export class RegisterComponent {
     });
 
   }
-
-  private callbackSucessRegister(estruturaJson: EstruturaJson): void{
-
-    if(estruturaJson){
-
-      if(TipoRetornoEnum.SUCESSO === estruturaJson.returnType){
-
-        this.router.navigate(['/chat']);
-  
-      }
-
-      this.fieldsInfoVO = HttpUtils.getMapFieldInfosVOByEstruturaJson(estruturaJson);
-      this.messagesInfoVO = estruturaJson.messagesInfo;
-
-    }
-
-  }
 	
 }
 
