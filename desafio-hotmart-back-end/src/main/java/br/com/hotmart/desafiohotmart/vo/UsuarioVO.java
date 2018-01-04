@@ -57,7 +57,7 @@ public class UsuarioVO implements BaseVO, BaseResponseVO {
 	 * @param senha
 	 * @param conectado
 	 */
-	public UsuarioVO(Long id, String nome, String nick, String email, String senha, boolean conectado) {
+	public UsuarioVO(Long id, String nome, String nick, String email, String senha, Boolean conectado) {
 		
 		this();
 		
@@ -66,7 +66,13 @@ public class UsuarioVO implements BaseVO, BaseResponseVO {
 		this.nick = nick;
 		this.email = email;
 		this.senha = senha;
-		this.conectado = conectado;
+		
+		if(conectado != null){
+			
+			this.conectado = conectado;
+			
+		}		
+		
 	}
 
 	/**

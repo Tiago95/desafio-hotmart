@@ -1,16 +1,21 @@
 package br.com.hotmart.desafiohotmart.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.hotmart.desafiohotmart.builder.MessageBuilder;
+import br.com.hotmart.desafiohotmart.entity.Usuario;
+import br.com.hotmart.desafiohotmart.enumerations.ReturnTypeEnum;
 import br.com.hotmart.desafiohotmart.enumerations.StatusSolicitacaoAmizadeEnum;
 import br.com.hotmart.desafiohotmart.service.PedidoAmizadeService;
 import br.com.hotmart.desafiohotmart.service.UsuarioBloqueadoService;
+import br.com.hotmart.desafiohotmart.service.UsuarioService;
 import br.com.hotmart.desafiohotmart.vo.ResponseVO;
+import br.com.hotmart.desafiohotmart.vo.UsuarioVO;
 
 /**
  * Controlador das funções de usuário.
@@ -21,6 +26,9 @@ import br.com.hotmart.desafiohotmart.vo.ResponseVO;
 @RestController
 @RequestMapping("user")
 public class UserController {
+	
+	@Autowired
+	private UsuarioService usuarioService;
 	
 	@Autowired
 	private UsuarioBloqueadoService usuarioBloqueadoService;
@@ -131,6 +139,33 @@ public class UserController {
 		}
 		
 		return messageBuilder.build();
+		
+	}
+	
+	/**
+	 * Responsável por buscar um usuário de acordo com um id.
+	 * 
+	 * @param idUsuario
+	 * @return
+	 */
+	@GetMapping("/findById/{idUsuario}")
+	public ResponseVO<UsuarioVO> findById(@PathVariable("idUsuario") Long idUsuario){
+		
+		if(idUsuario != null){
+			
+			Usuario usuario = usuarioService.findById(idUsuario);
+			
+			if(usuario != null){
+				
+				return new ResponseVO<UsuarioVO>(ReturnTypeEnum.SUCESSO, usuario.toUsuarioVO());
+				
+			}
+			
+			return new ResponseVO<UsuarioVO>(ReturnTypeEnum.SUCESSO);
+			
+		}
+		
+		return new ResponseVO<UsuarioVO>(ReturnTypeEnum.ERRO, "O parametro id do usuário é obrigatório.");
 		
 	}
 

@@ -1,5 +1,7 @@
 export class ChatMessage{
 
+	private _id: number;
+
     private _idUsuarioOrigem: number;
 	
 	private _nameUsuarioOrigem: string;
@@ -9,6 +11,14 @@ export class ChatMessage{
 	private _date: Date;    
 	
 	private _dateFormatter: string;
+
+	public get id(): number {
+		return this._id;
+	}
+
+	public set id(value: number) {
+		this._id = value;
+	}	
 
 	public get idUsuarioOrigem(): number {
 		return this._idUsuarioOrigem;

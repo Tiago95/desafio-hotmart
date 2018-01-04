@@ -47,24 +47,39 @@ export class ChatComponent implements OnInit{
 
         this.chatInfo = chatInfo;
 
-        if(chatInfo){
+        if(chatInfo && chatInfo.mensagensAtivas && chatInfo.mensagensAtivas.length > 0){
 
-          this.chatInfo.usuariosComMensagens = this.chatInfo.usuariosComMensagens.map((usuario, index) => {
+          this.trabalharDadosChatInfo(idUserActive);
 
-            this.setUserActive(usuario, index, idUserActive);
-            this.setAvatarUser(usuario);
-  
-            return usuario;
-  
-          });
+        }else if(idUserActive){
 
-          this.chatInfo.usuariosComMensagens.sort((usuario1, usuario2) => {
+          this.usuarioService.findById(idUserActive).then(usuario => {
 
-              return usuario1['active'] == usuario2['active'] ? 0 : usuario1['active'] ? -1 : 1;
+            if(usuario){
 
-          });
+              if(this.chatInfo && this.chatInfo.usuariosComMensagens && this.chatInfo.usuariosComMensagens.length > 0){
 
-        }       
+                this.chatInfo.usuariosComMensagens.push(usuario);
+                this.trabalharDadosChatInfo(idUserActive);
+
+              }else{
+
+                this.chatInfo = new ChatInfo();
+
+                this.chatInfo.mensagensAtivas = new Array();
+                this.chatInfo.usuariosComMensagens = new Array(usuario);
+
+                this.trabalharDadosChatInfo(idUserActive);
+
+              }           
+
+            }            
+
+          });         
+
+        } 
+
+       this.atualizarStatusMensagens();
       
       });
 
@@ -89,6 +104,8 @@ export class ChatComponent implements OnInit{
     this.chatService.getMensagensAtivasByUsuarioDestino(idUserActive).then(messages => {
 
       this.chatInfo.mensagensAtivas = messages;
+
+      this.atualizarStatusMensagens();
 
     });
 
@@ -150,6 +167,56 @@ export class ChatComponent implements OnInit{
       this.chatInfo.mensagensAtivas.push(chatMessage);
 
     }   
+
+  }
+
+  private trabalharDadosChatInfo(idUserActive: number){
+
+    this.chatInfo.usuariosComMensagens = this.chatInfo.usuariosComMensagens.map((usuario, index) => {
+
+      this.setUserActive(usuario, index, idUserActive);
+      this.setAvatarUser(usuario);
+
+      return usuario;
+
+    });
+
+    this.chatInfo.usuariosComMensagens.sort((usuario1, usuario2) => {
+
+        return usuario1['active'] == usuario2['active'] ? 0 : usuario1['active'] ? -1 : 1;
+
+    });
+
+  }
+
+  private atualizarStatusMensagens(){
+
+    if(this.chatInfo && this.chatInfo.mensagensAtivas && this.chatInfo.mensagensAtivas.length > 0){
+
+        let mensagensAtivasFilter: Array<ChatMessage> = this.chatInfo.mensagensAtivas.filter(chatMessage => {
+
+        if(chatMessage.idUsuarioOrigem !== this.usuarioService.getIdUsuarioLogado()){
+
+          return chatMessage.id;
+
+        } 
+
+      });
+
+      let idsChatMessage: Array<number> = mensagensAtivasFilter.map(chatMessage => {
+
+        return chatMessage.id;       
+
+      });
+
+      if(idsChatMessage && idsChatMessage.length > 0){
+
+        this.chatService.atualizarMensagensRecebida(idsChatMessage);
+        this.chatService.atualizarMensagensLida(idsChatMessage);
+
+      }     
+
+    }
 
   }
 	

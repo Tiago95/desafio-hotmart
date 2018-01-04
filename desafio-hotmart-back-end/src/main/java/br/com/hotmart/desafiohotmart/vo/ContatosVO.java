@@ -49,17 +49,32 @@ public class ContatosVO implements BaseResponseVO {
 	 * @param amizadeSolicitada
 	 * @param permitirConversasAnonimas
 	 */
-	public ContatosVO(Long id, String nome, String nick, boolean bloqueado,
-			Integer statusSolicitacaoAmizade, boolean amizadeSolicitada, boolean permitirConversasAnonimas) {
+	public ContatosVO(Long id, String nome, String nick, Boolean bloqueado,
+			Integer statusSolicitacaoAmizade, Boolean amizadeSolicitada, Boolean permitirConversasAnonimas) {
 		
 		this();
 		
 		this.id = id;
 		this.nome = nome;
 		this.nick = nick;
-		this.bloqueado = bloqueado;
-		this.amizadeSolicitada = amizadeSolicitada;
-		this.permitirConversasAnonimas = permitirConversasAnonimas;
+		
+		if(bloqueado != null){
+			
+			this.bloqueado = bloqueado;
+			
+		}
+		
+		if(amizadeSolicitada != null){
+			
+			this.amizadeSolicitada = amizadeSolicitada;
+			
+		}
+		
+		if(permitirConversasAnonimas != null){
+			
+			this.permitirConversasAnonimas = permitirConversasAnonimas;
+			
+		}	
 		
 		if(statusSolicitacaoAmizade != null){
 			

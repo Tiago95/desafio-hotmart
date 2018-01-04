@@ -1,7 +1,10 @@
 package br.com.hotmart.desafiohotmart.service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -28,6 +31,9 @@ public class ChatService extends BaseServiceAbstract<ChatMessage, Long> {
 	
 	@Autowired
 	private ChatMessageDAO chatMessageDAO;
+	
+	@Autowired
+	private UsuarioBloqueadoService usuarioBloqueadoService;
 
 	@Override
 	public PagingAndSortingRepository<ChatMessage, Long> getDAO() {
@@ -41,22 +47,24 @@ public class ChatService extends BaseServiceAbstract<ChatMessage, Long> {
 	 * @param idUserActive
 	 * @return
 	 */
-	public ChatInfoVO getChatInfoByIdUser(Long idUser, Long idUserActive) {
+	public ChatInfoVO getChatInfoByIdUser(Long idUser, Long idUserActive) {		
 		
-		ChatInfoVO chatInfoVO = new ChatInfoVO();
-		
-		List<UsuarioVO> usuariosComMensagens = chatMessageDAO.findContatosChatInfoByIdUser(idUser);
-		
-		chatInfoVO.setUsuariosComMensagens(usuariosComMensagens);
+		List<UsuarioVO> usuariosComMensagens = chatMessageDAO.findContatosChatInfoByIdUser(idUser);		
 		
 		if(usuariosComMensagens != null && !usuariosComMensagens.isEmpty()){
+			
+			ChatInfoVO chatInfoVO = new ChatInfoVO();
+			
+			chatInfoVO.setUsuariosComMensagens(usuariosComMensagens);
 			
 			List<ChatMessageVO> listaChatMessageVO = chatMessageDAO.findMessagesByUserOrigemAndUserDestino(new Usuario(idUser), idUserActive != null ? new Usuario(idUserActive) : usuariosComMensagens.iterator().next().toUsuario());
 			
 			chatInfoVO.setMensagensAtivas(listaChatMessageVO);
+			
+			return chatInfoVO;
 		}
 
-		return chatInfoVO;
+		return null;
 		
 	}
 	
@@ -102,6 +110,89 @@ public class ChatService extends BaseServiceAbstract<ChatMessage, Long> {
 		}
 		
 		return null;		
+		
+	}
+	
+	@Override
+	public ChatMessage save(ChatMessage chatMessage) {
+		
+		if(chatMessage != null && chatMessage.getUsuarioOrigem() != null
+				&& chatMessage.getUsuarioDestino() != null
+				&& usuarioBloqueadoService.countByUsuarioPrincipalAndUsuarioBloqueado(chatMessage.getUsuarioDestino(), chatMessage.getUsuarioOrigem()) <= 0){
+			
+			return super.save(chatMessage);
+			
+		}
+		
+		return null;
+		
+	}
+
+	/**
+	 * Responsável por atualizar o estado de recebida da mensagem
+	 * 
+	 * @param idsChatMensagem
+	 * @return
+	 */
+	@Transactional
+	public void atualizarMensagemRecebida(Long idChatMensagem) {
+
+		if(idChatMensagem != null){
+			
+			atualizarMensagemRecebida(Arrays.asList(idChatMensagem));
+			
+		}
+		
+	}
+	
+	/**
+	 * Responsável por atualizar o estado de recebida da mensagem
+	 * 
+	 * @param idsChatMensagem
+	 * @return
+	 */
+	@Transactional
+	public void atualizarMensagemRecebida(List<Long> idsChatMensagem) {
+
+		if(idsChatMensagem != null && !idsChatMensagem.isEmpty()){
+			
+			chatMessageDAO.atualizarMensagemRecebida(idsChatMensagem);
+			
+		}
+		
+	}
+	
+	/**
+	 * Responsável por atualizar o estado de lida da mensagem
+	 * 
+	 * @param idsChatMensagem
+	 * @return
+	 */
+	@Transactional
+	public void atualizarMensagemLida(Long idChatMensagem) {
+
+		if(idChatMensagem != null){
+			
+			atualizarMensagemRecebida(Arrays.asList(idChatMensagem));
+			
+		}
+		
+	}
+	
+	/**
+	 * Responsável por atualizar o estado de lida da mensagem
+	 * 
+	 * @param idsChatMensagem
+	 * @return
+	 */
+	@Transactional
+	public void atualizarMensagemLida(List<Long> idsChatMensagem) {
+
+		if(idsChatMensagem != null && !idsChatMensagem.isEmpty()){
+			
+			chatMessageDAO.atualizarMensagemLida(idsChatMensagem);
+			
+		}
 		
 	}
 

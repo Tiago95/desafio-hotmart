@@ -2,6 +2,9 @@ package br.com.hotmart.desafiohotmart.dao;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
@@ -37,7 +40,7 @@ public interface ChatMessageDAO extends PagingAndSortingRepository<ChatMessage, 
 	 * @param usuarioDestino
 	 * @return
 	 */
-	@Query("SELECT new br.com.hotmart.desafiohotmart.vo.ChatMessageVO(cm.usuarioOrigem.id, cm.usuarioOrigem.nome, cm.message, cm.sendDate) FROM ChatMessage cm WHERE (cm.usuarioOrigem = :usuarioOrigem AND cm.usuarioDestino = :usuarioDestino) OR (cm.usuarioOrigem = :usuarioDestino AND cm.usuarioDestino = :usuarioOrigem) ORDER BY cm.sendDate ASC")
+	@Query("SELECT new br.com.hotmart.desafiohotmart.vo.ChatMessageVO(cm.id, cm.usuarioOrigem.id, cm.usuarioOrigem.nome, cm.message, cm.sendDate) FROM ChatMessage cm WHERE (cm.usuarioOrigem = :usuarioOrigem AND cm.usuarioDestino = :usuarioDestino) OR (cm.usuarioOrigem = :usuarioDestino AND cm.usuarioDestino = :usuarioOrigem) ORDER BY cm.sendDate ASC")
 	List<ChatMessageVO> findMessagesByUserOrigemAndUserDestino(@Param("usuarioOrigem") Usuario usuarioOrigem, @Param("usuarioDestino") Usuario usuarioDestino);
 
 	/**
@@ -55,7 +58,29 @@ public interface ChatMessageDAO extends PagingAndSortingRepository<ChatMessage, 
 	 * @param usuarioDestino
 	 * @return
 	 */
-	@Query("SELECT new br.com.hotmart.desafiohotmart.vo.ChatMessageVO(cm.usuarioOrigem.id, cm.usuarioOrigem.nome, cm.message, cm.sendDate) FROM ChatMessage cm WHERE cm.usuarioDestino = :usuarioDestino AND cm.lida = false ORDER BY cm.sendDate DESC")
+	@Query("SELECT new br.com.hotmart.desafiohotmart.vo.ChatMessageVO(cm.id, cm.usuarioOrigem.id, cm.usuarioOrigem.nome, cm.message, cm.sendDate) FROM ChatMessage cm WHERE cm.usuarioDestino = :usuarioDestino AND cm.lida = false ORDER BY cm.sendDate DESC")
 	List<ChatMessageVO> findUltimasMensagensRecebidasNaoLidasByUsuarioDestino(@Param("usuarioDestino") Usuario usuarioDestino);
+
+	/**
+	 * Responsável por atualizar o estado de recebida da mensagem
+	 * 
+	 * @param idsChatMensagem
+	 * @return
+	 */
+	@Transactional
+	@Modifying
+	@Query("UPDATE ChatMessage SET recebida = true WHERE id IN (:idsChatMensagem)")
+	void atualizarMensagemRecebida(@Param("idsChatMensagem") List<Long> idsChatMensagem);
+	
+	/**
+	 * Responsável por atualizar o estado de lida da mensagem
+	 * 
+	 * @param idsChatMensagem
+	 * @return
+	 */
+	@Transactional
+	@Modifying
+	@Query("UPDATE ChatMessage SET lida = true WHERE id IN (:idsChatMensagem)")
+	void atualizarMensagemLida(@Param("idsChatMensagem") List<Long> idsChatMensagem);
 
 }

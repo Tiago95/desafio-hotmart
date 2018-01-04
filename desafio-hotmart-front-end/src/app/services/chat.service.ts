@@ -1,3 +1,4 @@
+import { EstruturaJson } from 'app/models/estrutura-json';
 import { ChatMessage } from './../models/chat-message';
 import { ChatInfo } from './../models/chat-info';
 import { RequestMethod } from '@angular/http';
@@ -55,9 +56,13 @@ export class ChatService{
 
 					if(message.body) {
 
-						that.messageChange.next(JSON.parse(message.body) as ChatMessage);
+						let chatMessage = JSON.parse(message.body) as ChatMessage;
 
-					}
+						that.messageChange.next(chatMessage);
+
+						that.atualizarMensagemRecebida(chatMessage.id);
+
+					}				
 
 				});
 					
@@ -152,6 +157,30 @@ export class ChatService{
 			});
 
 		});
+
+	}
+
+	public atualizarMensagemRecebida(idChatMessage: number): Promise<EstruturaJson>{
+
+		return this.httpService.realizarRequisicaoHttp(new HttpControl(DesafioHotmartAppComponent.API_URL + "/chat/atualizarMensagemRecebida/" + idChatMessage, RequestMethod.Post));
+
+	}
+
+	public atualizarMensagemLida(idChatMessage: number): Promise<EstruturaJson>{
+
+		return this.httpService.realizarRequisicaoHttp(new HttpControl(DesafioHotmartAppComponent.API_URL + "/chat/atualizarMensagemLida/" + idChatMessage, RequestMethod.Post));
+
+	}
+
+	public atualizarMensagensRecebida(idsChatMessage: Array<number>): Promise<EstruturaJson>{
+
+		return this.httpService.realizarRequisicaoHttp(new HttpControl(DesafioHotmartAppComponent.API_URL + "/chat/atualizarMensagensRecebida", RequestMethod.Post, idsChatMessage));
+
+	}
+
+	public atualizarMensagensLida(idsChatMessage: Array<number>): Promise<EstruturaJson>{
+
+		return this.httpService.realizarRequisicaoHttp(new HttpControl(DesafioHotmartAppComponent.API_URL + "/chat/atualizarMensagensLida", RequestMethod.Post, idsChatMessage));
 
 	}
 

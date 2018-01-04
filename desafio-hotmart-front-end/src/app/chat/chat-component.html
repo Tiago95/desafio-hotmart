@@ -1,7 +1,6 @@
-<a *ngIf="(chatInfo === undefined || chatInfo.usuariosComMensagens === undefined) || (chatInfo !== undefined && chatInfo !== null && chatInfo.usuariosComMensagens !== null && chatInfo.usuariosComMensagens !== undefined && chatInfo.usuariosComMensagens.length === 0)" routerLink="/dashboard" class="btn send-message-btn " role="button"><i class="fa fa-search"></i> Voltar</a>
-<h1 *ngIf="chatInfo === undefined || chatInfo.usuariosComMensagens === undefined">Carregando conversas</h1>
-<h1 *ngIf="chatInfo !== undefined && chatInfo !== null && chatInfo.usuariosComMensagens === undefined">Carregando conversas</h1>
-<h1 *ngIf="chatInfo !== undefined && chatInfo !== null && chatInfo.usuariosComMensagens !== null && chatInfo.usuariosComMensagens !== undefined && chatInfo.usuariosComMensagens.length === 0">Não existem conversas</h1>
+<a *ngIf="(chatInfo === undefined || chatInfo === null || chatInfo.usuariosComMensagens === null || chatInfo.usuariosComMensagens === undefined) || (chatInfo !== undefined && chatInfo !== null && chatInfo.usuariosComMensagens !== null && chatInfo.usuariosComMensagens !== undefined && chatInfo.usuariosComMensagens.length === 0)" routerLink="/dashboard" class="btn send-message-btn " role="button">Voltar</a>
+<h1 *ngIf="chatInfo === undefined">Carregando conversas</h1>
+<h1 *ngIf="chatInfo === null">Não existem conversas</h1>
 <div class="chat-w" *ngIf="chatInfo !== undefined && chatInfo != null && chatInfo.usuariosComMensagens !== null && chatInfo.usuariosComMensagens !== undefined && chatInfo.usuariosComMensagens.length > 0">
     <div class="d-flex justify-content-between bg-success pb-2 pt-2 pl-2 pr-2">  
         <div class="btn-panel btn-panel-conversation">

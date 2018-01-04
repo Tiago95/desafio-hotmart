@@ -18,6 +18,8 @@ public class ChatMessageVO implements BaseVO, BaseResponseVO {
 	 * 
 	 */
 	private static final long serialVersionUID = -6652861385695786342L;
+	
+	private Long id;
 
 	private Long idUsuarioOrigem;
 	
@@ -38,19 +40,35 @@ public class ChatMessageVO implements BaseVO, BaseResponseVO {
 	/**
 	 * Construtor com todos os parametros.
 	 * 
+	 * @param id
 	 * @param idUsuarioOrigem
 	 * @param nameUsuarioOrigem
 	 * @param message
 	 * @param date
 	 */
-	public ChatMessageVO(Long idUsuarioOrigem, String nameUsuarioOrigem, String message, LocalDateTime date) {
+	public ChatMessageVO(Long id, Long idUsuarioOrigem, String nameUsuarioOrigem, String message, LocalDateTime date) {
 		
 		this();
 		
+		this.id = id;
 		this.idUsuarioOrigem = idUsuarioOrigem;
 		this.nameUsuarioOrigem = nameUsuarioOrigem;
 		this.message = message;
 		this.date = date;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public Long getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	/**

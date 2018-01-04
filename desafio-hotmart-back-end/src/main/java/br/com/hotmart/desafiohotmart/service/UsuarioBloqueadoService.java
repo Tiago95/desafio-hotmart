@@ -40,7 +40,7 @@ public class UsuarioBloqueadoService extends BaseServiceAbstract<UsuarioBloquead
 			Usuario usuarioPrincipal = new Usuario(idUsuario);
 			Usuario usuarioBloqueado = new Usuario(idUsuarioBloqueado);
 			
-			if(usuarioBloqueadoDAO.countByUsuarioPrincipalAndUsuarioBloqueado(usuarioPrincipal, usuarioBloqueado) <= 0){
+			if(countByUsuarioPrincipalAndUsuarioBloqueado(usuarioPrincipal, usuarioBloqueado) <= 0){
 				
 				save(new UsuarioBloqueado(usuarioPrincipal, usuarioBloqueado));
 				
@@ -49,6 +49,20 @@ public class UsuarioBloqueadoService extends BaseServiceAbstract<UsuarioBloquead
 		}
 		
 	}
+	
+	/**
+	 * Responsável por retornar a quantidade de bloqueio de acordo com um usuário principal
+	 * e um usuário bloqueado.
+	 * 
+	 * @param usuarioPrincipal
+	 * @param usuarioBloqueado
+	 * @return
+	 */
+	public Long countByUsuarioPrincipalAndUsuarioBloqueado(Usuario usuarioPrincipal, Usuario usuarioBloqueado){
+		
+		return usuarioBloqueadoDAO.countByUsuarioPrincipalAndUsuarioBloqueado(usuarioPrincipal, usuarioBloqueado); 
+		
+	}	
 	
 	/**
 	 * Responsável por desbloquear um usuário.

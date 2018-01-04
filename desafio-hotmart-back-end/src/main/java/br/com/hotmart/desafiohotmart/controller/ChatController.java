@@ -10,6 +10,8 @@ import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,6 +19,7 @@ import br.com.hotmart.desafiohotmart.entity.ChatMessage;
 import br.com.hotmart.desafiohotmart.entity.Usuario;
 import br.com.hotmart.desafiohotmart.enumerations.ReturnTypeEnum;
 import br.com.hotmart.desafiohotmart.service.ChatService;
+import br.com.hotmart.desafiohotmart.service.UsuarioBloqueadoService;
 import br.com.hotmart.desafiohotmart.service.UsuarioService;
 import br.com.hotmart.desafiohotmart.utils.WebSocketUtils;
 import br.com.hotmart.desafiohotmart.vo.ChatInfoVO;
@@ -43,6 +46,9 @@ public class ChatController {
 	
 	@Autowired
 	private SimpMessageSendingOperations simpMessageSendingOperations;
+	
+	@Autowired
+	private UsuarioBloqueadoService usuarioBloqueadoService;
 	
 	/**
 	 * Responsável por obter as informações de conversas de um determinado usuário.
@@ -111,12 +117,101 @@ public class ChatController {
 		
 		Usuario usuarioDestino = usuarioService.findById(messageVO.getIdUsuarioDestino());
 		
-		ChatMessage chatMessage = new ChatMessage(WebSocketUtils.getUsuarioVOBySessionId(StompHeaderAccessor.wrap(message).getSessionId()),
-				usuarioDestino, messageVO.getMessage());
+		Usuario usuarioOrigem = WebSocketUtils.getUsuarioVOBySessionId(StompHeaderAccessor.wrap(message).getSessionId());
 		
-		chatMessageService.save(chatMessage);
+		if(usuarioBloqueadoService.countByUsuarioPrincipalAndUsuarioBloqueado(usuarioDestino, usuarioOrigem) <= 0){
+			
+			ChatMessage chatMessage = new ChatMessage(usuarioOrigem, usuarioDestino, messageVO.getMessage());
+			
+			chatMessageService.save(chatMessage);
+			
+			simpMessageSendingOperations.convertAndSendToUser(usuarioDestino.getUsername(), "/chatHotmart", chatMessage.toChatMessageVO());
+			
+		}		
 		
-		simpMessageSendingOperations.convertAndSendToUser(usuarioDestino.getUsername(), "/chatHotmart", chatMessage.toChatMessageVO());
+	}
+	
+	/**
+	 * Responsável por atualizar o estado de recebida da mensagem
+	 * 
+	 * @param idsChatMensagem
+	 * @return
+	 */
+	@PostMapping("/atualizarMensagensRecebida")
+	public ResponseVO<Void> atualizarMensagensRecebida(@RequestBody List<Long> idsChatMensagem){
+		
+		if(idsChatMensagem != null && !idsChatMensagem.isEmpty()){
+			
+			chatMessageService.atualizarMensagemRecebida(idsChatMensagem);
+			
+			return new ResponseVO<>();
+			
+		}
+		
+		return new ResponseVO<>(ReturnTypeEnum.ERRO, "O id da mensagem é obrigatório.");
+		
+	}
+	
+	/**
+	 * Responsável por atualizar o estado de lida da mensagem
+	 * 
+	 * @param idChatMensagem
+	 * @return
+	 */
+	@PostMapping("/atualizarMensagemRecebida/{idChatMensagem}")
+	public ResponseVO<Void> atualizarMensagemRecebida(@PathVariable("idChatMensagem") Long idChatMensagem){
+		
+		if(idChatMensagem != null){
+			
+			chatMessageService.atualizarMensagemRecebida(idChatMensagem);
+			
+			return new ResponseVO<>();
+			
+		}
+		
+		return new ResponseVO<>(ReturnTypeEnum.ERRO, "O id da mensagem é obrigatório.");
+		
+	}
+	
+	/**
+	 * Responsável por atualizar o estado de recebida da mensagem
+	 * 
+	 * @param idsChatMensagem
+	 * @return
+	 */
+	@PostMapping("/atualizarMensagensLida")
+	public ResponseVO<Void> atualizarMensagensLida(@RequestBody List<Long> idsChatMensagem){
+		
+		if(idsChatMensagem != null && !idsChatMensagem.isEmpty()){
+			
+			chatMessageService.atualizarMensagemLida(idsChatMensagem);
+			
+			return new ResponseVO<>();
+			
+		}
+		
+		return new ResponseVO<>(ReturnTypeEnum.ERRO, "O id da mensagem é obrigatório.");
+		
+	}
+	
+	/**
+	 * Responsável por atualizar o estado de recebida da mensagem
+	 * 
+	 * @param idChatMensagem
+	 * @return
+	 */
+	@PostMapping("/atualizarMensagemLida/{idChatMensagem}")
+	public ResponseVO<Void> atualizarMensagemLida(@PathVariable("idChatMensagem") Long idChatMensagem){
+		
+		if(idChatMensagem != null){
+			
+			chatMessageService.atualizarMensagemLida(idChatMensagem);
+			
+			return new ResponseVO<>();
+			
+		}
+		
+		return new ResponseVO<>(ReturnTypeEnum.ERRO, "O id da mensagem é obrigatório.");
 		
 	}
 

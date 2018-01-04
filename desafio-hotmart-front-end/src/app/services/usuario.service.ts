@@ -1,5 +1,5 @@
+import { TipoRetornoEnum } from './../enum/tipo-retorno-enum';
 import { EstruturaJson } from 'app/models/estrutura-json';
-import { TipoRetornoEnum } from 'app/enum/tipo-retorno-enum';
 import { Usuario } from './../models/usuario';
 import { RequestMethod } from '@angular/http';
 import { HttpControl } from './../models/http-control';
@@ -75,6 +75,27 @@ export class UsuarioService{
     public getIdUsuarioLogado(): number{
 
         return this.getUsuarioLogado().id;
+
+    }
+
+    public findById(idUsuario: number): Promise<Usuario>{
+
+        return new Promise<Usuario>((resolve, reject) => {
+
+            return this.httpService.realizarRequisicaoHttp(new HttpControl(DesafioHotmartAppComponent.API_URL + "/user/findById/" + idUsuario, RequestMethod.Get)).then(estruturaJson => {
+
+                if(estruturaJson && estruturaJson.returnType.toString() === TipoRetornoEnum[TipoRetornoEnum.SUCESSO]
+                    && estruturaJson.voReturn){
+
+                    resolve(estruturaJson.voReturn as Usuario);
+
+                }
+
+                resolve(null);
+
+            });
+
+        });        
 
     }
 
