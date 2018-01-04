@@ -20,7 +20,7 @@ public class SecurityUtils {
 	 * Construtor default privado por ser uma classe utilitária
 	 * 
 	 */
-	public SecurityUtils() {
+	private SecurityUtils() {
 		super();
 	}
 	

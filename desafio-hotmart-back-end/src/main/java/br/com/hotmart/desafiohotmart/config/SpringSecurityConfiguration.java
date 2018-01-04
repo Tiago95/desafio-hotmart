@@ -61,7 +61,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter{
 	 * @throws AuthenticationException
 	 */
 	@Autowired
-	public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws AuthenticationException {
+	public void configureGlobalSecurity(AuthenticationManagerBuilder auth) {
 		
 		auth.authenticationProvider(authenticationProvider());
 		

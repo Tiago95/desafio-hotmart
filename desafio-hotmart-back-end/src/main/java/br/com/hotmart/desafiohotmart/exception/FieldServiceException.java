@@ -14,7 +14,7 @@ public class FieldServiceException extends ServiceException {
 	 */
 	private static final long serialVersionUID = -2038336178395988196L;
 	
-	private String field;
+	private final String field;
 	
 	/**
 	 * Construtor com todos os parametros.
@@ -35,13 +35,6 @@ public class FieldServiceException extends ServiceException {
 	 */
 	public String getField() {
 		return field;
-	}
-
-	/**
-	 * @param field the field to set
-	 */
-	public void setField(String field) {
-		this.field = field;
 	}
 	
 }

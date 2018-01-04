@@ -41,7 +41,7 @@ public class WebSocketAuthenticatorService {
 	 * @return
 	 * @throws AuthenticationException
 	 */
-	public UsernamePasswordAuthenticationToken getAuthenticatedOrFail(final String  username, final String password) throws AuthenticationException {
+	public UsernamePasswordAuthenticationToken getAuthenticatedOrFail(final String  username, final String password) {
 	        
 		Usuario usuario = validateCredentials(username, password);        
 
@@ -63,9 +63,7 @@ public class WebSocketAuthenticatorService {
 		
 		validateCredentialsInputParameters(username, password);
 		
-		Usuario usuario = validateCredentialsByUser(username, password);
-		
-		return usuario;
+		return validateCredentialsByUser(username, password);
 		
 	}
 

@@ -43,7 +43,7 @@ public class AuthController {
   @GetMapping("/user")
   public ResponseVO<UsuarioVO> user(Principal user) {  
 	  
-	  return new ResponseVO<UsuarioVO>(ReturnTypeEnum.SUCESSO, SecurityUtils.getUsuarioVOByUserPrincipal(user));
+	  return new ResponseVO<>(ReturnTypeEnum.SUCESSO, SecurityUtils.getUsuarioVOByUserPrincipal(user));
     
   }
   

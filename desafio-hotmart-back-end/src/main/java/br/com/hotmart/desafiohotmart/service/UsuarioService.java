@@ -69,7 +69,7 @@ public class UsuarioService extends BaseServiceAbstract<Usuario, Long> implement
 	}
 
 	@Override
-	public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String login) {
 		
 		Usuario usuario = findByLogin(login);
 		

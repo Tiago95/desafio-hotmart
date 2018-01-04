@@ -26,11 +26,11 @@ public class MessageBuilder<E> {
 
 	private Map<String, FieldInfoVO> errosEncontrados = new HashMap<>();
 
-	private Set<String> mensagensErro = new LinkedHashSet<String>();
+	private Set<String> mensagensErro = new LinkedHashSet<>();
 
-	private Set<String> mensagensSucesso = new LinkedHashSet<String>();
+	private Set<String> mensagensSucesso = new LinkedHashSet<>();
 
-	private Set<String> mensagensAlerta = new LinkedHashSet<String>();
+	private Set<String> mensagensAlerta = new LinkedHashSet<>();
 
 	private E voReturn;
 
@@ -78,20 +78,6 @@ public class MessageBuilder<E> {
 	public MessageBuilder<E> addWarningField(String nomeCampo, String mensagem) {
 
 		errosEncontrados.put(nomeCampo, new FieldInfoVO(mensagem, nomeCampo, ReturnTypeEnum.SUCESSO));
-
-		return this;
-	}
-	
-	/**
-	 * Responsável por colocar uma mensagem de sucesso em um determinado campo
-	 * 
-	 * @param nomeCampo
-	 * @param mensagem
-	 * @return
-	 */
-	public MessageBuilder<E> addSucessField(String nomeCampo, String mensagem) {
-
-		errosEncontrados.put(nomeCampo, new FieldInfoVO(mensagem, nomeCampo, ReturnTypeEnum.ERRO));
 
 		return this;
 	}
@@ -184,7 +170,7 @@ public class MessageBuilder<E> {
 	 */
 	public ResponseVO<E> build() {
 
-		return new ResponseVO<E>(getReturnType(), new ArrayList<FieldInfoVO>(errosEncontrados.values()), getReturnMessages(), voReturn);
+		return new ResponseVO<>(getReturnType(), new ArrayList<FieldInfoVO>(errosEncontrados.values()), getReturnMessages(), voReturn);
 		
 	}
 	
@@ -206,7 +192,7 @@ public class MessageBuilder<E> {
 	 */
 	private List<MessageInfoVO> getReturnMessages() {
 		
-		List<MessageInfoVO> mensagensRetorno = new ArrayList<MessageInfoVO>();
+		List<MessageInfoVO> mensagensRetorno = new ArrayList<>();
 		
 		mensagensErro.forEach(message -> mensagensRetorno.add(new MessageInfoVO(message, ReturnTypeEnum.ERRO)));
 		mensagensSucesso.forEach(message -> mensagensRetorno.add(new MessageInfoVO(message, ReturnTypeEnum.SUCESSO)));

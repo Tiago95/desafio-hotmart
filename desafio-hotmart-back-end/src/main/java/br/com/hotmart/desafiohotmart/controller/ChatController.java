@@ -50,7 +50,7 @@ public class ChatController {
 	public ResponseVO<ChatInfoVO> getChatInfoByIdUser(@PathVariable("idUser") Long idUser,
 			@PathVariable("idUserActive") Long idUserActive){
 		
-		return new ResponseVO<ChatInfoVO>(ReturnTypeEnum.SUCESSO, chatMessageService.getChatInfoByIdUser(idUser, idUserActive));
+		return new ResponseVO<>(ReturnTypeEnum.SUCESSO, chatMessageService.getChatInfoByIdUser(idUser, idUserActive));
 		
 	}
 	

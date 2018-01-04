@@ -47,7 +47,7 @@ public class ExceptionHandlingController {
 			
 		}
 		
-        return new ResponseEntity<ResponseVO<?>>(messageBuilder.build(), HttpStatus.OK);
+        return new ResponseEntity<>(messageBuilder.build(), HttpStatus.OK);
     }
 	
 }

@@ -44,7 +44,7 @@ public class ResponseVO<T> implements BaseVO {
 		
 		if(fieldsInfo != null && fieldsInfo.length > 0){
 			
-			this.fieldsInfo = new ArrayList<FieldInfoVO>();
+			this.fieldsInfo = new ArrayList<>();
 			
 			for (FieldInfoVO fi : fieldsInfo) {
 				
@@ -64,7 +64,7 @@ public class ResponseVO<T> implements BaseVO {
 	 */
 	public ResponseVO(ReturnTypeEnum returnType, String mensagem) {
 		
-		this.messagesInfo = new ArrayList<MessageInfoVO>(Arrays.asList(new MessageInfoVO(mensagem, returnType)));	
+		this.messagesInfo = new ArrayList<>(Arrays.asList(new MessageInfoVO(mensagem, returnType)));	
 		this.returnType = returnType;
 	}
 

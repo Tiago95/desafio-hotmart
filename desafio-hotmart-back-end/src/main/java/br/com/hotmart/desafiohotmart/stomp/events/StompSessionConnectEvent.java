@@ -22,7 +22,7 @@ import br.com.hotmart.desafiohotmart.utils.WebSocketUtils;
 @Component
 public class StompSessionConnectEvent implements ApplicationListener<SessionConnectEvent> {
 	
-	private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
+	private static final Logger LOGGER = LoggerFactory.getLogger(StompSessionConnectEvent.class);
 	
 	@Autowired
 	private UsuarioService usuarioService;
