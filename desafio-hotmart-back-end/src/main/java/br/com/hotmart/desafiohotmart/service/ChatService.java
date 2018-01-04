@@ -1,5 +1,6 @@
 package br.com.hotmart.desafiohotmart.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +56,25 @@ public class ChatService extends BaseServiceAbstract<ChatMessage, Long> {
 		}
 
 		return chatInfoVO;
+		
+	}
+	
+	/**
+	 * Responsável por retornar uma lista de mensagens trocadas entre usuários.
+	 * 
+	 * @param idUsuarioOrigem
+	 * @param idUsuarioDestino
+	 * @return
+	 */
+	public List<ChatMessageVO> findMessagesByUserOrigemAndUserDestino(Long idUsuarioOrigem, Long idUsuarioDestino) {
+		
+		if(idUsuarioOrigem != null && idUsuarioDestino != null){
+			
+			return chatMessageDAO.findMessagesByUserOrigemAndUserDestino(new Usuario(idUsuarioOrigem), new Usuario(idUsuarioDestino));
+			
+		}
+		
+		return new ArrayList<>();
 		
 	}
 

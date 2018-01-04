@@ -1,5 +1,7 @@
 package br.com.hotmart.desafiohotmart.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -18,6 +20,8 @@ import br.com.hotmart.desafiohotmart.service.ChatService;
 import br.com.hotmart.desafiohotmart.service.UsuarioService;
 import br.com.hotmart.desafiohotmart.utils.WebSocketUtils;
 import br.com.hotmart.desafiohotmart.vo.ChatInfoVO;
+import br.com.hotmart.desafiohotmart.vo.ChatMessageVO;
+import br.com.hotmart.desafiohotmart.vo.LastChatInfoVO;
 import br.com.hotmart.desafiohotmart.vo.MessageVO;
 import br.com.hotmart.desafiohotmart.vo.ResponseVO;
 
@@ -51,6 +55,34 @@ public class ChatController {
 			@PathVariable("idUserActive") Long idUserActive){
 		
 		return new ResponseVO<>(ReturnTypeEnum.SUCESSO, chatMessageService.getChatInfoByIdUser(idUser, idUserActive));
+		
+	}
+	
+	/**
+	 * Responsável por retornar uma lista de mensagens trocadas entre usuários.
+	 * 
+	 * @param idUsuarioOrigem
+	 * @param idUsuarioDestino
+	 * @return
+	 */
+	@GetMapping("/getMensagensAtivasByIdUsuarioOrigemAndUsuarioDestino/{idUsuarioOrigem}/{idUsuarioDestino}")
+	public ResponseVO<List<ChatMessageVO>> getMensagensAtivasByIdUsuarioOrigemAndUsuarioDestino(@PathVariable("idUser") Long idUsuarioOrigem,
+			@PathVariable("idUserActive") Long idUsuarioDestino){
+		
+		if(idUsuarioOrigem != null && idUsuarioDestino != null){
+			
+			return new ResponseVO<>(ReturnTypeEnum.SUCESSO, chatMessageService.findMessagesByUserOrigemAndUserDestino(idUsuarioOrigem, idUsuarioDestino));
+			
+		}
+		
+		return new ResponseVO<>(ReturnTypeEnum.ERRO, "O usuário de origem e o usuário de destino são obrigatórios.");
+		
+	}
+	
+	@GetMapping("/getLastChatInfo/{idUsuarioOrigem}")
+	public ResponseVO<LastChatInfoVO> getLastChatInfo(@PathVariable("idUser") Long idUsuarioOrigem){
+		
+		return null;
 		
 	}
 	
