@@ -27,6 +27,7 @@ import { ChatService } from 'app/services/chat.service';
 import { MenuItems } from 'app/core/menu/menu-items/menu-items';
 import { PageTitleService } from 'app/core/page-title/page-title.service';
 import { DatePipe } from '@angular/common';
+import { AlertCenterModule } from 'ng2-alert-center/alert-center/alert-center.module';
 
 
 
@@ -47,8 +48,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 		FlexLayoutModule,
 		MaterialModule,
 		RouterModule.forRoot(AppRoutes),
+		AlertCenterModule,
       PerfectScrollbarModule,
-      HttpModule,
+	  HttpModule,
       TourNgBootstrapModule.forRoot(),
       TranslateModule.forRoot({
 		   provide: TranslateLoader,

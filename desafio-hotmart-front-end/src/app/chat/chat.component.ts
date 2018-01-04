@@ -78,6 +78,24 @@ export class ChatComponent implements OnInit{
 
   }
 
+  public changeUserChat(idUserActive: number){
+
+    this.chatService.getMensagensAtivasByUsuarioDestino(idUserActive).then(messages => {
+
+      this.chatInfo.mensagensAtivas = messages;
+
+    });
+
+    this.chatInfo.usuariosComMensagens = this.chatInfo.usuariosComMensagens.map((usuario, index) => {
+
+      this.setUserActive(usuario, index, idUserActive);
+
+      return usuario;
+
+    });
+
+  }
+
   private setUserActive(usuario: Usuario, index: number, idUserActive: number){
 
     if(idUserActive && usuario.id === idUserActive){

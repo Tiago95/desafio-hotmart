@@ -66,8 +66,8 @@ public class ChatController {
 	 * @return
 	 */
 	@GetMapping("/getMensagensAtivasByIdUsuarioOrigemAndUsuarioDestino/{idUsuarioOrigem}/{idUsuarioDestino}")
-	public ResponseVO<List<ChatMessageVO>> getMensagensAtivasByIdUsuarioOrigemAndUsuarioDestino(@PathVariable("idUser") Long idUsuarioOrigem,
-			@PathVariable("idUserActive") Long idUsuarioDestino){
+	public ResponseVO<List<ChatMessageVO>> getMensagensAtivasByIdUsuarioOrigemAndUsuarioDestino(@PathVariable("idUsuarioOrigem") Long idUsuarioOrigem,
+			@PathVariable("idUsuarioDestino") Long idUsuarioDestino){
 		
 		if(idUsuarioOrigem != null && idUsuarioDestino != null){
 			
@@ -79,10 +79,22 @@ public class ChatController {
 		
 	}
 	
+	/**
+	 * Responsável por obter as últimas informações do chat.
+	 * 
+	 * @param idUsuarioOrigem
+	 * @return
+	 */
 	@GetMapping("/getLastChatInfo/{idUsuarioOrigem}")
-	public ResponseVO<LastChatInfoVO> getLastChatInfo(@PathVariable("idUser") Long idUsuarioOrigem){
+	public ResponseVO<LastChatInfoVO> getLastChatInfo(@PathVariable("idUsuarioOrigem") Long idUsuarioOrigem){
 		
-		return null;
+		if(idUsuarioOrigem != null){
+			
+			return new ResponseVO<>(ReturnTypeEnum.SUCESSO, chatMessageService.getLastChatInfo(idUsuarioOrigem));
+			
+		}
+		
+		return new ResponseVO<>(ReturnTypeEnum.ERRO, "O usuário de origem é obrigatório.");
 		
 	}
 	

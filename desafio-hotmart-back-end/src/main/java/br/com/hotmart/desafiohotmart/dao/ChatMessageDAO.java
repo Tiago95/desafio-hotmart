@@ -40,4 +40,22 @@ public interface ChatMessageDAO extends PagingAndSortingRepository<ChatMessage, 
 	@Query("SELECT new br.com.hotmart.desafiohotmart.vo.ChatMessageVO(cm.usuarioOrigem.id, cm.usuarioOrigem.nome, cm.message, cm.sendDate) FROM ChatMessage cm WHERE (cm.usuarioOrigem = :usuarioOrigem AND cm.usuarioDestino = :usuarioDestino) OR (cm.usuarioOrigem = :usuarioDestino AND cm.usuarioDestino = :usuarioOrigem) ORDER BY cm.sendDate ASC")
 	List<ChatMessageVO> findMessagesByUserOrigemAndUserDestino(@Param("usuarioOrigem") Usuario usuarioOrigem, @Param("usuarioDestino") Usuario usuarioDestino);
 
+	/**
+	 * Responsável por obter a quantidades de mensagens de acordo com um determinado usuário destino e a flag lida.
+	 * 
+	 * @param usuarioDestino
+	 * @param lida
+	 * @return
+	 */
+	Long countByUsuarioDestinoAndLida(Usuario usuarioDestino, boolean lida);
+
+	/**
+	 * Responsável por retornar todas as mensagens não lidas por um usuário de destino.
+	 * 
+	 * @param usuarioDestino
+	 * @return
+	 */
+	@Query("SELECT new br.com.hotmart.desafiohotmart.vo.ChatMessageVO(cm.usuarioOrigem.id, cm.usuarioOrigem.nome, cm.message, cm.sendDate) FROM ChatMessage cm WHERE cm.usuarioDestino = :usuarioDestino AND cm.lida = false ORDER BY cm.sendDate DESC")
+	List<ChatMessageVO> findUltimasMensagensRecebidasNaoLidasByUsuarioDestino(@Param("usuarioDestino") Usuario usuarioDestino);
+
 }

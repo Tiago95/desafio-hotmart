@@ -14,6 +14,7 @@ import { DesafioHotmartAppComponent } from 'app/app.component';
 import { UsuarioService } from 'app/services/usuario.service';
 import { Usuario } from 'app/models/usuario';
 import { Observable } from 'rxjs/Observable';
+import { LastChatInfo } from 'app/models/last-chat-info';
 
 const CHAT_URL = 'http://localhost:8080/chat';
 
@@ -93,6 +94,54 @@ export class ChatService{
 				if(estruturaJson){
 
 					resolve(estruturaJson.voReturn as ChatInfo);
+
+				}else{
+
+					resolve(null);
+
+				}
+
+			});
+
+		});
+
+	}
+
+	public getMensagensAtivasByUsuarioDestino(idUserActive: number): Promise<Array<ChatMessage>>{
+
+		let url = DesafioHotmartAppComponent.API_URL + "/chat/getMensagensAtivasByIdUsuarioOrigemAndUsuarioDestino/" + this.usuarioService.getIdUsuarioLogado() + "/" + idUserActive;
+
+		return new Promise<Array<ChatMessage>>((resolve, reject) => {
+
+			this.httpService.realizarRequisicaoHttp(new HttpControl(url, RequestMethod.Get)).then(estruturaJson => {
+
+				if(estruturaJson){
+
+					resolve(estruturaJson.voReturn as Array<ChatMessage>);
+
+				}else{
+
+					resolve(null);
+
+				}
+
+			});
+
+		});
+
+	}
+
+	public getLastChatInfo(): Promise<LastChatInfo>{
+
+		let url = DesafioHotmartAppComponent.API_URL + "/chat/getLastChatInfo/" + this.usuarioService.getIdUsuarioLogado();
+
+		return new Promise<LastChatInfo>((resolve, reject) => {
+
+			this.httpService.realizarRequisicaoHttp(new HttpControl(url, RequestMethod.Get)).then(estruturaJson => {
+
+				if(estruturaJson){
+
+					resolve(estruturaJson.voReturn as LastChatInfo);
 
 				}else{
 

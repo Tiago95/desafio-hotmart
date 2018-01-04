@@ -12,6 +12,7 @@ import br.com.hotmart.desafiohotmart.entity.ChatMessage;
 import br.com.hotmart.desafiohotmart.entity.Usuario;
 import br.com.hotmart.desafiohotmart.vo.ChatInfoVO;
 import br.com.hotmart.desafiohotmart.vo.ChatMessageVO;
+import br.com.hotmart.desafiohotmart.vo.LastChatInfoVO;
 import br.com.hotmart.desafiohotmart.vo.UsuarioVO;
 
 /**
@@ -75,6 +76,32 @@ public class ChatService extends BaseServiceAbstract<ChatMessage, Long> {
 		}
 		
 		return new ArrayList<>();
+		
+	}
+
+	/**
+	 * Responsável por obter as últimas informações do chat.
+	 * 
+	 * @param idUsuarioOrigem
+	 * @return
+	 */
+	public LastChatInfoVO getLastChatInfo(Long idUsuarioOrigem) {
+		
+		if(idUsuarioOrigem != null){
+			
+			Usuario usuarioDestino = new Usuario(idUsuarioOrigem);
+			
+			LastChatInfoVO lastChatInfoVO = new LastChatInfoVO();
+			
+			lastChatInfoVO.setQuantidadeMensagensNaoLidas(chatMessageDAO.countByUsuarioDestinoAndLida(usuarioDestino, false));
+			
+			lastChatInfoVO.setUltimasMensagensRecebidas(chatMessageDAO.findUltimasMensagensRecebidasNaoLidasByUsuarioDestino(usuarioDestino));
+			
+			return lastChatInfoVO;
+			
+		}
+		
+		return null;		
 		
 	}
 

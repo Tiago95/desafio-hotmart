@@ -1,11 +1,17 @@
+<a *ngIf="(chatInfo === undefined || chatInfo.usuariosComMensagens === undefined) || (chatInfo !== undefined && chatInfo !== null && chatInfo.usuariosComMensagens !== null && chatInfo.usuariosComMensagens !== undefined && chatInfo.usuariosComMensagens.length === 0)" routerLink="/dashboard" class="btn send-message-btn " role="button"><i class="fa fa-search"></i> Voltar</a>
 <h1 *ngIf="chatInfo === undefined || chatInfo.usuariosComMensagens === undefined">Carregando conversas</h1>
 <h1 *ngIf="chatInfo !== undefined && chatInfo !== null && chatInfo.usuariosComMensagens === undefined">Carregando conversas</h1>
 <h1 *ngIf="chatInfo !== undefined && chatInfo !== null && chatInfo.usuariosComMensagens !== null && chatInfo.usuariosComMensagens !== undefined && chatInfo.usuariosComMensagens.length === 0">Não existem conversas</h1>
 <div class="chat-w" *ngIf="chatInfo !== undefined && chatInfo != null && chatInfo.usuariosComMensagens !== null && chatInfo.usuariosComMensagens !== undefined && chatInfo.usuariosComMensagens.length > 0">
+    <div class="d-flex justify-content-between bg-success pb-2 pt-2 pl-2 pr-2">  
+        <div class="btn-panel btn-panel-conversation">
+           <a routerLink="/dashboard" class="btn send-message-btn " role="button"> Voltar</a>
+        </div>
+  </div>
     <div class="row pt-3">
        <div class="col-lg-3 pr-0">
           <div class="conversation-wrap">
-             <div class="media conversation" [ngClass]="{'bg-success': usuario.active}" *ngFor="let usuario of chatInfo.usuariosComMensagens">
+             <div class="media conversation cursorPointer" [ngClass]="{'bg-success': usuario.active}" *ngFor="let usuario of chatInfo.usuariosComMensagens" (click)="changeUserChat(usuario.id)">
                 <a class="d-flex">
                    <div class="align-self-center">
                       <img class="media-object img-circle" src="assets/img/user-{{usuario.avatar}}.jpg" width="50" height="50">
@@ -35,7 +41,7 @@
                 <div class="clearfix msg" [ngClass]="{'msg-me': message.idUsuarioOrigem === usuarioAtivo.id}" *ngFor="let message of chatInfo.mensagensAtivas">
                    <div class="pl-3 pr-3 msg-w">
                       <small>{{message.message}}</small>
-                      <small class="time"><i class="fa fa-clock-o"></i> {{message.dateFormatter}}</small>
+                      <small class="time">{{message.dateFormatter}}</small>
                    </div>
                 </div>
              </div>
