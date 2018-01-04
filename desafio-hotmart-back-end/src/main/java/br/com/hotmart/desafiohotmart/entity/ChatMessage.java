@@ -28,7 +28,7 @@ import br.com.hotmart.desafiohotmart.vo.UsuarioVO;
  */
 @Entity
 @Table(name = "chat_message")
-@NamedNativeQuery(name = "SqlFindContatosChatInfoByIdUser", query = "SELECT DISTINCT uf.id AS id, uf.nome AS nome, uf.nick_name AS nick, uf.email AS email, uf.senha AS senha, uf.conectado AS conectado FROM chat_message cm LEFT JOIN usuario uo ON (cm.usuario_origem_id = uo.id AND uo.id = :idUser) LEFT JOIN usuario ud ON (cm.usuario_destino_id = ud.id AND ud.id = :idUser) LEFT JOIN usuario uf ON ((uo.id IS NOT NULL AND cm.usuario_destino_id = uf.id) OR (ud.id IS NOT NULL AND cm.usuario_origem_id = uf.id))", resultSetMapping = "SqlFindContatosChatInfoByIdUser")
+@NamedNativeQuery(name = "SqlFindContatosChatInfoByIdUser", query = "SELECT DISTINCT uf.id AS id, uf.nome AS nome, uf.nick_name AS nick, uf.login AS email, uf.senha AS senha, uf.conectado AS conectado FROM chat_message cm LEFT JOIN usuario uo ON (cm.usuario_origem_id = uo.id AND uo.id = :idUser) LEFT JOIN usuario ud ON (cm.usuario_destino_id = ud.id AND ud.id = :idUser) LEFT JOIN usuario uf ON ((uo.id IS NOT NULL AND cm.usuario_destino_id = uf.id) OR (ud.id IS NOT NULL AND cm.usuario_origem_id = uf.id))", resultSetMapping = "SqlFindContatosChatInfoByIdUser")
 @SqlResultSetMapping(name = "SqlFindContatosChatInfoByIdUser", classes = @ConstructorResult(targetClass = UsuarioVO.class, columns = {@ColumnResult(name = "id", type = Long.class), @ColumnResult(name = "nome", type = String.class), @ColumnResult(name = "nick", type = String.class), @ColumnResult(name = "email", type = String.class), @ColumnResult(name = "senha", type = String.class), @ColumnResult(name = "conectado", type = Boolean.class)}))
 public class ChatMessage extends BaseEntity{
 	

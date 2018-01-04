@@ -2,6 +2,10 @@ package br.com.hotmart.desafiohotmart.vo;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import br.com.hotmart.desafiohotmart.utils.FormatterUtils;
+
 /**
  * Classe responsável por conter os atributos de mensagens.
  * 
@@ -96,6 +100,16 @@ public class ChatMessageVO implements BaseVO, BaseResponseVO {
 	 */
 	public LocalDateTime getDate() {
 		return date;
+	}
+	
+	/**
+	 * Responsável por retornar a data formatada.
+	 * 
+	 * @return the date
+	 */
+	@JsonSerialize
+	public String getDateFormatter() {
+		return FormatterUtils.formatLocalDateTime(getDate());
 	}
 
 	/**

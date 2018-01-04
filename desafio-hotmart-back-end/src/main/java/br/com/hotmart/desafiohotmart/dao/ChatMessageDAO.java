@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.data.repository.query.Param;
 
 import br.com.hotmart.desafiohotmart.entity.ChatMessage;
 import br.com.hotmart.desafiohotmart.entity.Usuario;
@@ -28,7 +28,7 @@ public interface ChatMessageDAO extends PagingAndSortingRepository<ChatMessage, 
 	 * @return
 	 */
 	@Query(nativeQuery = true, name = "SqlFindContatosChatInfoByIdUser")
-	List<UsuarioVO> findContatosChatInfoByIdUser(@PathVariable("idUser") Long idUser);
+	List<UsuarioVO> findContatosChatInfoByIdUser(@Param("idUser") Long idUser);
 
 	/**
 	 * Responsável por retornar uma lista de mensagens trocadas entre dois usuários.
@@ -37,7 +37,7 @@ public interface ChatMessageDAO extends PagingAndSortingRepository<ChatMessage, 
 	 * @param usuarioDestino
 	 * @return
 	 */
-	@Query("SELECT new br.com.hotmart.desafiohotmart.vo.ChatMessageVO(cm.usuarioOrigem.id, cm.usuarioOrigem.nome, cm.message, cm.sendDate) FROM ChatMessage cm WHERE (cm.usuarioOrigem = :usuarioOrigem AND cm.usuarioDestino = :usuarioDestino) OR (cm.usuarioOrigem = :usuarioDestino AND cm.usuarioDestino = :usuarioOrigem)")
-	List<ChatMessageVO> findMessagesByUserOrigemAndUserDestino(@PathVariable("usuarioOrigem") Usuario usuarioOrigem, @PathVariable("usuarioOrigem") Usuario usuarioDestino);
+	@Query("SELECT new br.com.hotmart.desafiohotmart.vo.ChatMessageVO(cm.usuarioOrigem.id, cm.usuarioOrigem.nome, cm.message, cm.sendDate) FROM ChatMessage cm WHERE (cm.usuarioOrigem = :usuarioOrigem AND cm.usuarioDestino = :usuarioDestino) OR (cm.usuarioOrigem = :usuarioDestino AND cm.usuarioDestino = :usuarioOrigem) ORDER BY cm.sendDate ASC")
+	List<ChatMessageVO> findMessagesByUserOrigemAndUserDestino(@Param("usuarioOrigem") Usuario usuarioOrigem, @Param("usuarioDestino") Usuario usuarioDestino);
 
 }

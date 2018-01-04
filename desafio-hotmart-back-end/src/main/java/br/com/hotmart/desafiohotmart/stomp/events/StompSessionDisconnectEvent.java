@@ -30,7 +30,7 @@ public class StompSessionDisconnectEvent implements ApplicationListener<SessionD
 
 			Usuario usuario = SecurityUtils.getUsuarioByUserPrincipal(shaccessor.getUser());
 
-			WebSocketUtils.connect(shaccessor.getSessionId(), usuario);
+			WebSocketUtils.disconnect(shaccessor.getSessionId());
 			
 			usuarioService.updateUserConnected(usuario.getId(), false);
 			

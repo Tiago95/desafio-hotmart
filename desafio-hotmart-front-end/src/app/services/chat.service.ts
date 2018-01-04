@@ -1,52 +1,90 @@
+import { ChatMessage } from './../models/chat-message';
 import { ChatInfo } from './../models/chat-info';
 import { RequestMethod } from '@angular/http';
 import { HttpControl } from './../models/http-control';
-import {Injectable} from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import {Subject} from 'rxjs/Subject';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/filter';
 import { Message } from 'app/models/message';
 import Stomp from 'stompjs';
 import SockJS from 'sockjs-client';
-import { ChatInfo } from 'app/models/chat-info';
 import { HttpService } from 'app/services/http.service';
 import { DesafioHotmartAppComponent } from 'app/app.component';
 import { UsuarioService } from 'app/services/usuario.service';
+import { Usuario } from 'app/models/usuario';
+import { Observable } from 'rxjs/Observable';
 
 const CHAT_URL = 'http://localhost:8080/chat';
 
 @Injectable()
-export class ChatService {
+export class ChatService{
 
 	private stompClient: any;
 
-	public constructor(private httpService: HttpService, private usuarioService: UsuarioService){}
+	private messageChange: Subject<ChatMessage> = new Subject();
 
-	public connect(login: string, password: string){
+	public constructor(private httpService: HttpService, private usuarioService: UsuarioService){
+
+		if(localStorage.getItem("isSocketConnect")){
+
+			let credentialsSocket = JSON.parse(localStorage.getItem("credentialsSocketConnect"));
+
+			this.connect(credentialsSocket.login, credentialsSocket.password);
+
+		}
+
+	}
+
+	public connect(login: string, password: string): Promise<void>{
+
+		return new Promise<void>((resolve, reject) => {
 
 			let ws = new SockJS(CHAT_URL);
 			this.stompClient = Stomp.over(ws);
 			let that = this;
 			this.stompClient.connect({login: login, password: btoa(password)}, function(frame) {
+
+				localStorage.setItem("isSocketConnect", "true");
+				localStorage.setItem("credentialsSocketConnect", JSON.stringify({login: login, password: password}));
+
+				resolve();
+
 				that.stompClient.subscribe("/user/chatHotmart", (message) => {
-						if(message.body) {					  
-							console.log(message.body);
-						}
-					});
+
+					if(message.body) {
+
+						that.messageChange.next(JSON.parse(message.body) as ChatMessage);
+
+					}
+
+				});
 					
-			});
+			}, (erro => {
+
+				console.log(erro);
+
+				this.connect(login, password);
+
+			}));
+
+		});		
 
 	}
 
 	public sendMsg(message: string, idUsuarioDestino: number){
 
-		this.stompClient.send("/app/chat" , {}, JSON.stringify({message: message, idUsuarioDestino: idUsuarioDestino}));
+		if(this.stompClient){
+
+			this.stompClient.send("/app/chat" , {}, JSON.stringify({message: message, idUsuarioDestino: idUsuarioDestino}));
+
+		}
 
 	}
 
 	public getChatInfo(idUserActive: number): Promise<ChatInfo>{
 
-		let url = idUserActive && idUserActive > 0 ? DesafioHotmartAppComponent.API_URL + "/getChatInfoByIdUser/" + this.usuarioService.getIdUsuarioLogado() + "/" + idUserActive : DesafioHotmartAppComponent.API_URL + "/getChatInfoByIdUser/" + this.usuarioService.getIdUsuarioLogado();
+		let url = idUserActive && idUserActive > 0 ? DesafioHotmartAppComponent.API_URL + "/chat/getChatInfoByIdUser/" + this.usuarioService.getIdUsuarioLogado() + "/" + idUserActive : DesafioHotmartAppComponent.API_URL + "/chat/getChatInfoByIdUser/" + this.usuarioService.getIdUsuarioLogado();
 
 		return new Promise<ChatInfo>((resolve, reject) => {
 
@@ -65,6 +103,12 @@ export class ChatService {
 			});
 
 		});
+
+	}
+
+	public getNewMessage(): Observable<ChatMessage> {
+
+		return this.messageChange.asObservable();
 
 	}
 

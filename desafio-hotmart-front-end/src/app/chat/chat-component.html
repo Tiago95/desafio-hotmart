@@ -1,6 +1,7 @@
 <h1 *ngIf="chatInfo === undefined || chatInfo.usuariosComMensagens === undefined">Carregando conversas</h1>
-<h1 *ngIf="chatInfo != null && chatInfo.usuariosComMensagens !== null && chatInfo.usuariosComMensagens !== undefined && chatInfo.usuariosComMensagens.length === 0">Não existem conversas</h1>
-<div class="chat-w" *ngIf="chatInfo != null && chatInfo.usuariosComMensagens !== null && chatInfo.usuariosComMensagens !== undefined && chatInfo.usuariosComMensagens.length > 0">
+<h1 *ngIf="chatInfo !== undefined && chatInfo !== null && chatInfo.usuariosComMensagens === undefined">Carregando conversas</h1>
+<h1 *ngIf="chatInfo !== undefined && chatInfo !== null && chatInfo.usuariosComMensagens !== null && chatInfo.usuariosComMensagens !== undefined && chatInfo.usuariosComMensagens.length === 0">Não existem conversas</h1>
+<div class="chat-w" *ngIf="chatInfo !== undefined && chatInfo != null && chatInfo.usuariosComMensagens !== null && chatInfo.usuariosComMensagens !== undefined && chatInfo.usuariosComMensagens.length > 0">
     <div class="row pt-3">
        <div class="col-lg-3 pr-0">
           <div class="conversation-wrap">
@@ -31,18 +32,18 @@
                 </div>
              </div>
              <div class="msg-wrap">
-                <div class="clearfix msg" [ngClass]="{'msg-me': message.usuarioOrigem === usuarioAtivo.id}" *ngFor="let message of chatInfo.mensagensAtivas">
+                <div class="clearfix msg" [ngClass]="{'msg-me': message.idUsuarioOrigem === usuarioAtivo.id}" *ngFor="let message of chatInfo.mensagensAtivas">
                    <div class="pl-3 pr-3 msg-w">
                       <small>{{message.message}}</small>
-                      <small class="time"><i class="fa fa-clock-o"></i> {{message.dataHoraFormatada}}</small>
+                      <small class="time"><i class="fa fa-clock-o"></i> {{message.dateFormatter}}</small>
                    </div>
                 </div>
              </div>
              <div class="send-wrap ">
-                <textarea class="form-control send-message" rows="6" placeholder="Digite sua mensagem..." [(ngModel)]="newMessage" name="new-message" id="new-message" #new-message="ngModel" [maxLength]="255"></textarea>
+                <textarea class="form-control send-message" rows="6" placeholder="Digite sua mensagem..." [(ngModel)]="newMessage" name="message" id="message" #message="ngModel" [maxLength]="255"></textarea>
              </div>
              <div class="btn-panel">
-                <a (click)="send()" class="text-right btn btn-primary send-message-btn" role="button"><i class="fa fa fa-paper-plane"></i> Enviar</a>            
+                <a (click)="send()" *ngIf="newMessage" class="text-right btn btn-primary send-message-btn" role="button"><i class="fa fa fa-paper-plane"></i> Enviar</a>            
              </div>
           </div>
        </div>

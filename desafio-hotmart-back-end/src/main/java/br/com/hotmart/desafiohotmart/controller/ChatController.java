@@ -50,9 +50,9 @@ public class ChatController {
 	 * @param idUser
 	 * @return
 	 */
-	@GetMapping("/getChatInfoByIdUser/{idUser}/{idUserActive}")
+	@GetMapping({"/getChatInfoByIdUser/{idUser}/{idUserActive}", "/getChatInfoByIdUser/{idUser}"})
 	public ResponseVO<ChatInfoVO> getChatInfoByIdUser(@PathVariable("idUser") Long idUser,
-			@PathVariable("idUserActive") Long idUserActive){
+			@PathVariable(name = "idUserActive", required = false) Long idUserActive){
 		
 		return new ResponseVO<>(ReturnTypeEnum.SUCESSO, chatMessageService.getChatInfoByIdUser(idUser, idUserActive));
 		
