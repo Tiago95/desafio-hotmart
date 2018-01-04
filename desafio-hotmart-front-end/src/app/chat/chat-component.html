@@ -1,55 +1,50 @@
-<div class="chat-w">
-   <div class="row pt-3">
-      <div class="col-lg-3 pr-0">
-         <div class="conversation-wrap">
-            <div class="media conversation bg-success">
-               <a class="d-flex">
-                  <div class="align-self-center">
-                     <img class="media-object img-circle" src="assets/img/user-8.jpg" width="50" height="50">
-                  </div>
-                  <div class="align-self-center pr-2 pl-2">
-                     <h6>Juan King</h6>
-                     <small>Hello</small>
-                  </div>
-               </a>
-            </div>
-         </div>
-      </div>
-      <div class="col-lg-9 pl-0">
-       <div class="message-wrap">       
-        <div class="msg-head">
-          <div class="d-flex justify-content-between pb-2 pt-2 pl-3 pr-3">
-               <div class="d-flex">
-                  <div class="align-self-center">
-                     <img class="media-object img-circle" src="assets/img/user-8.jpg" width="50" height="50">
-                  </div>
-                  <div class="align-self-center pr-2 pl-2">
-                     <h6>Juan King</h6>                     
-                  </div>
-               </div>
-          </div>            
-        </div>
-         <div class="msg-wrap">
-            <div class="clearfix msg">
-               <div class="pl-3 pr-3 msg-w">
-                  <small>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum, quae!</small>
-                  <small class="time"><i class="fa fa-clock-o"></i> 12:10am</small>
-               </div>
-            </div>
-            <div class="clearfix msg msg-me">
-               <div class="pl-3 pr-3 msg-w">
-                  <small>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum, quae!</small>
-                  <small class="time"><i class="fa fa-clock-o"></i> 12:10am</small>
-               </div>
-            </div>
-         </div>
-         <div class="send-wrap ">
-            <textarea class="form-control send-message" rows="3" placeholder="Digite sua mensagem..."></textarea>
-         </div>
-         <div class="btn-panel">
-           <a href="" class="text-right btn btn-primary send-message-btn" role="button"><i class="fa fa fa-paper-plane"></i> Enviar</a>            
-         </div>      
-          </div></div>
-   </div>
-</div>
-
+<h1 *ngIf="chatInfo === undefined || chatInfo.usuariosComMensagens === undefined">Carregando conversas</h1>
+<h1 *ngIf="chatInfo != null && chatInfo.usuariosComMensagens !== null && chatInfo.usuariosComMensagens !== undefined && chatInfo.usuariosComMensagens.length === 0">Não existem conversas</h1>
+<div class="chat-w" *ngIf="chatInfo != null && chatInfo.usuariosComMensagens !== null && chatInfo.usuariosComMensagens !== undefined && chatInfo.usuariosComMensagens.length > 0">
+    <div class="row pt-3">
+       <div class="col-lg-3 pr-0">
+          <div class="conversation-wrap">
+             <div class="media conversation" [ngClass]="{'bg-success': usuario.active}" *ngFor="let usuario of chatInfo.usuariosComMensagens">
+                <a class="d-flex">
+                   <div class="align-self-center">
+                      <img class="media-object img-circle" src="assets/img/user-{{usuario.avatar}}.jpg" width="50" height="50">
+                   </div>
+                   <div class="align-self-center pr-2 pl-2">
+                      <h6>{{usuario.nick}}</h6>
+                   </div>
+                </a>
+             </div>
+          </div>
+       </div>
+       <div class="col-lg-9 pl-0">
+          <div class="message-wrap">
+             <div class="msg-head">
+                <div class="d-flex justify-content-between pb-2 pt-2 pl-3 pr-3">
+                   <div class="d-flex">
+                      <div class="align-self-center">
+                         <img class="media-object img-circle" src="assets/img/user-{{usuarioAtivo.avatar}}.jpg" width="50" height="50">
+                      </div>
+                      <div class="align-self-center pr-2 pl-2">
+                         <h6>{{usuarioAtivo.nick}}</h6>
+                      </div>
+                   </div>
+                </div>
+             </div>
+             <div class="msg-wrap">
+                <div class="clearfix msg" [ngClass]="{'msg-me': message.usuarioOrigem === usuarioAtivo.id}" *ngFor="let message of chatInfo.mensagensAtivas">
+                   <div class="pl-3 pr-3 msg-w">
+                      <small>{{message.message}}</small>
+                      <small class="time"><i class="fa fa-clock-o"></i> {{message.dataHoraFormatada}}</small>
+                   </div>
+                </div>
+             </div>
+             <div class="send-wrap ">
+                <textarea class="form-control send-message" rows="6" placeholder="Digite sua mensagem..." [(ngModel)]="newMessage" name="new-message" id="new-message" #new-message="ngModel" [maxLength]="255"></textarea>
+             </div>
+             <div class="btn-panel">
+                <a (click)="send()" class="text-right btn btn-primary send-message-btn" role="button"><i class="fa fa fa-paper-plane"></i> Enviar</a>            
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>

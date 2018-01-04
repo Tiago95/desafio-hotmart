@@ -3,10 +3,14 @@ package br.com.hotmart.desafiohotmart.entity;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
+import javax.persistence.ColumnResult;
+import javax.persistence.ConstructorResult;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedNativeQuery;
+import javax.persistence.SqlResultSetMapping;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -14,6 +18,7 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotBlank;
 
 import br.com.hotmart.desafiohotmart.vo.ChatMessageVO;
+import br.com.hotmart.desafiohotmart.vo.UsuarioVO;
 
 /**
  * Entidade de armazenamento das mensagens de usuário.
@@ -23,6 +28,8 @@ import br.com.hotmart.desafiohotmart.vo.ChatMessageVO;
  */
 @Entity
 @Table(name = "chat_message")
+@NamedNativeQuery(name = "SqlFindContatosChatInfoByIdUser", query = "SELECT DISTINCT uf.id AS id, uf.nome AS nome, uf.nick_name AS nick, uf.email AS email, uf.senha AS senha, uf.conectado AS conectado FROM chat_message cm LEFT JOIN usuario uo ON (cm.usuario_origem_id = uo.id AND uo.id = :idUser) LEFT JOIN usuario ud ON (cm.usuario_destino_id = ud.id AND ud.id = :idUser) LEFT JOIN usuario uf ON ((uo.id IS NOT NULL AND cm.usuario_destino_id = uf.id) OR (ud.id IS NOT NULL AND cm.usuario_origem_id = uf.id))", resultSetMapping = "SqlFindContatosChatInfoByIdUser")
+@SqlResultSetMapping(name = "SqlFindContatosChatInfoByIdUser", classes = @ConstructorResult(targetClass = UsuarioVO.class, columns = {@ColumnResult(name = "id", type = Long.class), @ColumnResult(name = "nome", type = String.class), @ColumnResult(name = "nick", type = String.class), @ColumnResult(name = "email", type = String.class), @ColumnResult(name = "senha", type = String.class), @ColumnResult(name = "conectado", type = Boolean.class)}))
 public class ChatMessage extends BaseEntity{
 	
 	/**

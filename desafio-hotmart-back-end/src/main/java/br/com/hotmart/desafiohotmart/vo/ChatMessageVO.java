@@ -22,6 +22,32 @@ public class ChatMessageVO implements BaseVO, BaseResponseVO {
 	private String message;
 	
 	private LocalDateTime date;
+	
+	/**
+	 * Construtor default.
+	 * 
+	 */
+	public ChatMessageVO() {
+		super();
+	}	
+
+	/**
+	 * Construtor com todos os parametros.
+	 * 
+	 * @param idUsuarioOrigem
+	 * @param nameUsuarioOrigem
+	 * @param message
+	 * @param date
+	 */
+	public ChatMessageVO(Long idUsuarioOrigem, String nameUsuarioOrigem, String message, LocalDateTime date) {
+		
+		this();
+		
+		this.idUsuarioOrigem = idUsuarioOrigem;
+		this.nameUsuarioOrigem = nameUsuarioOrigem;
+		this.message = message;
+		this.date = date;
+	}
 
 	/**
 	 * @return the idUsuarioOrigem

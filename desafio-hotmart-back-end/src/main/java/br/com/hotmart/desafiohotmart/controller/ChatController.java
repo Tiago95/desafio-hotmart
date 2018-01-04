@@ -6,14 +6,20 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.hotmart.desafiohotmart.entity.ChatMessage;
 import br.com.hotmart.desafiohotmart.entity.Usuario;
-import br.com.hotmart.desafiohotmart.service.ChatMessageService;
+import br.com.hotmart.desafiohotmart.enumerations.ReturnTypeEnum;
+import br.com.hotmart.desafiohotmart.service.ChatService;
 import br.com.hotmart.desafiohotmart.service.UsuarioService;
 import br.com.hotmart.desafiohotmart.utils.WebSocketUtils;
+import br.com.hotmart.desafiohotmart.vo.ChatInfoVO;
 import br.com.hotmart.desafiohotmart.vo.MessageVO;
+import br.com.hotmart.desafiohotmart.vo.ResponseVO;
 
 /**
  * Classe responsável por conter as regras de chat da aplicação.
@@ -22,16 +28,31 @@ import br.com.hotmart.desafiohotmart.vo.MessageVO;
  *
  */
 @RestController
+@RequestMapping("chat")
 public class ChatController {
 	
 	@Autowired
-	private ChatMessageService chatMessageService;
+	private ChatService chatMessageService;
 	
 	@Autowired
 	private UsuarioService usuarioService;
 	
 	@Autowired
 	private SimpMessageSendingOperations simpMessageSendingOperations;
+	
+	/**
+	 * Responsável por obter as informações de conversas de um determinado usuário.
+	 * 
+	 * @param idUser
+	 * @return
+	 */
+	@GetMapping("/getChatInfoByIdUser/{idUser}/{idUserActive}")
+	public ResponseVO<ChatInfoVO> getChatInfoByIdUser(@PathVariable("idUser") Long idUser,
+			@PathVariable("idUserActive") Long idUserActive){
+		
+		return new ResponseVO<ChatInfoVO>(ReturnTypeEnum.SUCESSO, chatMessageService.getChatInfoByIdUser(idUser, idUserActive));
+		
+	}
 	
 	/**
 	 * Responsável por controlar o envio de mensagens trocadas entre os usuários.

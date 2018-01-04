@@ -38,6 +38,36 @@ public class UsuarioVO implements BaseVO, BaseResponseVO {
 	private String senha;
 	
 	private boolean conectado;
+	
+	/**
+	 * Construtor default.
+	 * 
+	 */
+	public UsuarioVO() {
+		super();
+	}
+
+	/**
+	 * Construtor com todos os parametros.
+	 * 
+	 * @param id
+	 * @param nome
+	 * @param nick
+	 * @param email
+	 * @param senha
+	 * @param conectado
+	 */
+	public UsuarioVO(Long id, String nome, String nick, String email, String senha, boolean conectado) {
+		
+		this();
+		
+		this.id = id;
+		this.nome = nome;
+		this.nick = nick;
+		this.email = email;
+		this.senha = senha;
+		this.conectado = conectado;
+	}
 
 	/**
 	 * @return the id
