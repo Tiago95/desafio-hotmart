@@ -71,12 +71,12 @@
                            <small class="dropdown-header"><strong>Você tem {{lastChatInfo.quantidadeMensagensNaoLidas}} novas mensagens</strong></small>
                         </div>
                         <div class="dropdown-body">
-                           <a class="dropdown-item d-flex" routerLink="/chat" *ngFor="let chatMessage of lastChatInfo.ultimasMensagensRecebidas">
+                           <a class="dropdown-item d-flex" [routerLink]="['/chat', chatMessage.idUsuarioOrigem]" *ngFor="let chatMessage of lastChatInfo.ultimasMensagensRecebidas">
                               <div class="align-self-center">
                                  <img src="assets/img/user-{{chatMessage.avatar}}.jpg" class="img-circle" width="40" height="40" alt="">
                               </div>
                               <div class="ml-2 mr-2"> <span class="align-self-center d-block">{{chatMessage.message}}</span>
-                                 <small><i class="fa fa-clock-o"></i> {{chatMessage.dateFormatter}}</small>
+                                 <small><i class="fa fa-clock-o"></i> {{chatMessage.nameUsuarioOrigem}} - {{chatMessage.dateFormatter}}</small>
                               </div>
                            </a>
                         </div>

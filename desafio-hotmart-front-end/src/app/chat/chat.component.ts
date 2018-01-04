@@ -58,6 +58,12 @@ export class ChatComponent implements OnInit{
   
           });
 
+          this.chatInfo.usuariosComMensagens.sort((usuario1, usuario2) => {
+
+              return usuario1['active'] == usuario2['active'] ? 0 : usuario1['active'] ? -1 : 1;
+
+          });
+
         }       
       
       });

@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { TipoRetornoEnum } from 'app/enum/tipo-retorno-enum';
 import { AppUtils } from './../utils/app-utils';
 import { UsuarioService } from './../services/usuario.service';
@@ -19,17 +20,25 @@ export class ContactsComponent implements OnInit{
 
     private contatos: Array<Contato>;
 
-    public constructor(private usuarioService: UsuarioService){}
+    public constructor(private usuarioService: UsuarioService, private router: Router){}
 
     public ngOnInit(){
 
-        this.usuarioService.getContatosByUserLogado().then(contatos => this.contatos = contatos, error => {this.contatos = null; console.log(error)}).catch(error => {this.contatos = null; console.log(error)});
+        this.usuarioService.getContatosByUserLogado().then(contatos => {
+            
+            if(contatos && contatos.length > 0){
 
-    }
+                this.contatos = contatos.map(contato => {
 
-    public getRandomNumberUser(){
+                    contato['avatar'] = AppUtils.getRandomInt(1, 13);
+    
+                    return contato;
+    
+                });
 
-        return AppUtils.getRandomInt(1, 13);
+            }            
+
+        }, error => {this.contatos = null; console.log(error)}).catch(error => {this.contatos = null; console.log(error)});
 
     }
 
@@ -39,11 +48,11 @@ export class ContactsComponent implements OnInit{
             
             if(estruturaJson && estruturaJson.returnType && estruturaJson.returnType.toString() === TipoRetornoEnum[TipoRetornoEnum.SUCESSO]){
 
-                this.contatos = this.contatos.map(contato => {
+                this.contatos = this.contatos.map(contato => {                    
 
                     if(contato.id === idUsuario){
         
-                        contato.bloqueado = true;
+                        contato.bloqueado = true;                        
         
                         return contato;
         
@@ -178,7 +187,7 @@ export class ContactsComponent implements OnInit{
 
     public chat(idUsuario: number){
 
-        
+        this.router.navigate(["/chat", idUsuario]);
         
     }
   

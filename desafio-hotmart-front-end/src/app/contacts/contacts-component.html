@@ -10,14 +10,14 @@
                 <h1 *ngIf="contatos !== null && contatos !== undefined && contatos.length === 0">Não existem contatos</h1>
                 <ul class="registered-users-list clearfix list-style-none pl-0 d-flex align-content-around flex-wrap" *ngIf="contatos !== null && contatos !== undefined && contatos.length > 0">
                     <li class="ng-tns-c6-19 ng-star-inserted" *ngFor="let contato of contatos">
-                        <a class="d-block mb-2"><img class="ng-tns-c6-19" alt="" height="128" width="128" src="assets/img/user-{{getRandomNumberUser()}}.jpg"></a>
+                        <a class="d-block mb-2"><img class="ng-tns-c6-19" alt="" height="128" width="128" src="assets/img/user-{{contato.avatar}}.jpg"></a>
                         <p class="text-ellipsis"> <strong class="ng-tns-c6-19">{{contato.nick}}</strong></p>
                         <i class="fa fa-ban cursorPointer" *ngIf="!contato.bloqueado" aria-hidden="true" (click)="bloquear(contato.id)"> Bloquear</i>
                         <i class="fa fa-unlock cursorPointer" *ngIf="contato.bloqueado" aria-hidden="true" (click)="desbloquear(contato.id)"> Desbloquear</i>
                         <i class="fa fa-user-o cursorPointer" *ngIf="contato.statusSolicitacaoAmizade === 'NAO_SOLICITADO'" aria-hidden="true" (click)="solicitarAmizade(contato.id)"> Solicitar Amizade</i>
                         <i class="fa fa-user-o cursorPointer" *ngIf="contato.statusSolicitacaoAmizade === 'PENDENTE' && !contato.amizadeSolicitada" aria-hidden="true" (click)="aceitarAmizade(contato.id)"> Aceitar Pedido Amizade</i>
                         <i class="fa fa-user-o cursorPointer" *ngIf="contato.statusSolicitacaoAmizade === 'PENDENTE' && !contato.amizadeSolicitada" aria-hidden="true" (click)="recusarAmizade(contato.id)"> Recusar Pedido Amizade</i>
-                        <i class="fa fa-commenting cursorPointer" *ngIf="(contato.statusSolicitacaoAmizade === 'ACEITO' || contato.amizadeSolicitada) && !contato.bloqueado" aria-hidden="true" (click)="chat(contato.id)"> Chat</i>
+                        <i class="fa fa-commenting cursorPointer" *ngIf="(contato.statusSolicitacaoAmizade === 'ACEITO' || contato.permitirConversasAnonimas) && !contato.bloqueado" aria-hidden="true" (click)="chat(contato.id)"> Chat</i>
                     </li>
                 </ul>
             </div>

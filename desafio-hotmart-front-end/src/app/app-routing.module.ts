@@ -28,6 +28,9 @@ export const AppRoutes: Routes = [{
   },{
     path: 'chat',
     loadChildren: './chat/chat.module#ChatModule'
+  },{
+    path: 'chat/:idUserActive',
+    loadChildren: './chat/chat.module#ChatModule'
   }]
 }];
 

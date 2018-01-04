@@ -28,6 +28,8 @@ public class ContatosVO implements BaseResponseVO {
 	
 	private boolean amizadeSolicitada;
 	
+	private boolean permitirConversasAnonimas;
+	
 	/**
 	 * Construtor default.
 	 * 
@@ -45,9 +47,10 @@ public class ContatosVO implements BaseResponseVO {
 	 * @param bloqueado
 	 * @param statusSolicitacaoAmizade
 	 * @param amizadeSolicitada
+	 * @param permitirConversasAnonimas
 	 */
 	public ContatosVO(Long id, String nome, String nick, boolean bloqueado,
-			Integer statusSolicitacaoAmizade, boolean amizadeSolicitada) {
+			Integer statusSolicitacaoAmizade, boolean amizadeSolicitada, boolean permitirConversasAnonimas) {
 		
 		this();
 		
@@ -56,6 +59,7 @@ public class ContatosVO implements BaseResponseVO {
 		this.nick = nick;
 		this.bloqueado = bloqueado;
 		this.amizadeSolicitada = amizadeSolicitada;
+		this.permitirConversasAnonimas = permitirConversasAnonimas;
 		
 		if(statusSolicitacaoAmizade != null){
 			
@@ -147,6 +151,20 @@ public class ContatosVO implements BaseResponseVO {
 	 */
 	public void setAmizadeSolicitada(boolean amizadeSolicitada) {
 		this.amizadeSolicitada = amizadeSolicitada;
+	}
+
+	/**
+	 * @return the permitirConversasAnonimas
+	 */
+	public boolean isPermitirConversasAnonimas() {
+		return permitirConversasAnonimas;
+	}
+
+	/**
+	 * @param permitirConversasAnonimas the permitirConversasAnonimas to set
+	 */
+	public void setPermitirConversasAnonimas(boolean permitirConversasAnonimas) {
+		this.permitirConversasAnonimas = permitirConversasAnonimas;
 	}
 
 }

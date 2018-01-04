@@ -10,7 +10,9 @@ export class Contato{
 	
 	private _statusSolicitacaoAmizade: string;
 	
-    private _amizadeSolicitada: boolean;    
+	private _amizadeSolicitada: boolean;    
+	
+	private _permitirConversasAnonimas: boolean;
 
 	public get id(): number {
 		return this._id;
@@ -58,6 +60,14 @@ export class Contato{
 
 	public set amizadeSolicitada(value: boolean) {
 		this._amizadeSolicitada = value;
-	}    
+	} 
+
+	public get permitirConversasAnonimas(): boolean {
+		return this._permitirConversasAnonimas;
+	}
+
+	public set permitirConversasAnonimas(value: boolean) {
+		this._permitirConversasAnonimas = value;
+	}	   
 
 }
