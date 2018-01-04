@@ -6,7 +6,9 @@ export class ChatMessage{
 	
 	private _message: string;
 	
-    private _date: string;    
+	private _date: Date;    
+	
+	private _dateFormatter: string;
 
 	public get idUsuarioOrigem(): number {
 		return this._idUsuarioOrigem;
@@ -32,12 +34,20 @@ export class ChatMessage{
 		this._message = value;
 	}
 
-	public get date(): string {
+	public get date(): Date {
 		return this._date;
 	}
 
-	public set date(value: string) {
+	public set date(value: Date) {
 		this._date = value;
-	}    
+	}
+
+	public get dateFormatter(): string {
+		return this._dateFormatter;
+	}
+
+	public set dateFormatter(value: string) {
+		this._dateFormatter = value;
+	}	   
 
 }

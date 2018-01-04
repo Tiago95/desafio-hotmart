@@ -56,6 +56,8 @@ export class AuthenticationService{
             .then((estruturaJson: EstruturaJson) => {
 
                 localStorage.removeItem('currentUser');
+                localStorage.removeItem('isSocketConnect');
+                localStorage.removeItem('credentialsSocketConnect');
                 
                 resolve();
                 

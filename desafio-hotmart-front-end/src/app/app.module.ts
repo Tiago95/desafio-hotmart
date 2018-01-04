@@ -26,6 +26,7 @@ import { UrlPermission } from 'app/urlPermission/url.permission';
 import { ChatService } from 'app/services/chat.service';
 import { MenuItems } from 'app/core/menu/menu-items/menu-items';
 import { PageTitleService } from 'app/core/page-title/page-title.service';
+import { DatePipe } from '@angular/common';
 
 
 
@@ -61,7 +62,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 		MainComponent
 	],
 	bootstrap: [DesafioHotmartAppComponent],
-	providers:[AuthenticationService, HttpService, UrlPermission, ChatService, MenuItems, PageTitleService, UsuarioService,
+	providers:[AuthenticationService, HttpService, UrlPermission, ChatService, MenuItems, PageTitleService, UsuarioService, DatePipe,
       {
          provide: PERFECT_SCROLLBAR_CONFIG,
          useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
