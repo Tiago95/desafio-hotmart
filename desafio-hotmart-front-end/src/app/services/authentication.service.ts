@@ -1,3 +1,4 @@
+import { HttpService } from 'app/services/http.service';
 import { Usuario } from './../models/usuario';
 import { EstruturaJson } from 'app/models/estrutura-json';
 import { HttpControl } from './../models/http-control';
@@ -7,7 +8,6 @@ import { Injectable } from "@angular/core";
 import 'rxjs/add/operator/map';
 
 import { Credentials } from './../models/credentials';
-import { HttpService } from './http-service';
 import { TipoRetornoEnum } from 'app/enum/tipo-retorno-enum';
 
 @Injectable()

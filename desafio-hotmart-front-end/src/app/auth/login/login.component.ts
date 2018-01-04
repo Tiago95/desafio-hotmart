@@ -34,7 +34,7 @@ export class LoginComponent {
 
       if(estruturaJson){
 
-        if(TipoRetornoEnum.ERRO === estruturaJson.returnType){
+        if(estruturaJson.returnType && TipoRetornoEnum[TipoRetornoEnum.ERRO] === estruturaJson.returnType.toString()){
 
           this.errorMessage = "Usuário ou senha incorreta";        
     

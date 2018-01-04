@@ -9,7 +9,7 @@ package br.com.hotmart.desafiohotmart.enumerations;
 public enum StatusSolicitacaoAmizadeEnum {
 	
 	NAO_SOLICITADO,
-	SOLICITADO,
+	PENDENTE,
 	ACEITO,
 	RECUSADO;
 

@@ -47,6 +47,31 @@ public class PedidoAmizade extends BaseEntity {
 	@Column(name = "status_solicitacao", nullable = false, unique = false, columnDefinition = "tinyint")
 	@Enumerated(value = EnumType.ORDINAL)
 	private StatusSolicitacaoAmizadeEnum statusSolicitacao;
+	
+	/**
+	 * Construtor default.
+	 * 
+	 */
+	public PedidoAmizade() {
+		super();
+	}
+
+	/**
+	 * Construtor que recebe um usuário principal e um usuário amigo.
+	 * 
+	 * @param usuarioPrincipal
+	 * @param usuarioAmigo
+	 */
+	public PedidoAmizade(Usuario usuarioPrincipal, Usuario usuarioAmigo) {
+
+		this();
+		
+		this.usuarioPrincipal = usuarioPrincipal;
+		this.usuarioAmigo = usuarioAmigo;
+		this.statusSolicitacao = StatusSolicitacaoAmizadeEnum.PENDENTE;
+		this.dataSolicitacao = LocalDateTime.now();
+		
+	}
 
 	/**
 	 * @return the usuarioPrincipal

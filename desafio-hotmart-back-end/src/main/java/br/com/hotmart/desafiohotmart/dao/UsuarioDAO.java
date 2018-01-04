@@ -61,9 +61,9 @@ public interface UsuarioDAO extends PagingAndSortingRepository<Usuario, Long> {
 	/**
 	 * Responsável por retornar uma lista de contatos de acordo com um usuário.
 	 * 
-	 * @param usuario
+	 * @param idUsuario
 	 * @return
 	 */
-	@Query("SELECT new br.com.hotmart.desafiohotmart.vo.ContatosVO(u.nome, u.nickName, CASE WHEN ub IS NOT NULL THEN true ELSE false END, CASE WHEN pa IS NOT NULL THEN pa.statusSolicitacao ELSE 0 END) FROM Usuario u LEFT JOIN UsuarioBloqueado ub ON (ub.usuarioPrincipal = :usuario AND ub.usuarioBloqueado = u) LEFT JOIN PedidoAmizade pa ON (pa.usuarioPrincipal = :usuario AND pa.usuarioAmigo = u) WHERE u <> :usuario")
-	List<ContatosVO> getContatosVOByUsuario(@Param("usuario") Usuario usuario);
+	@Query(nativeQuery = true, name = "SqlGetContatosVOByUsuario")
+	List<ContatosVO> getContatosVOByUsuario(@Param("idUsuario") Long idUsuario);
 }

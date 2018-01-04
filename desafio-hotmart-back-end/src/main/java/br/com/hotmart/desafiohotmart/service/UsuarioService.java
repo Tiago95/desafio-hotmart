@@ -134,24 +134,12 @@ public class UsuarioService extends BaseServiceAbstract<Usuario, Long> implement
 	/**
 	 * Responsável por retornar uma lista de contatos de acordo com um usuário.
 	 * 
-	 * @param usuario
-	 * @return
-	 */
-	public List<ContatosVO> getContatosVOByUsuario(Usuario usuario){
-		
-		return usuarioDAO.getContatosVOByUsuario(usuario);
-		
-	}
-	
-	/**
-	 * Responsável por retornar uma lista de contatos de acordo com um usuário.
-	 * 
 	 * @param idUsuario
 	 * @return
 	 */
 	public List<ContatosVO> getContatosVOByUsuario(Long idUsuario){
 		
-		return getContatosVOByUsuario(new Usuario(idUsuario));
+		return usuarioDAO.getContatosVOByUsuario(idUsuario);
 		
 	}
 

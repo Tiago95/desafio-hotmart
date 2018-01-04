@@ -1,3 +1,4 @@
+import { UsuarioService } from './services/usuario.service';
 import { MainComponent } from './main/main.component';
 import { NgModule} from '@angular/core';
 import { BrowserModule} from '@angular/platform-browser';
@@ -20,7 +21,7 @@ import { DesafioHotmartAppComponent} from './app.component';
 import { AppRoutes} from "./app-routing.module";
 import { AuthLayoutComponent } from './auth/auth-layout.component';
 import { AuthenticationService } from 'app/services/authentication.service';
-import { HttpService } from 'app/services/http-service';
+import { HttpService } from 'app/services/http.service';
 import { UrlPermission } from 'app/urlPermission/url.permission';
 import { ChatService } from 'app/services/chat.service';
 import { MenuItems } from 'app/core/menu/menu-items/menu-items';
@@ -60,7 +61,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 		MainComponent
 	],
 	bootstrap: [DesafioHotmartAppComponent],
-	providers:[AuthenticationService, HttpService, UrlPermission, ChatService, MenuItems, PageTitleService,
+	providers:[AuthenticationService, HttpService, UrlPermission, ChatService, MenuItems, PageTitleService, UsuarioService,
       {
          provide: PERFECT_SCROLLBAR_CONFIG,
          useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG

@@ -36,9 +36,9 @@ export class RegisterComponent {
       
         if(estruturaJson){
 
-        if(TipoRetornoEnum.SUCESSO === estruturaJson.returnType){
+        if(estruturaJson.returnType && TipoRetornoEnum[TipoRetornoEnum.SUCESSO] === estruturaJson.returnType.toString()){
 
-          this.router.navigate(['/chat']);
+          this.router.navigate(['/dashboard']);
     
         }
 

@@ -16,6 +16,8 @@ public class ContatosVO implements BaseResponseVO {
 	 */
 	private static final long serialVersionUID = -4126424322444784145L;
 
+	private Long id;
+	
 	private String nome;
 	
 	private String nick;
@@ -23,6 +25,8 @@ public class ContatosVO implements BaseResponseVO {
 	private boolean bloqueado;
 	
 	private StatusSolicitacaoAmizadeEnum statusSolicitacaoAmizade;
+	
+	private boolean amizadeSolicitada;
 	
 	/**
 	 * Construtor default.
@@ -35,20 +39,44 @@ public class ContatosVO implements BaseResponseVO {
 	/**
 	 * Construtor com todos os parametros.
 	 * 
+	 * @param id
 	 * @param nome
 	 * @param nick
 	 * @param bloqueado
 	 * @param statusSolicitacaoAmizade
+	 * @param amizadeSolicitada
 	 */
-	public ContatosVO(String nome, String nick, boolean bloqueado,
-			StatusSolicitacaoAmizadeEnum statusSolicitacaoAmizade) {
+	public ContatosVO(Long id, String nome, String nick, boolean bloqueado,
+			Integer statusSolicitacaoAmizade, boolean amizadeSolicitada) {
 		
 		this();
 		
+		this.id = id;
 		this.nome = nome;
 		this.nick = nick;
 		this.bloqueado = bloqueado;
-		this.statusSolicitacaoAmizade = statusSolicitacaoAmizade;
+		this.amizadeSolicitada = amizadeSolicitada;
+		
+		if(statusSolicitacaoAmizade != null){
+			
+			this.statusSolicitacaoAmizade = StatusSolicitacaoAmizadeEnum.values()[statusSolicitacaoAmizade];
+			
+		}
+		
+	}
+
+	/**
+	 * @return the id
+	 */
+	public Long getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	/**
@@ -105,6 +133,20 @@ public class ContatosVO implements BaseResponseVO {
 	 */
 	public void setStatusSolicitacaoAmizade(StatusSolicitacaoAmizadeEnum statusSolicitacaoAmizade) {
 		this.statusSolicitacaoAmizade = statusSolicitacaoAmizade;
+	}
+
+	/**
+	 * @return the amizadeSolicitada
+	 */
+	public boolean isAmizadeSolicitada() {
+		return amizadeSolicitada;
+	}
+
+	/**
+	 * @param amizadeSolicitada the amizadeSolicitada to set
+	 */
+	public void setAmizadeSolicitada(boolean amizadeSolicitada) {
+		this.amizadeSolicitada = amizadeSolicitada;
 	}
 
 }

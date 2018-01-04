@@ -1,12 +1,22 @@
 export class Usuario {
 
+	private _id: number;
+
     private _nome: string;
 
     private _nick: string;
 
-    private _email: string;
+    private _email: string;	
 
-    private _senha: string;
+	private _senha: string;
+	
+	public get id(): number {
+		return this._id;
+	}
+
+	public set id(value: number) {
+		this._id = value;
+	}
 
 	public get nome(): string {
 		return this._nome;
@@ -42,6 +52,7 @@ export class Usuario {
 
 	public toJSON(){
 		return {
+			id: this.id,
 			nome: this.nome,
 			nick: this.nick,
 			email: this.email,

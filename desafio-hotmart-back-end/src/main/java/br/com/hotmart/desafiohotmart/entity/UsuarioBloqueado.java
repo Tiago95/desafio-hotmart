@@ -38,6 +38,29 @@ public class UsuarioBloqueado extends BaseEntity {
 	@NotNull
 	@Column(name = "data_bloqueio", nullable = true, unique = false, columnDefinition = "datetime")
 	private LocalDateTime dataBloqueio;
+	
+	/**
+	 * Construtor default
+	 * 
+	 */
+	public UsuarioBloqueado() {
+		super();
+	}
+
+	/**
+	 * Construtor com os usuários.
+	 * 
+	 * @param usuarioPrincipal
+	 * @param usuarioBloqueado
+	 */
+	public UsuarioBloqueado(Usuario usuarioPrincipal, Usuario usuarioBloqueado) {
+
+		this();
+		
+		this.usuarioPrincipal = usuarioPrincipal;
+		this.usuarioBloqueado = usuarioBloqueado;
+		this.dataBloqueio = LocalDateTime.now();
+	}
 
 	/**
 	 * @return the usuarioPrincipal
