@@ -14,13 +14,18 @@ import {Router} from "@angular/router";
 })
 export class DashboardComponent {
 
-    public constructor(private router: Router){
+    public constructor(private router: Router){}
 
+    public goToContacts(){
+
+        this.router.navigate(["/contacts"]);
 
     }
 
-    public goToContacts(){
-        this.router.navigate(["/contacts"]);
+    public goToConversas(){
+
+        this.router.navigate(["/chat"]);
+        
     }
 
 }

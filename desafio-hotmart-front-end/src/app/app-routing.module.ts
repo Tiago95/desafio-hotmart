@@ -25,6 +25,9 @@ export const AppRoutes: Routes = [{
   {
     path: 'contacts',
     loadChildren: './contacts/contacts.module#ContactsModule'
+  },{
+    path: 'chat',
+    loadChildren: './chat/chat.module#ChatModule'
   }]
 }];
 
