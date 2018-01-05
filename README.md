@@ -119,19 +119,19 @@ Pequeno trecho
 
 ## Como realizar a execução da aplicação
 
-### Excecução aplicação Front-End
+### Execução aplicação Front-End
 
-* Instalicação do node
+* Instalação do node
 ```
 https://nodejs.org/en/download/
 ```
 
-* Instalicação do Angular 5
+* Instalação do Angular 5
 ```
 npm install @angular/cli -g
 ```
 
-* Instalicação das dependências do projeto
+* Instalação das dependências do projeto
 ```
 npm install
 ```
@@ -147,7 +147,7 @@ ng serve --port {número da porta}
 ```
 A alteração da porta não afetará o funcionamento da aplicação. O importante e subir em alguma porta :grin:.
 
-### Excecução aplicação Back-End
+### Execução aplicação Back-End
 
 * Instalação do Java 8
 
@@ -180,7 +180,7 @@ Por padrão a aplicação subirá na porta 8080, caso seja necessário a altera�
 server.port = {numero da porta}
 ``` 
 
-Isso poderá ocasionar em um mal funcionamento da aplicação tendo em vista que a aplicação do front-end está apontando para esse porta. Calma não entre em desespero :dizzy_face:, após a alteração da porta com a configuração acima, você poderá alterar o arquivo que está desafio-hotmart-front-end/src/app/app.component.ts nesse pequeno trecho.
+Isso poderá ocasionar em um mal funcionamento da aplicação tendo em vista que a aplicação do front-end está apontando para essa porta. Calma não entre em desespero :dizzy_face:, após a alteração da porta com a configuração acima, você poderá alterar o arquivo que está desafio-hotmart-front-end/src/app/app.component.ts nesse pequeno trecho.
 
 ```
 static API_URL: string = "http://localhost:8080";
@@ -190,11 +190,11 @@ Pronto a aplicação já estará em perfeito funcionamento novamente. :stuck_out
 
 ## Detalhamento do Aplicação
 
-### A aplicação possuí os seguintes recuros
+### A aplicação possui os seguintes recursos
 
-* Uma tela de login onde os usuários cadastrados na aplicação poderam entrar na aplicação.
+* Uma tela de login onde os usuários cadastrados na aplicação poderão entrar na aplicação.
 
-* Uma tela de cadastro onde novos usuários poderam ser cadastrar na aplicação.
+* Uma tela de cadastro onde novos usuários poderão ser cadastrar na aplicação.
 
 * Uma tela de dashboard onde o usuário terá informações como seu nick, seu status, foto, contatos, mensagens não lidas, conversas, chat e logout.
 
@@ -208,31 +208,31 @@ Pronto a aplicação já estará em perfeito funcionamento novamente. :stuck_out
 
 * 1. Tela de Login - É a primeira página do aplicação.
 
-* 1.1 Tela de cadastro - Há um boptão de cadastrar no rodapé do login. Esse botão levará o usário a tela em questão.
+* 1.1 Tela de cadastro - Há um botão de cadastrar no rodapé do login. Esse botão levará o usuário a tela em questão.
 
-* 2. Tela de Contatos - Após o usuário efetuar o login ou se cadastrar na aplicação ele será direcionado para a página de dashboard onde haverá um card de nome contatos que o levará a uma tela onde ele verá todos os usuários cadastrados na aplicação, o seu status e funcções como bloquear, desbloquear, solicitar amizade, chat, etc...
+* 2. Tela de Contatos - Após o usuário efetuar o login ou se cadastrar na aplicação ele será direcionado para a página de dashboard onde haverá um card de nome contatos que o levará a uma tela onde ele verá todos os usuários cadastrados na aplicação, o seu status e outras funções como bloquear, desbloquear, solicitar amizade, chat, etc...
  
-* 2.1 Tela Inicial - Assim que o usuário entrar na aplicação ou receber uma nova mensagem ele será notificados de duas formas diferentes. A primeira é uma mensagem que aparecerá no topo central da aplicação e ficará disponivel por um tempo determinado. Já a segunda é um icone (em forma de caixa de correio) no topo direito que mostrará quantidade de mensagens não lidas pelo usuário e quais as suas últimas mensagens. As duas formas mencionadas são atualizadas sempre que o usuário receber uma mensagem, ler uma mensagem ou entrar na aplicação.
+* 2.1 Tela Inicial - Assim que o usuário entrar na aplicação ou receber uma nova mensagem ele será notificado de duas formas diferentes. A primeira é uma mensagem que aparecerá no topo central da aplicação e ficará disponível por um tempo determinado. Já a segunda é um ícone (em forma de caixa de correio) no topo direito que mostrará quantidade de mensagens não lidas pelo usuário e quais as suas últimas mensagens. As duas formas mencionadas são atualizadas sempre que o usuário receber uma mensagem, ler uma mensagem ou entrar na aplicação.
 
-* 3. Envio de mensagens - Após o usuário efetuar o login ou se cadastrar na aplicação ele será direcionado para a página de dashboard onde haverá um card de nome conversas que o levará a uma tela onde ele verá todas as suas conversas até o momente e também poderá realizar nova troca de mensagens. Caso o usuário esteja online o mesmo receberá a mensagem de forma instantânea, em caso contrário ele receberá a mensagem na primeira oportunidade. O usuário tem outras formas de acessa essa tela, ele poderá acessar pela telade contatos (onde há um link direto), pelas notificações de mensagens não lidas e pelo menu.
+* 3. Envio de mensagens - Após o usuário efetuar o login ou se cadastrar na aplicação ele será direcionado para a página de dashboard onde haverá um card de nome conversas que o levará a uma tela onde ele verá todas as suas conversas até o momento e também poderá realizar nova troca de mensagens. Caso o usuário esteja online o mesmo receberá a mensagem de forma instantânea, em caso contrário ele receberá a mensagem na primeira oportunidade. O usuário tem outras formas de acessa essa tela, ele poderá acessar pela tela de contatos (onde há um link direto), pelas notificações de mensagens não lidas e pelo menu.
 
 * 4. Suporte a 100 usuários simultâneos - Infelizmente não consegui realizar o teste de carga com o JMETER devido a falta de tempo, pois essa semana foi muito pesada em relação a volume de trabalho no meu local de trabalho atual, o que me gerou algumas horas extras. :worried: Mas pela minha experiência e pelas tecnologias utilizadas no projeto, eu quase posso dar certeza que ela aguenta!! :grinning:
 
 * 5. Lista de contatos - Esse item foi realizado conforme mencionado no item 2.
 
-* 6. Tela de hitórico de mensagens - Esse item foi implementado junto a tela de envio de mensagens (detalhado no item 3.). Nessa tela em questão você poderá consultar suas mensagens e enviar outras.
+* 6. Tela de histórico de mensagens - Esse item foi implementado junto a tela de envio de mensagens (detalhado no item 3.). Nessa tela em questão você poderá consultar suas mensagens e enviar outras.
 
-* 7. Solicitação de amizade - Esse item foi desenvolvimento e pode ser manipulado na tela de contatos (conforme mencionado no item 2.). Como a especificação não estava muito clara em relação ao que o usuário ganharia com essa amizade eu a implementei da seguinte forma: No cadastro de usário o mesmo poderá informar se permiti ou não o recebimento de mensagens anonimas, ou seja, de pessoas que não são amigas. Em caso positivo ela receberá notificações de mensagens sem o pedido de mensagem ser aceito, já em caso negativo ela somente receberá notificações de pessoas que são amigas dela!! :couple::ok_woman::raising_hand::no_good:
+* 7. Solicitação de amizade - Esse item foi desenvolvimento e pode ser manipulado na tela de contatos (conforme mencionado no item 2.). Como a especificação não estava muito clara em relação ao que o usuário ganharia com essa amizade eu a implementei da seguinte forma: No cadastro de usuário o mesmo poderá informar se permiti ou não o recebimento de mensagens anônimas, ou seja, de pessoas que não são amigas. Em caso positivo ela receberá notificações de mensagens sem o pedido de mensagem ser aceito, já em caso negativo ela somente receberá notificações de pessoas que são amigas dela!! :couple::ok_woman::raising_hand::no_good:
 
 * 8.  Bloqueio/Desbloqueio de usuário - Esse item foi desenvolvimento e pode ser manipulado na tela de contatos (conforme mencionado no item 2.). Caso o usuário esteja bloqueado ele até enviará a mensagem a outro usuário, porém o outro usuário não receberá a mesma (estilo Whatsapp). :see_no_evil:
 
 * 9. Edição de mensagens enviadas - Esse item não foi desenvolvido devido ao mesmo problema relatado no item 4. :grinning::grinning:
 
-* 10. Envio de mensagens de audio/video - Esse item não foi desenvolvido devido ao mesmo problema relatado no item 4 e 9. :grinning::grinning::grinning:
+* 10. Envio de mensagens de áudio/vídeo - Esse item não foi desenvolvido devido ao mesmo problema relatado no item 4 e 9. :grinning::grinning::grinning:
 
 ## Considerações finais
 
-Foi (e está sendo) muito bacana participar do processo seletivo de uma grande empresa como a Hotmart. Gostaria de agradecer à todos os envolvidos a oportunidade e confiança. Espero que vocês tenham gostado do desafio que eu desenvolvi nesse etapa, me coloco a disposição para esclarecer qualquer dúvida e fico no aguardo de um feedback. Obrigado! :grin::satisfied::grinning::sunglasses:  
+Foi (e está sendo) muito bacana participar do processo seletivo de uma grande empresa como a Hotmart. Gostaria de agradecer a todos os envolvidos a oportunidade e confiança. Espero que vocês tenham gostado do desafio que eu desenvolvi nesse etapa, me coloco a disposição para esclarecer qualquer dúvida e fico no aguardo de um feedback. Obrigado! :grin::satisfied::grinning::sunglasses:  
 
 ## Autor
 
