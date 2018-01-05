@@ -204,5 +204,32 @@ Pronto a aplicação já estará em perfeito funcionamento novamente. :stuck_out
 
 * Um menu lateral onde o usuário poderá navegar em todos os recursos citados acima.
 
+## Detalhamento do Aplicação X Desafio Proposto
+
+* 1. Tela de Login - É a primeira página do aplicação.
+
+* 1.1 Tela de cadastro - Há um boptão de cadastrar no rodapé do login. Esse botão levará o usário a tela em questão.
+
+* 2. Tela de Contatos - Após o usuário efetuar o login ou se cadastrar na aplicação ele será direcionado para a página de dashboard onde haverá um card de nome contatos que o levará a uma tela onde ele verá todos os usuários cadastrados na aplicação, o seu status e funcções como bloquear, desbloquear, solicitar amizade, chat, etc...
+ 
+* 2.1 Tela Inicial - Assim que o usuário entrar na aplicação ou receber uma nova mensagem ele será notificados de duas formas diferentes. A primeira é uma mensagem que aparecerá no topo central da aplicação e ficará disponivel por um tempo determinado. Já a segunda é um icone (em forma de caixa de correio) no topo direito que mostrará quantidade de mensagens não lidas pelo usuário e quais as suas últimas mensagens. As duas formas mencionadas são atualizadas sempre que o usuário receber uma mensagem, ler uma mensagem ou entrar na aplicação.
+
+* 3. Envio de mensagens - Após o usuário efetuar o login ou se cadastrar na aplicação ele será direcionado para a página de dashboard onde haverá um card de nome conversas que o levará a uma tela onde ele verá todas as suas conversas até o momente e também poderá realizar nova troca de mensagens. Caso o usuário esteja online o mesmo receberá a mensagem de forma instantânea, em caso contrário ele receberá a mensagem na primeira oportunidade. O usuário tem outras formas de acessa essa tela, ele poderá acessar pela telade contatos (onde há um link direto), pelas notificações de mensagens não lidas e pelo menu.
+
+* 4. Suporte a 100 usuários simultâneos - Infelizmente não consegui realizar o teste de carga com o JMETER devido a falta de tempo, pois essa semana foi muito pesada em relação a volume de trabalho no meu local de trabalho atual, o que me gerou algumas horas extras. :worried: Mas pela minha experiência e pelas tecnologias utilizadas no projeto, eu quase posso dar certeza que ela aguenta!! :grinning:
+
+* 5. Lista de contatos - Esse item foi realizado conforme mencionado no item 2.
+
+* 6. Tela de hitórico de mensagens - Esse item foi implementado junto a tela de envio de mensagens (detalhado no item 3.). Nessa tela em questão você poderá consultar suas mensagens e enviar outras.
+
+* 7. Solicitação de amizade - Esse item foi desenvolvimento e pode ser manipulado na tela de contatos (conforme mencionado no item 2.). Como a especificação não estava muito clara em relação ao que o usuário ganharia com essa amizade eu a implementei da seguinte forma: No cadastro de usário o mesmo poderá informar se permiti ou não o recebimento de mensagens anonimas, ou seja, de pessoas que não são amigas. Em caso positivo ela receberá notificações de mensagens sem o pedido de mensagem ser aceito, já em caso negativo ela somente receberá notificações de pessoas que são amigas dela!! :couple::ok_woman::raising_hand::no_good:
+
+* 8.  Bloqueio/Desbloqueio de usuário - Esse item foi desenvolvimento e pode ser manipulado na tela de contatos (conforme mencionado no item 2.). Caso o usuário esteja bloqueado ele até enviará a mensagem a outro usuário, porém o outro usuário não receberá a mesma (estilo Whatsapp). :see_no_evil:
+
+* 9. Edição de mensagens enviadas - Esse item não foi desenvolvido devido ao mesmo problema relatado no item 4. :grinning::grinning:
+
+* 10. Envio de mensagens de audio/video - Esse item não foi desenvolvido devido ao mesmo problema relatado no item 4 e 9. :grinning::grinning::grinning:
+
 ## Autor
+
 * **Tiago Guimarães da Silva**
