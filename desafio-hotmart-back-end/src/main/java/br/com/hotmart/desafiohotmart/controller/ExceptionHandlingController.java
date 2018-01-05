@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import br.com.hotmart.desafiohotmart.builder.MessageBuilder;
 import br.com.hotmart.desafiohotmart.vo.ResponseVO;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 /**
  * Controllador responsáveis por controllar as exceções da aplicação.
@@ -26,6 +29,10 @@ public class ExceptionHandlingController {
 	 * @param methodArgumentNotValidException
 	 * @return
 	 */
+	@ApiOperation(value = "Tratamento Bean Validation", nickname = "invalidInput", notes="Responsável tratar as mensagens de exceções disparadas pelo Bean Validation e devolver no formato padrão da aplicação ResponseVo<E>.")
+	@ApiResponses({ 
+	    @ApiResponse(code = 200, message = "Success", response = ResponseEntity.class)
+	})
 	@ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ResponseVO<?>> invalidInput(MethodArgumentNotValidException methodArgumentNotValidException) {
 

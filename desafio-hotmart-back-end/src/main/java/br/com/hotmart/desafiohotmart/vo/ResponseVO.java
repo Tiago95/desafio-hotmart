@@ -5,7 +5,15 @@ import java.util.Arrays;
 import java.util.List;
 
 import br.com.hotmart.desafiohotmart.enumerations.ReturnTypeEnum;
+import io.swagger.annotations.ApiModelProperty;
 
+/**
+ * Responsável por montar a estrutura padrão de retorno do REST (JSON).
+ * 
+ * @author Tiago
+ *
+ * @param <T>
+ */
 public class ResponseVO<T> implements BaseVO {
 
 	/**
@@ -13,12 +21,16 @@ public class ResponseVO<T> implements BaseVO {
 	 */
 	private static final long serialVersionUID = -5687213113675187630L;
 
+	@ApiModelProperty(notes = "Tipo de retorno da requisição")
 	private ReturnTypeEnum returnType;
 	
+	@ApiModelProperty(notes = "Mensagens de validação relacionadas a campo")
 	private List<FieldInfoVO> fieldsInfo;
 	
+	@ApiModelProperty(notes = "Mensagens de validação não relacionadas a campo")
 	private List<MessageInfoVO> messagesInfo;
 	
+	@ApiModelProperty(notes = "VO de retorno de uma requisição")
 	private T voReturn;
 	
 	/**

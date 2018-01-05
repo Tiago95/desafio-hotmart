@@ -16,6 +16,11 @@ import br.com.hotmart.desafiohotmart.service.UsuarioBloqueadoService;
 import br.com.hotmart.desafiohotmart.service.UsuarioService;
 import br.com.hotmart.desafiohotmart.vo.ResponseVO;
 import br.com.hotmart.desafiohotmart.vo.UsuarioVO;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 /**
  * Controlador das funções de usuário.
@@ -43,6 +48,14 @@ public class UserController {
 	 * @param idUsuarioBloqueado
 	 * @return
 	 */
+	@ApiOperation(value = "Bloqueio de usuário", nickname = "bloquearUsuario", notes="Responsável por bloquear um usuário.")
+	@ApiImplicitParams({
+        @ApiImplicitParam(name = "idUsuario", value = "Id do usuário solicitante", required = true, dataType = "Long", paramType = "path"),
+        @ApiImplicitParam(name = "idUsuarioBloqueado", value = "Id do usuário que está sendo bloqueado", required = true, dataType = "Long", paramType = "path")
+    })
+	@ApiResponses({ 
+	    @ApiResponse(code = 200, message = "Success", response = ResponseVO.class)
+	})
 	@PostMapping("/bloquear/{idUsuario}/{idUsuarioBloqueado}")
 	public ResponseVO<Void> bloquearUsuario(@PathVariable("idUsuario") Long idUsuario, @PathVariable("idUsuarioBloqueado") Long idUsuarioBloqueado){
 		
@@ -69,6 +82,14 @@ public class UserController {
 	 * @param idUsuarioBloqueado
 	 * @return
 	 */
+	@ApiOperation(value = "Desbloqueio de usuário", nickname = "desbloquearUsuario", notes="Responsável por desbloquear um usuário.")
+	@ApiImplicitParams({
+        @ApiImplicitParam(name = "idUsuario", value = "Id do usuário solicitante", required = true, dataType = "Long", paramType = "path"),
+        @ApiImplicitParam(name = "idUsuarioBloqueado", value = "Id do usuário que está sendo desbloqueado", required = true, dataType = "Long", paramType = "path")
+    })
+	@ApiResponses({ 
+	    @ApiResponse(code = 200, message = "Success", response = ResponseVO.class)
+	})
 	@PostMapping("/desbloquear/{idUsuario}/{idUsuarioBloqueado}")
 	public ResponseVO<Void> desbloquearUsuario(@PathVariable("idUsuario") Long idUsuario, @PathVariable("idUsuarioBloqueado") Long idUsuarioBloqueado){
 		
@@ -95,6 +116,14 @@ public class UserController {
 	 * @param idUsuarioAmigo
 	 * @return
 	 */
+	@ApiOperation(value = "Solicitação de amizade", nickname = "solicitarAmizade", notes="Responsável por solicitar um pedido de amizade.")
+	@ApiImplicitParams({
+        @ApiImplicitParam(name = "idUsuario", value = "Id do usuário solicitante", required = true, dataType = "Long", paramType = "path"),
+        @ApiImplicitParam(name = "idUsuarioAmigo", value = "Id do usuário que está recebendo o pedido de amizade", required = true, dataType = "Long", paramType = "path")
+    })
+	@ApiResponses({ 
+	    @ApiResponse(code = 200, message = "Success", response = ResponseVO.class)
+	})
 	@PostMapping("/solicitarAmizade/{idUsuario}/{idUsuarioAmigo}")
 	public ResponseVO<Void> solicitarAmizade(@PathVariable("idUsuario") Long idUsuario, @PathVariable("idUsuarioAmigo") Long idUsuarioAmigo){
 		
@@ -122,8 +151,17 @@ public class UserController {
 	 * @param statusSolicitacaoAmizade
 	 * @return
 	 */
+	@ApiOperation(value = "Atualização do pedido de amizade", nickname = "atualizarPedidoAmizade", notes="Responsável por atualizar um pedido de amizade.(ACEITO ou RECUSADO)")
+	@ApiImplicitParams({
+        @ApiImplicitParam(name = "idUsuario", value = "Id do usuário solicitante", required = true, dataType = "Long", paramType = "path"),
+        @ApiImplicitParam(name = "idUsuarioAmigo", value = "Id do usuário que está alterando o pedido de amizade", required = true, dataType = "Long", paramType = "path"),
+        @ApiImplicitParam(name = "statusSolicitacaoAmizade", value = "Status da solicitação de amizade (ACEITO / RECUSADO)", required = true, dataType = "StatusSolicitacaoAmizadeEnum", paramType = "path")
+    })
+	@ApiResponses({ 
+	    @ApiResponse(code = 200, message = "Success", response = ResponseVO.class)
+	})
 	@PostMapping("/atualizarPedidoAmizade/{idUsuario}/{idUsuarioAmigo}/{statusSolicitacaoAmizade}")
-	public ResponseVO<Void> solicitarAmizade(@PathVariable("idUsuario") Long idUsuario, @PathVariable("idUsuarioAmigo") Long idUsuarioAmigo,
+	public ResponseVO<Void> atualizarPedidoAmizade(@PathVariable("idUsuario") Long idUsuario, @PathVariable("idUsuarioAmigo") Long idUsuarioAmigo,
 			@PathVariable("statusSolicitacaoAmizade") StatusSolicitacaoAmizadeEnum statusSolicitacaoAmizade){
 		
 		MessageBuilder<Void> messageBuilder = new MessageBuilder<>();
@@ -148,6 +186,13 @@ public class UserController {
 	 * @param idUsuario
 	 * @return
 	 */
+	@ApiOperation(value = "Obtenção de usuário", nickname = "findById", notes="Responsável por buscar um usuário de acordo com um id.")
+	@ApiImplicitParams({
+        @ApiImplicitParam(name = "idUsuario", value = "Id do usuário que deverá ser carregado", required = true, dataType = "Long", paramType = "path")
+    })
+	@ApiResponses({ 
+	    @ApiResponse(code = 200, message = "Success", response = ResponseVO.class)
+	})
 	@GetMapping("/findById/{idUsuario}")
 	public ResponseVO<UsuarioVO> findById(@PathVariable("idUsuario") Long idUsuario){
 		
@@ -176,6 +221,14 @@ public class UserController {
 	 * @param conectado
 	 * @return
 	 */
+	@ApiOperation(value = "Atualização status conectado de usuário", nickname = "atualizarStatusConectadoUsuario", notes="Responsável por alterar o ststaus de conectado do usuário.")
+	@ApiImplicitParams({
+        @ApiImplicitParam(name = "idUsuario", value = "Id do usuário que deverá ser atualizado", required = true, dataType = "Long", paramType = "path"),
+        @ApiImplicitParam(name = "conectado", value = "Status da conxão (conectado / desconectado)", required = true, dataType = "boolean", paramType = "path")
+    })
+	@ApiResponses({ 
+	    @ApiResponse(code = 200, message = "Success", response = ResponseVO.class)
+	})
 	@PostMapping("/atualizarStatusConectadoUsuario/{idUsuario}/{conectado}")
 	public ResponseVO<Void> atualizarStatusConectadoUsuario(@PathVariable("idUsuario") Long idUsuario,
 			@PathVariable("conectado") boolean conectado) {

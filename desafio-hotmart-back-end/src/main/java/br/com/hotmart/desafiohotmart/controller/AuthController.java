@@ -18,6 +18,9 @@ import br.com.hotmart.desafiohotmart.service.UsuarioService;
 import br.com.hotmart.desafiohotmart.utils.SecurityUtils;
 import br.com.hotmart.desafiohotmart.vo.ResponseVO;
 import br.com.hotmart.desafiohotmart.vo.UsuarioVO;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 /**
  * Responsável por conter serviços de entrada de 
@@ -40,6 +43,10 @@ public class AuthController {
    * @param user
    * @return
    */
+  @ApiOperation(value = "Obtenção do usuário logado", nickname = "user", notes="Obtenção o usuário logado na aplicação")
+  @ApiResponses({ 
+      @ApiResponse(code = 200, message = "Success", response = ResponseVO.class)
+  })
   @GetMapping("/user")
   public ResponseVO<UsuarioVO> user(Principal user) {  
 	  
@@ -53,6 +60,10 @@ public class AuthController {
    * @param usuarioVO
    * @return
    */
+  @ApiOperation(value = "Registro de usuário", nickname = "register", notes="Responsável por registar/cadastar um novo usuário")
+  @ApiResponses({ 
+      @ApiResponse(code = 200, message = "Success", response = ResponseVO.class)
+  })
   @PostMapping("/register")
   public ResponseVO<UsuarioVO> register(@Valid @RequestBody UsuarioVO usuarioVO){
 	  

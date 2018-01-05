@@ -27,6 +27,11 @@ import br.com.hotmart.desafiohotmart.vo.ChatMessageVO;
 import br.com.hotmart.desafiohotmart.vo.LastChatInfoVO;
 import br.com.hotmart.desafiohotmart.vo.MessageVO;
 import br.com.hotmart.desafiohotmart.vo.ResponseVO;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 /**
  * Classe responsável por conter as regras de chat da aplicação.
@@ -56,6 +61,14 @@ public class ChatController {
 	 * @param idUser
 	 * @return
 	 */
+	@ApiOperation(value = "Obtenção de informações do chat", nickname = "getChatInfoByIdUser", notes="Responsável por obter todos as informações do chat. Informações como os usuários que játrocaram mensagens e as mensagens")
+	@ApiImplicitParams({
+        @ApiImplicitParam(name = "idUser", value = "Id do usuário solicitante", required = true, dataType = "Long", paramType = "path"),
+        @ApiImplicitParam(name = "idUserActive", value = "Id do usuário ativo no chat, ou seja, id do usuário que está conversando com o usuário solicitante", required = false, dataType = "Long", paramType = "path")
+    })
+	@ApiResponses({ 
+	      @ApiResponse(code = 200, message = "Success", response = ResponseVO.class)
+	})
 	@GetMapping({"/getChatInfoByIdUser/{idUser}/{idUserActive}", "/getChatInfoByIdUser/{idUser}"})
 	public ResponseVO<ChatInfoVO> getChatInfoByIdUser(@PathVariable("idUser") Long idUser,
 			@PathVariable(name = "idUserActive", required = false) Long idUserActive){
@@ -71,6 +84,14 @@ public class ChatController {
 	 * @param idUsuarioDestino
 	 * @return
 	 */
+	@ApiOperation(value = "Obtenção de mensagens trocados por usuários", nickname = "getMensagensAtivasByIdUsuarioOrigemAndUsuarioDestino", notes="Responsável por obter todos as conversas que foram trocadas entre determinados usuários.")
+	@ApiImplicitParams({
+        @ApiImplicitParam(name = "idUsuarioOrigem", value = "Id do usuário de origem da mensagem, ou seja, o usuário que mandou a mensagens", required = true, dataType = "Long", paramType = "path"),
+        @ApiImplicitParam(name = "idUsuarioDestino", value = "Id do usuário de destino da mensagem, ou seja, o usuário que recebeu a mensagens", required = true, dataType = "Long", paramType = "path")
+    })
+	@ApiResponses({ 
+	      @ApiResponse(code = 200, message = "Success", response = ResponseVO.class)
+	})
 	@GetMapping("/getMensagensAtivasByIdUsuarioOrigemAndUsuarioDestino/{idUsuarioOrigem}/{idUsuarioDestino}")
 	public ResponseVO<List<ChatMessageVO>> getMensagensAtivasByIdUsuarioOrigemAndUsuarioDestino(@PathVariable("idUsuarioOrigem") Long idUsuarioOrigem,
 			@PathVariable("idUsuarioDestino") Long idUsuarioDestino){
@@ -91,6 +112,13 @@ public class ChatController {
 	 * @param idUsuarioOrigem
 	 * @return
 	 */
+	@ApiOperation(value = "Obtenção das últimas informações do chat", nickname = "getLastChatInfo", notes="Responsável por obter as últimas informações do chat, como quantidade de mensagens não lidas, últimas mensagens, entre outros.")
+	@ApiImplicitParams({
+        @ApiImplicitParam(name = "idUsuarioOrigem", value = "Id do usuário de origem da mensagem, ou seja, o usuário que mandou a mensagens", required = true, dataType = "Long", paramType = "path")
+    })
+	@ApiResponses({ 
+	      @ApiResponse(code = 200, message = "Success", response = ResponseVO.class)
+	})
 	@GetMapping("/getLastChatInfo/{idUsuarioOrigem}")
 	public ResponseVO<LastChatInfoVO> getLastChatInfo(@PathVariable("idUsuarioOrigem") Long idUsuarioOrigem){
 		
@@ -112,6 +140,10 @@ public class ChatController {
 	 * @param principal
 	 * @return
 	 */
+	@ApiOperation(value = "Envio mensagens de chat", nickname = "sendMessage", notes="Responsável por interceptar todas as mensagens trocadas pelos usuários.")
+	@ApiResponses({ 
+	    @ApiResponse(code = 200, message = "Success", response = Void.class)
+	})
 	@MessageMapping("/chat")
 	public void sendMessage(@Payload MessageVO messageVO, Message<?> message){
 		
@@ -137,6 +169,10 @@ public class ChatController {
 	 * @param idsChatMensagem
 	 * @return
 	 */
+	@ApiOperation(value = "Atualização mensagens recebidas", nickname = "atualizarMensagensRecebida", notes="Responsável por atualizar o status de recebida de algumas determinadas mensagens.")
+	@ApiResponses({ 
+	    @ApiResponse(code = 200, message = "Success", response = ResponseVO.class)
+	})
 	@PostMapping("/atualizarMensagensRecebida")
 	public ResponseVO<Void> atualizarMensagensRecebida(@RequestBody List<Long> idsChatMensagem){
 		
@@ -158,6 +194,13 @@ public class ChatController {
 	 * @param idChatMensagem
 	 * @return
 	 */
+	@ApiOperation(value = "Atualização mensagem recebida", nickname = "atualizarMensagemRecebida", notes="Responsável por atualizar o status de recebida de uma determinada mensagem.")
+	@ApiImplicitParams({
+        @ApiImplicitParam(name = "idChatMensagem", value = "Id da mensagem", required = true, dataType = "Long", paramType = "path")
+    })
+	@ApiResponses({ 
+	    @ApiResponse(code = 200, message = "Success", response = ResponseVO.class)
+	})
 	@PostMapping("/atualizarMensagemRecebida/{idChatMensagem}")
 	public ResponseVO<Void> atualizarMensagemRecebida(@PathVariable("idChatMensagem") Long idChatMensagem){
 		
@@ -179,6 +222,10 @@ public class ChatController {
 	 * @param idsChatMensagem
 	 * @return
 	 */
+	@ApiOperation(value = "Atualização mensagens lidas", nickname = "atualizarMensagensLida", notes="Responsável por atualizar o status de lida de algumas determinadas mensagens.")
+	@ApiResponses({ 
+	    @ApiResponse(code = 200, message = "Success", response = ResponseVO.class)
+	})
 	@PostMapping("/atualizarMensagensLida")
 	public ResponseVO<Void> atualizarMensagensLida(@RequestBody List<Long> idsChatMensagem){
 		
@@ -200,6 +247,13 @@ public class ChatController {
 	 * @param idChatMensagem
 	 * @return
 	 */
+	@ApiOperation(value = "Atualização mensagem lida", nickname = "atualizarMensagemLida", notes="Responsável por atualizar o status de lida de uma determinada mensagem.")
+	@ApiImplicitParams({
+        @ApiImplicitParam(name = "idChatMensagem", value = "Id da mensagem", required = true, dataType = "Long", paramType = "path")
+    })
+	@ApiResponses({ 
+	    @ApiResponse(code = 200, message = "Success", response = ResponseVO.class)
+	})
 	@PostMapping("/atualizarMensagemLida/{idChatMensagem}")
 	public ResponseVO<Void> atualizarMensagemLida(@PathVariable("idChatMensagem") Long idChatMensagem){
 		
