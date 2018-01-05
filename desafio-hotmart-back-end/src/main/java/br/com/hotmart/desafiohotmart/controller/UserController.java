@@ -168,5 +168,21 @@ public class UserController {
 		return new ResponseVO<UsuarioVO>(ReturnTypeEnum.ERRO, "O parametro id do usuário é obrigatório.");
 		
 	}
+	
+	/**
+	 * Responsável por alterar o ststaus de conectado do usuário.
+	 * 
+	 * @param idUsuario
+	 * @param conectado
+	 * @return
+	 */
+	@PostMapping("/atualizarStatusConectadoUsuario/{idUsuario}/{conectado}")
+	public ResponseVO<Void> atualizarStatusConectadoUsuario(@PathVariable("idUsuario") Long idUsuario,
+			@PathVariable("conectado") boolean conectado) {
+
+		usuarioService.updateUserConnected(idUsuario, conectado);
+
+		return new ResponseVO<>();
+	}
 
 }

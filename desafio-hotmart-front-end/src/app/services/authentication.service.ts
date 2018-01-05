@@ -9,11 +9,12 @@ import 'rxjs/add/operator/map';
 
 import { Credentials } from './../models/credentials';
 import { TipoRetornoEnum } from 'app/enum/tipo-retorno-enum';
+import { UsuarioService } from 'app/services/usuario.service';
 
 @Injectable()
 export class AuthenticationService{
 
-    constructor(private httpService: HttpService){}
+    constructor(private httpService: HttpService, private usuarioService: UsuarioService){}
 
     public login(credentials: Credentials): Promise<EstruturaJson> {
         
@@ -79,9 +80,13 @@ export class AuthenticationService{
             this.httpService.realizarRequisicaoHttp(new HttpControl(DesafioHotmartAppComponent.API_URL + "/logout", RequestMethod.Post, {}))
             .then((estruturaJson: EstruturaJson) => {
 
+                let idUsuarioLogado: number = this.usuarioService.getIdUsuarioLogado();
+
                 localStorage.removeItem('currentUser');
                 localStorage.removeItem('isSocketConnect');
                 localStorage.removeItem('credentialsSocketConnect');
+
+                this.httpService.realizarRequisicaoHttp(new HttpControl(DesafioHotmartAppComponent.API_URL + "/user/atualizarStatusConectadoUsuario/" + idUsuarioLogado + "/false", RequestMethod.Post));
                 
                 resolve();
                 

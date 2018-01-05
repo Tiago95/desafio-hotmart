@@ -17,6 +17,8 @@
                    </div>
                    <div class="align-self-center pr-2 pl-2">
                       <h6>{{usuario.nick}}</h6>
+                      <p *ngIf="usuario.conectado" class="mb-0"><small><i class="fa fa-circle text-success"></i> Online</small></p>
+                      <p *ngIf="!usuario.conectado" class="mb-0"><small><i class="fa fa-circle text-danger"></i> Offline</small></p>
                    </div>
                 </a>
              </div>

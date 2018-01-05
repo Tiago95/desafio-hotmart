@@ -10,6 +10,8 @@ export class Usuario {
 
 	private _senha: string;
 
+	private _conectado: boolean;
+
 	private _permitirConversasAnonimas: boolean;
 	
 	public get id(): number {
@@ -52,6 +54,14 @@ export class Usuario {
 		this._senha = value;
 	}	
 
+	public get conectado(): boolean {
+		return this._conectado;
+	}
+
+	public set conectado(value: boolean) {
+		this._conectado = value;
+	}	
+
 	public get permitirConversasAnonimas(): boolean {
 		return this._permitirConversasAnonimas;
 	}
@@ -67,6 +77,7 @@ export class Usuario {
 			nick: this.nick,
 			email: this.email,
 			senha: this.senha,
+			conectado: this.conectado,
 			permitirConversasAnonimas: this.permitirConversasAnonimas
 		};
 	}
