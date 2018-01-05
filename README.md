@@ -135,7 +135,7 @@ npm install @angular/cli -g
 ```
 npm install
 ```
-Esse comando deve ser executado no local do projeto. E isso pode demorar um pouco :-(. Melhor pegar um café :-)!!
+Esse comando deve ser executado no local do projeto. E isso pode demorar um pouco :disappointed_relieved:. Melhor pegar um café :grin:!!
 
 * Execução da aplicação de fato
 ```
@@ -145,7 +145,48 @@ Esse comando deve ser executado no local do projeto. Por padrão a aplicação s
 ```
 ng serve --port {número da porta}
 ```
-A alteração da porta não afetará o funcionamento da aplicação. O importante e subir em alguma porta :-).
+A alteração da porta não afetará o funcionamento da aplicação. O importante e subir em alguma porta :grin:.
+
+### Excecução aplicação Back-End
+
+* Instalação do Java 8
+
+```
+http://www.oracle.com/technetwork/pt/java/javase/downloads/index.html
+```
+
+* Instalação Maven
+
+```
+https://maven.apache.org/download.cgi
+```
+
+* Instalação das dependências do projeto
+
+```
+mvn clean install
+```
+Esse comando deve ser executado no local do projeto.
+
+* Execução da aplicação de fato
+
+```
+Você poderá executar a class desafio-hotmart-back-end/src/main/java/br/com/hotmart/desafiohotmart/DesafioHotmartApplication.java como jar comum (java -jar)
+```
+
+Por padrão a aplicação subirá na porta 8080, caso seja necessário a alteração da mesma, isso poderá ser realizado com um alteração simples no arquivo desafio-hotmart-back-end/scr/main/resources/application.properties.
+
+```
+server.port = {numero da porta}
+``` 
+
+Isso poderá ocasionar em um mal funcionamento da aplicação tendo em vista que a aplicação do front-end está apontando para esse porta. Calma não entre em desespero :dizzy_face:, após a alteração da porta com a configuração acima, você poderá alterar o arquivo que está desafio-hotmart-front-end/src/app/app.component.ts nesse pequeno trecho.
+
+```
+static API_URL: string = "http://localhost:8080";
+``` 
+
+Pronto a aplicação já estará em perfeito funcionamento novamente. :stuck_out_tongue_winking_eye:
 
 ## Autor
 * **Tiago Guimarães da Silva**
