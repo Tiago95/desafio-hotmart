@@ -232,7 +232,7 @@ Pronto a aplicação já estará em perfeito funcionamento novamente. :stuck_out
 
 ## Considerações finais
 
-Foi (e está sendo) muito bacana participar do processo seletivo de uma grande empresa como a Hotmart. Gostaria de agradeçer à todos os envolvidos a oportunidade e confiança. Espero que vocês tenham gostado do desafio que eu desenvolvi nesse etapa, me coloco a disposição para esclarecer qualquer dúvida e fico no aguardo de um feedback. Obrigado! :grin::satisfied::grinning::sunglasses:  
+Foi (e está sendo) muito bacana participar do processo seletivo de uma grande empresa como a Hotmart. Gostaria de agradecer à todos os envolvidos a oportunidade e confiança. Espero que vocês tenham gostado do desafio que eu desenvolvi nesse etapa, me coloco a disposição para esclarecer qualquer dúvida e fico no aguardo de um feedback. Obrigado! :grin::satisfied::grinning::sunglasses:  
 
 ## Autor
 

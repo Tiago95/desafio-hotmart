@@ -7,7 +7,7 @@
             </div>
             <div class="widget-body">
                 <h1 *ngIf="contatos === undefined">Carregando contatos</h1>
-                <h1 *ngIf="contatos !== null && contatos !== undefined && contatos.length === 0">Não existem contatos</h1>
+                <h1 *ngIf="contatos === null || (contatos !== null && contatos !== undefined && contatos.length === 0)">Não existem contatos</h1>
                 <ul class="registered-users-list clearfix list-style-none pl-0 d-flex align-content-around flex-wrap" *ngIf="contatos !== null && contatos !== undefined && contatos.length > 0">
                     <li class="ng-tns-c6-19 ng-star-inserted" *ngFor="let contato of contatos">
                         <a class="d-block mb-2"><img class="ng-tns-c6-19" alt="" height="128" width="128" src="assets/img/user-{{contato.avatar}}.jpg"></a>

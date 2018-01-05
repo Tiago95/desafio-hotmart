@@ -36,6 +36,10 @@ export class ContactsComponent implements OnInit{
     
                 });
 
+            }else{
+
+                this.contatos = null;
+
             }            
 
         }, error => {this.contatos = null; console.log(error)}).catch(error => {this.contatos = null; console.log(error)});
