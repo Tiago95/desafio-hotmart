@@ -188,5 +188,21 @@ static API_URL: string = "http://localhost:8080";
 
 Pronto a aplicação já estará em perfeito funcionamento novamente. :stuck_out_tongue_winking_eye:
 
+## Detalhamento do Aplicação
+
+### A aplicação possuí os seguintes recuros
+
+* Uma tela de login onde os usuários cadastrados na aplicação poderam entrar na aplicação.
+
+* Uma tela de cadastro onde novos usuários poderam ser cadastrar na aplicação.
+
+* Uma tela de dashboard onde o usuário terá informações como seu nick, seu status, foto, contatos, mensagens não lidas, conversas, chat e logout.
+
+* Uma tela de contatos onde o usuário poderá ver todos os outros usuários que estão cadastrados na aplicação. Nessa tela ele também poderá ver o status dos usuários (online e offline), bloquear um usuário, desbloquear um usuário, solicitar uma amizade, aceitar uma amizade, recusar uma amizade e entrar na tela de chat com algum usuário.
+
+* Um tela de chat/conversas onde o usuário poderá ver o seu histórico de conversas, conversar com outros usuários, ver status dos usuários e outros dados do usuário.
+
+* Um menu lateral onde o usuário poderá navegar em todos os recursos citados acima.
+
 ## Autor
 * **Tiago Guimarães da Silva**
