@@ -200,7 +200,7 @@ Pronto a aplicação já estará em perfeito funcionamento novamente. :stuck_out
 
 * Uma tela de contatos onde o usuário poderá ver todos os outros usuários que estão cadastrados na aplicação. Nessa tela ele também poderá ver o status dos usuários (online e offline), bloquear um usuário, desbloquear um usuário, solicitar uma amizade, aceitar uma amizade, recusar uma amizade e entrar na tela de chat com algum usuário.
 
-* Um tela de chat/conversas onde o usuário poderá ver o seu histórico de conversas, conversar com outros usuários, ver status dos usuários e outros dados do usuário.
+* Uma tela de chat/conversas onde o usuário poderá ver o seu histórico de conversas, conversar com outros usuários, ver status dos usuários e outros dados do usuário.
 
 * Um menu lateral onde o usuário poderá navegar em todos os recursos citados acima.
 
