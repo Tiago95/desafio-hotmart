@@ -14,6 +14,8 @@ export class Contato{
 	
 	private _permitirConversasAnonimas: boolean;
 
+	private _conectado: boolean;
+
 	public get id(): number {
 		return this._id;
 	}
@@ -68,6 +70,14 @@ export class Contato{
 
 	public set permitirConversasAnonimas(value: boolean) {
 		this._permitirConversasAnonimas = value;
-	}	   
+	}
+
+	public get conectado(): boolean {
+		return this._conectado;
+	}
+
+	public set conectado(value: boolean) {
+		this._conectado = value;
+	}		   
 
 }

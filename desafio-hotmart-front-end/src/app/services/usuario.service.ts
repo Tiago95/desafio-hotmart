@@ -20,7 +20,7 @@ export class UsuarioService{
             this.httpService.realizarRequisicaoHttp(new HttpControl(DesafioHotmartAppComponent.API_URL + "/contacts/getAllContactsByIdUser/" + this.getIdUsuarioLogado(), RequestMethod.Get))
             .then(estruturaJson => {           
 
-                if(estruturaJson && estruturaJson.returnType && estruturaJson.returnType.toString() === TipoRetornoEnum[TipoRetornoEnum.SUCESSO]){
+                if(estruturaJson && estruturaJson.returnType && (estruturaJson.returnType.toString() === TipoRetornoEnum[TipoRetornoEnum.SUCESSO] || estruturaJson.returnType === TipoRetornoEnum.SUCESSO as TipoRetornoEnum)){
 
                     resolve(estruturaJson.voReturn as Array<Contato>);
     
@@ -84,7 +84,7 @@ export class UsuarioService{
 
             return this.httpService.realizarRequisicaoHttp(new HttpControl(DesafioHotmartAppComponent.API_URL + "/user/findById/" + idUsuario, RequestMethod.Get)).then(estruturaJson => {
 
-                if(estruturaJson && estruturaJson.returnType.toString() === TipoRetornoEnum[TipoRetornoEnum.SUCESSO]
+                if(estruturaJson && (estruturaJson.returnType.toString() === TipoRetornoEnum[TipoRetornoEnum.SUCESSO] || estruturaJson.returnType === TipoRetornoEnum.SUCESSO as TipoRetornoEnum)
                     && estruturaJson.voReturn){
 
                     resolve(estruturaJson.voReturn as Usuario);

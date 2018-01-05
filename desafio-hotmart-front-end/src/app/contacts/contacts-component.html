@@ -12,6 +12,8 @@
                     <li class="ng-tns-c6-19 ng-star-inserted" *ngFor="let contato of contatos">
                         <a class="d-block mb-2"><img class="ng-tns-c6-19" alt="" height="128" width="128" src="assets/img/user-{{contato.avatar}}.jpg"></a>
                         <p class="text-ellipsis"> <strong class="ng-tns-c6-19">{{contato.nick}}</strong></p>
+                        <p *ngIf="contato.conectado" class="mb-0"><small><i class="fa fa-circle text-success"></i> Online</small></p>
+                        <p *ngIf="!contato.conectado" class="mb-0"><small><i class="fa fa-circle text-danger"></i> Offline</small></p>
                         <i class="fa fa-ban cursorPointer" *ngIf="!contato.bloqueado" aria-hidden="true" (click)="bloquear(contato.id)"> Bloquear</i>
                         <i class="fa fa-unlock cursorPointer" *ngIf="contato.bloqueado" aria-hidden="true" (click)="desbloquear(contato.id)"> Desbloquear</i>
                         <i class="fa fa-user-o cursorPointer" *ngIf="contato.statusSolicitacaoAmizade === 'NAO_SOLICITADO'" aria-hidden="true" (click)="solicitarAmizade(contato.id)"> Solicitar Amizade</i>

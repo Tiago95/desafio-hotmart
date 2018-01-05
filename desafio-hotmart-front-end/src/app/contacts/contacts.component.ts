@@ -46,7 +46,7 @@ export class ContactsComponent implements OnInit{
 
         this.usuarioService.bloquear(idUsuario).then(estruturaJson => {
             
-            if(estruturaJson && estruturaJson.returnType && estruturaJson.returnType.toString() === TipoRetornoEnum[TipoRetornoEnum.SUCESSO]){
+            if(estruturaJson && estruturaJson.returnType && (estruturaJson.returnType.toString() === TipoRetornoEnum[TipoRetornoEnum.SUCESSO] || estruturaJson.returnType === TipoRetornoEnum.SUCESSO as TipoRetornoEnum)){
 
                 this.contatos = this.contatos.map(contato => {                    
 
@@ -74,7 +74,7 @@ export class ContactsComponent implements OnInit{
 
         this.usuarioService.desbloquear(idUsuario).then(estruturaJson => {
             
-            if(estruturaJson && estruturaJson.returnType && estruturaJson.returnType.toString() === TipoRetornoEnum[TipoRetornoEnum.SUCESSO]){
+            if(estruturaJson && estruturaJson.returnType && (estruturaJson.returnType.toString() === TipoRetornoEnum[TipoRetornoEnum.SUCESSO] || estruturaJson.returnType === TipoRetornoEnum.SUCESSO as TipoRetornoEnum)){
 
                 this.contatos = this.contatos.map(contato => {
 
@@ -102,7 +102,7 @@ export class ContactsComponent implements OnInit{
 
         this.usuarioService.solicitarAmizade(idUsuario).then(estruturaJson => {
             
-            if(estruturaJson && estruturaJson.returnType && estruturaJson.returnType.toString() === TipoRetornoEnum[TipoRetornoEnum.SUCESSO]){
+            if(estruturaJson && estruturaJson.returnType && (estruturaJson.returnType.toString() === TipoRetornoEnum[TipoRetornoEnum.SUCESSO] || estruturaJson.returnType === TipoRetornoEnum.SUCESSO as TipoRetornoEnum)){
 
                 this.contatos = this.contatos.map(contato => {
 
@@ -131,7 +131,7 @@ export class ContactsComponent implements OnInit{
 
         this.usuarioService.aceitarAmizade(idUsuario).then(estruturaJson => {
             
-            if(estruturaJson && estruturaJson.returnType && estruturaJson.returnType.toString() === TipoRetornoEnum[TipoRetornoEnum.SUCESSO]){
+            if(estruturaJson && estruturaJson.returnType && (estruturaJson.returnType.toString() === TipoRetornoEnum[TipoRetornoEnum.SUCESSO] || estruturaJson.returnType === TipoRetornoEnum.SUCESSO as TipoRetornoEnum)){
 
                 this.contatos = this.contatos.map(contato => {
 
@@ -160,7 +160,7 @@ export class ContactsComponent implements OnInit{
 
         this.usuarioService.recusarAmizade(idUsuario).then(estruturaJson => {
             
-            if(estruturaJson && estruturaJson.returnType && estruturaJson.returnType.toString() === TipoRetornoEnum[TipoRetornoEnum.SUCESSO]){
+            if(estruturaJson && estruturaJson.returnType && (estruturaJson.returnType.toString() === TipoRetornoEnum[TipoRetornoEnum.SUCESSO] || estruturaJson.returnType === TipoRetornoEnum.SUCESSO as TipoRetornoEnum)){
 
                 this.contatos = this.contatos.map(contato => {
 

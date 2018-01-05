@@ -20,6 +20,18 @@ const MENUITEMS = [
     name: 'HOME',
     type: 'link',
     icon: 'home'
+  },
+  {
+    state: 'contacts',
+    name: 'Contatos',
+    type: 'link',
+    icon: 'home'
+  },
+  {
+    state: 'chat',
+    name: 'Conversas',
+    type: 'link',
+    icon: 'home'
   }
 ];
 

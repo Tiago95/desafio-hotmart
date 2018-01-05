@@ -41,6 +41,15 @@
                             <div *ngIf="f.submitted && fieldsInfoVO.get('senha') && fieldsInfoVO.get('email').returnType === 'ERRO'" class="help-block">{{fieldsInfoVO.get('senha').message}}</div>
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label" for="opcoesConversasAnonimas">Permitir conversas anonimas</label>
+                        <div class="col-10">
+                            <select class="form-control" id="opcoesConversasAnonimas" [(ngModel)]="usuario.permitirConversasAnonimas" name="permitirConversasAnonimas" #permitirConversasAnonimas="ngModel">
+                                <option class="ng-tns-c18-42" [ngValue]="true" [selected]="true">Sim</option>
+                                <option class="ng-tns-c18-42" [ngValue]="false">Não</option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="text-center">
                         <a routerLink="/"><button type="button" class="btn btn-primary">Voltar</button></a>
                         <button type="submit" class="btn btn-primary">Cadastrar</button>

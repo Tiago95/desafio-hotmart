@@ -26,6 +26,10 @@ export class ChatService{
 
 	private messageChange: Subject<ChatMessage> = new Subject();
 
+	private mensagensLidasAtualizadas: Subject<void> = new Subject();
+
+	private mensagensRecebidasAtualizadas: Subject<void> = new Subject();
+
 	public constructor(private httpService: HttpService, private usuarioService: UsuarioService){
 
 		if(localStorage.getItem("isSocketConnect")){
@@ -162,31 +166,83 @@ export class ChatService{
 
 	public atualizarMensagemRecebida(idChatMessage: number): Promise<EstruturaJson>{
 
-		return this.httpService.realizarRequisicaoHttp(new HttpControl(DesafioHotmartAppComponent.API_URL + "/chat/atualizarMensagemRecebida/" + idChatMessage, RequestMethod.Post));
+		return new Promise<EstruturaJson>((resolve, reject) => {
+
+			this.httpService.realizarRequisicaoHttp(new HttpControl(DesafioHotmartAppComponent.API_URL + "/chat/atualizarMensagemRecebida/" + idChatMessage, RequestMethod.Post)).then(estruturaJson => {
+
+				this.mensagensRecebidasAtualizadas.next();
+
+				resolve(estruturaJson);
+
+			});
+
+		});		
 
 	}
 
 	public atualizarMensagemLida(idChatMessage: number): Promise<EstruturaJson>{
 
-		return this.httpService.realizarRequisicaoHttp(new HttpControl(DesafioHotmartAppComponent.API_URL + "/chat/atualizarMensagemLida/" + idChatMessage, RequestMethod.Post));
+		return new Promise<EstruturaJson>((resolve, reject) => {
+
+			this.httpService.realizarRequisicaoHttp(new HttpControl(DesafioHotmartAppComponent.API_URL + "/chat/atualizarMensagemLida/" + idChatMessage, RequestMethod.Post)).then(estruturaJson => {
+
+				this.mensagensLidasAtualizadas.next();
+	
+				resolve(estruturaJson);
+	
+			});
+
+		});	
 
 	}
 
 	public atualizarMensagensRecebida(idsChatMessage: Array<number>): Promise<EstruturaJson>{
 
-		return this.httpService.realizarRequisicaoHttp(new HttpControl(DesafioHotmartAppComponent.API_URL + "/chat/atualizarMensagensRecebida", RequestMethod.Post, idsChatMessage));
+		return new Promise<EstruturaJson>((resolve, reject) => {
+
+			this.httpService.realizarRequisicaoHttp(new HttpControl(DesafioHotmartAppComponent.API_URL + "/chat/atualizarMensagensRecebida", RequestMethod.Post, idsChatMessage)).then(estruturaJson => {
+
+				this.mensagensRecebidasAtualizadas.next();
+	
+				resolve(estruturaJson);
+	
+			});
+
+		});
 
 	}
 
 	public atualizarMensagensLida(idsChatMessage: Array<number>): Promise<EstruturaJson>{
 
-		return this.httpService.realizarRequisicaoHttp(new HttpControl(DesafioHotmartAppComponent.API_URL + "/chat/atualizarMensagensLida", RequestMethod.Post, idsChatMessage));
+		return new Promise<EstruturaJson>((resolve, reject) => {
+
+			this.httpService.realizarRequisicaoHttp(new HttpControl(DesafioHotmartAppComponent.API_URL + "/chat/atualizarMensagensLida", RequestMethod.Post, idsChatMessage)).then(estruturaJson => {
+
+				this.mensagensLidasAtualizadas.next();
+	
+				resolve(estruturaJson);
+	
+			});
+
+		});		
 
 	}
 
 	public getNewMessage(): Observable<ChatMessage> {
 
 		return this.messageChange.asObservable();
+
+	}
+
+	public getMensagensLidasAtualizadas(): Observable<void> {
+
+		return this.mensagensLidasAtualizadas.asObservable();
+
+	}
+
+	public getMensagensRecebidasAtualizadas(): Observable<void> {
+
+		return this.mensagensRecebidasAtualizadas.asObservable();
 
 	}
 

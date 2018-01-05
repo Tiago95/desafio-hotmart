@@ -9,6 +9,8 @@ export class Usuario {
     private _email: string;	
 
 	private _senha: string;
+
+	private _permitirConversasAnonimas: boolean;
 	
 	public get id(): number {
 		return this._id;
@@ -48,7 +50,15 @@ export class Usuario {
 
 	public set senha(value: string) {
 		this._senha = value;
-	} 
+	}	
+
+	public get permitirConversasAnonimas(): boolean {
+		return this._permitirConversasAnonimas;
+	}
+
+	public set permitirConversasAnonimas(value: boolean) {
+		this._permitirConversasAnonimas = value;
+	}	
 
 	public toJSON(){
 		return {
@@ -56,7 +66,8 @@ export class Usuario {
 			nome: this.nome,
 			nick: this.nick,
 			email: this.email,
-			senha: this.senha
+			senha: this.senha,
+			permitirConversasAnonimas: this.permitirConversasAnonimas
 		};
 	}
 

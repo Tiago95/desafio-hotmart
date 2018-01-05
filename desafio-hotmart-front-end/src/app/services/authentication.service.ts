@@ -20,21 +20,23 @@ export class AuthenticationService{
         return new Promise<EstruturaJson>((resolve, reject) => {
 
             this.httpService.realizarRequisicaoHttp(new HttpControl(DesafioHotmartAppComponent.API_URL + "/auth/user", RequestMethod.Get, null, this.createHeaders(credentials)))
-            .then(response => {
+            .then(estruturaJson => {
                 
-                if(response){
+                if(estruturaJson){
 
-                    let usuario = response.voReturn as Usuario;
+                    let usuario = estruturaJson.voReturn as Usuario;
                     
                     if (usuario) {
                         
+                        localStorage.removeItem('isSocketConnect');
+                        localStorage.removeItem('credentialsSocketConnect');
                         localStorage.setItem('currentUser', JSON.stringify(usuario));
         
                     }
         
                 }
 
-                resolve(response);
+                resolve(estruturaJson);
 
             });
        
@@ -44,7 +46,29 @@ export class AuthenticationService{
 
     public register(usuario: Usuario): Promise<EstruturaJson>{
 
-        return this.httpService.realizarRequisicaoHttp(new HttpControl(DesafioHotmartAppComponent.API_URL + "/auth/register", RequestMethod.Post, usuario));
+        return new Promise<EstruturaJson>((resolve, reject) => {
+
+            this.httpService.realizarRequisicaoHttp(new HttpControl(DesafioHotmartAppComponent.API_URL + "/auth/register", RequestMethod.Post, usuario)).then((estruturaJson: EstruturaJson) => {
+
+                if(estruturaJson){
+
+                    let usuario = estruturaJson.voReturn as Usuario;
+                    
+                    if (usuario) {
+                        
+                        localStorage.removeItem('isSocketConnect');
+                        localStorage.removeItem('credentialsSocketConnect');
+                        localStorage.setItem('currentUser', JSON.stringify(usuario));
+        
+                    }
+        
+                }
+
+                resolve(estruturaJson);
+                
+            });
+
+        });        
 
     }
 

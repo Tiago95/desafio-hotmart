@@ -45,6 +45,45 @@ export class MainComponent implements OnInit{
 
     public ngOnInit(){
 
+        this.chatService.getMensagensLidasAtualizadas().subscribe(ret => this.atualizarLastChatInfo());
+        this.chatService.getNewMessage().subscribe(chatMessage => this.atualizarLastChatInfo());
+
+        this.atualizarLastChatInfo();
+
+    }
+
+	public toggleFullscreen() {
+    	if (screenfull.enabled) {
+    		screenfull.toggle();
+      		this.isFullscreen = !this.isFullscreen;
+    	}
+      }
+      
+    public onActivate(e, scrollContainer) {
+        scrollContainer.scrollTop = 0;
+    }
+
+    public logout(){
+
+        this.authService.logOut().then(e => this.router.navigate(['/authentication/login']));
+
+    }
+
+    private exibirModalMensagensNaoLidas(){
+
+        if(this.lastChatInfo && this.lastChatInfo.quantidadeMensagensNaoLidas
+            && this.lastChatInfo.quantidadeMensagensNaoLidas > 0){
+
+            let msg: string = this.currentUser.nick + ' você tem ' + this.lastChatInfo.quantidadeMensagensNaoLidas + ' mensagens não lidas. Vá para o chat/histórico de mensagens para descobrir as mensagens. :-)!!'
+
+            this.alertService.alert(Alert.create(AlertType.INFO, msg, 20000));
+
+        }       
+
+    }
+
+    private atualizarLastChatInfo(){
+
         this.chatService.getLastChatInfo().then(lastChatInfo => {
 
             this.lastChatInfo = lastChatInfo;
@@ -78,36 +117,6 @@ export class MainComponent implements OnInit{
             }
 
         });
-
-    }
-
-	public toggleFullscreen() {
-    	if (screenfull.enabled) {
-    		screenfull.toggle();
-      		this.isFullscreen = !this.isFullscreen;
-    	}
-      }
-      
-    public onActivate(e, scrollContainer) {
-        scrollContainer.scrollTop = 0;
-    }
-
-    public logout(){
-
-        this.authService.logOut().then(e => this.router.navigate(['/authentication/login']));
-
-    }
-
-    private exibirModalMensagensNaoLidas(){
-
-        if(this.lastChatInfo && this.lastChatInfo.quantidadeMensagensNaoLidas
-            && this.lastChatInfo.quantidadeMensagensNaoLidas > 0){
-
-            let msg: string = this.currentUser.nick + ' você tem ' + this.lastChatInfo.quantidadeMensagensNaoLidas + ' mensagens não lidas. Vá para o chat/histórico de mensagens para descobrir as mensagens. :-)!!'
-
-            this.alertService.alert(Alert.create(AlertType.INFO, msg, 20000));
-
-        }       
 
     }
 

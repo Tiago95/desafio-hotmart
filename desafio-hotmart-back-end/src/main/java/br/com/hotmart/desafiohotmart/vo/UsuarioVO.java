@@ -39,12 +39,17 @@ public class UsuarioVO implements BaseVO, BaseResponseVO {
 	
 	private boolean conectado;
 	
+	private boolean permitirConversasAnonimas;
+	
 	/**
 	 * Construtor default.
 	 * 
 	 */
 	public UsuarioVO() {
+		
 		super();
+		
+		this.permitirConversasAnonimas = true;
 	}
 
 	/**
@@ -160,6 +165,20 @@ public class UsuarioVO implements BaseVO, BaseResponseVO {
 	}
 
 	/**
+	 * @return the permitirConversasAnonimas
+	 */
+	public boolean isPermitirConversasAnonimas() {
+		return permitirConversasAnonimas;
+	}
+
+	/**
+	 * @param permitirConversasAnonimas the permitirConversasAnonimas to set
+	 */
+	public void setPermitirConversasAnonimas(boolean permitirConversasAnonimas) {
+		this.permitirConversasAnonimas = permitirConversasAnonimas;
+	}
+
+	/**
 	 * Responsável por retornar uma entidade de usuário.
 	 * 
 	 * @return
@@ -174,6 +193,7 @@ public class UsuarioVO implements BaseVO, BaseResponseVO {
 	    usuario.setSenha(this.getSenha());
 	    usuario.setNome(this.getNome());
 	    usuario.setConectado(this.isConectado());
+	    usuario.setPermitirConversasAnonimas(this.isPermitirConversasAnonimas());
 	    
 	    return usuario;
 		
